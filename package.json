@@ -6,7 +6,7 @@
     "url": "https://github.com/AminFazlMondo/Lerna-Projen.git"
   },
   "bin": {
-    "lerna-projen": "lerna-projen"
+    "lerna-projen": "./bin/lerna-projen"
   },
   "scripts": {
     "clobber": "npx projen clobber",
