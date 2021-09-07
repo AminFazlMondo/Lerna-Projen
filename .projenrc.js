@@ -42,6 +42,6 @@ const additionalRules = {
 }
 
 project.eslint.addRules(additionalRules)
-project.addBins({'lerna-projen': 'lerna-projen'})
+project.addBins({'lerna-projen': './bin/lerna-projen'})
 
 project.synth()
