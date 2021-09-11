@@ -13,6 +13,7 @@ export class LernaProject extends NodeProject {
       jest: false,
       devDeps: [
         'lerna',
+        'lerna-projen',
       ],
       projenCommand: 'npx lerna-projen',
     })
