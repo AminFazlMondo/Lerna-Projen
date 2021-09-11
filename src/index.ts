@@ -49,8 +49,4 @@ export class LernaProject extends NodeProject {
       },
     }))
   }
-
-  // postSynthesize() {
-  //   Object.values(this.subProjects).forEach(subProject => subProject.synth())
-  // }
 }
