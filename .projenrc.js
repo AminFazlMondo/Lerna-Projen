@@ -25,6 +25,12 @@ const project = new TypeScriptProject({
   releaseToNpm: true,
   npmAccess: NpmAccess.PUBLIC,
   docgen: true,
+  tsconfig: {
+    compilerOptions: {
+      lib: ['es2019'],
+    },
+  },
+  minNodeVersion: '12.0.0',
 })
 
 const additionalRules = {

@@ -25,6 +25,8 @@ export class LernaProject extends NodeProject {
       .forEach(task => {
         task.exec(`lerna run ${task.name} --stream`)
       })
+
+    this.buildTask.exec('rm -rf ./dist/*')
   }
 
   addSubProject(subProject: Project) {
@@ -48,5 +50,6 @@ export class LernaProject extends NodeProject {
         version: '4.0.0',
       },
     }))
+    Object.keys(this.subProjects).forEach(subProjectPath => this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`))
   }
 }

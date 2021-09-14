@@ -2,28 +2,21 @@ import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
 import {LogLevel, TypeScriptProject} from 'projen'
-// import * as fs from 'fs-extra'
 import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
 
-// Hook to automatically remove temporary directories without needing each
-// place to actually handle this specifically.
-// afterAll((done) => {
-//   // Array.from used to get a copy, so we can safely remove from the set
-//   for (const dir of Array.from(autoRemove)) {
-//     try {
-//       // Note - fs-extra.removeSync is idempotent, so we're safe if the
-//       // directory has already been cleaned up before we get there!
-//       // fs.removeSync(dir)
-//       console.log('###DEBUG-dir:', dir)
-//     } catch (e) {
-//       done.fail(e)
-//     }
-//     autoRemove.delete(dir)
-//   }
-//   done()
-// })
+afterAll((done) => {
+  for (const dir of Array.from(autoRemove)) {
+    try {
+      fs.rmdirSync(dir, {recursive: true})
+    } catch (e) {
+      console.error('Failed to remove temp directory', e)
+    }
+    autoRemove.delete(dir)
+  }
+  done()
+})
 
 function mkdtemp() {
   const tmpdir = fs.mkdtempSync(path.join(os.tmpdir(), 'projen-test-'))
@@ -72,6 +65,7 @@ test('Should generate lerna file and tasks', () => {
     },
   })
   project.addSubProject(subProject)
+  console.log('###DEBUG-project:', project.outdir)
 
   const output = captureSynth(project)
 
@@ -92,6 +86,19 @@ test('Should generate lerna file and tasks', () => {
           steps: expect.not.arrayContaining([{
             exec: 'lerna run test --stream',
           }]),
+        }),
+        build: expect.objectContaining({
+          steps: expect.arrayContaining([
+            {
+              exec: 'lerna run build --stream',
+            },
+            {
+              exec: 'rm -rf ./dist/*',
+            },
+            {
+              exec: `cp -r ./${subProjectDirectory}/dist/* ./dist/`,
+            },
+          ]),
         }),
       }),
     }),
