@@ -42,6 +42,8 @@ jobs:
         with:
           name: dist
           path: dist
+    container:
+      image: jsii/superchain
   release_github:
     name: Publish to GitHub Releases
     needs: release

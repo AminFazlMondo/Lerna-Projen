@@ -40,11 +40,13 @@ junit.xml
 !/.github/workflows/upgrade.yml
 !/.github/pull_request_template.md
 !/test/
-!/tsconfig.json
 !/src/
 /lib
 /dist/
 !/tsconfig.jest.json
 !/.eslintrc.json
 !/tsconfig.eslint.json
+.jsii
+tsconfig.json
+!/API.md
 !/.github/workflows/release.yml

@@ -65,7 +65,6 @@ test('Should generate lerna file and tasks', () => {
     },
   })
   project.addSubProject(subProject)
-  console.log('###DEBUG-project:', project.outdir)
 
   const output = captureSynth(project)
 

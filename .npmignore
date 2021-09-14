@@ -21,3 +21,4 @@ tsconfig.tsbuildinfo
 /tsconfig.jest.json
 /.eslintrc.json
 /tsconfig.eslint.json
+!.jsii

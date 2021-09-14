@@ -1,9 +1,9 @@
-const {TypeScriptProject, NodePackageManager, NpmAccess} = require('projen')
+const {NodePackageManager, NpmAccess, JsiiProject} = require('projen')
 
-const project = new TypeScriptProject({
+const project = new JsiiProject({
   defaultReleaseBranch: 'main',
   name: 'lerna-project',
-  description: 'A Lerna Project for projen',
+  description: 'A lerna project for managing monorepo using lerna',
   keywords: [
     'lerna',
     'monorepo',
@@ -16,7 +16,7 @@ const project = new TypeScriptProject({
   repository: 'https://github.com/AminFazlMondo/Lerna-Projen.git',
   authorEmail: 'amin.fazl@mondo.com.au',
   authorName: 'Amin Fazl',
-  bundledDeps: [
+  peerDeps: [
     'projen',
   ],
   devDeps: [
@@ -48,6 +48,5 @@ const additionalRules = {
 }
 
 project.eslint.addRules(additionalRules)
-project.addBins({'lerna-projen': './bin/lerna-projen'})
 
 project.synth()

@@ -15,7 +15,6 @@ export class LernaProject extends NodeProject {
         'lerna',
         'lerna-projen',
       ],
-      projenCommand: 'npx lerna-projen',
     })
 
     this.subProjects = {}
