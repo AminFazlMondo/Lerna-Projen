@@ -1422,6 +1422,32 @@ The node version to use in GitHub workflows.
 
 ---
 
+##### `docgen`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.docgen"></a>
+
+```typescript
+public readonly docgen: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Consolidate sub projects doc files.
+
+---
+
+##### `docsDirectory`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.docsDirectory"></a>
+
+```typescript
+public readonly docsDirectory: string;
+```
+
+- *Type:* `string`
+- *Default:* "docs"
+
+(experimental) Docs directory.
+
+---
+
 ## Classes <a name="Classes"></a>
 
 ### LernaProject <a name="lerna-projen.LernaProject"></a>
@@ -1461,6 +1487,27 @@ public preSynthesize()
 ```
 
 
+#### Properties <a name="Properties"></a>
+
+##### `docgen`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.docgen"></a>
+
+```typescript
+public readonly docgen: boolean;
+```
+
+- *Type:* `boolean`
+
+---
+
+##### `docsDirectory`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.docsDirectory"></a>
+
+```typescript
+public readonly docsDirectory: string;
+```
+
+- *Type:* `string`
+
+---
 
 
 

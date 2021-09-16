@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
-import {LogLevel, TypeScriptProject} from 'projen'
+import {LogLevel, NodeProject, TypeScriptProject} from 'projen'
 import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
@@ -44,64 +44,166 @@ function captureSynth(project: LernaProject): SynthOutput {
   }
 }
 
-test('Should generate lerna file and tasks', () => {
+function generateProjects(parentDocsFolder: string, subProjectDirectory: string, docgen = false, subProjectHasDocs = true): LernaProject {
   const parentDirectory = mkdtemp()
-  const project = new LernaProject({
+  const parentProject = new LernaProject({
     name: 'test',
     outdir: parentDirectory,
     defaultReleaseBranch: 'test',
     logging: {
       level: LogLevel.OFF,
     },
+    docsDirectory: parentDocsFolder,
+    docgen,
   })
 
-  const subProjectDirectory = 'packages/test-sub-project'
-  const subProject = new TypeScriptProject({
+  const SubProjectType = subProjectHasDocs ? TypeScriptProject : NodeProject
+  const subProject = new SubProjectType({
     name: 'test-sub-project',
-    outdir: path.join(parentDirectory, subProjectDirectory),
+    parent: parentProject,
+    outdir: subProjectDirectory,
     defaultReleaseBranch: 'test',
     logging: {
       level: LogLevel.OFF,
     },
   })
-  project.addSubProject(subProject)
+  parentProject.addSubProject(subProject)
+  return parentProject
+}
 
-  const output = captureSynth(project)
+const parentDocsFolder = 'stub-docs'
+const subProjectDirectory = 'packages/test-sub-project'
+const expectedDocsCommand = `mkdir --parents ./${parentDocsFolder}/${subProjectDirectory} && mv ./${subProjectDirectory}/docs/* ./${parentDocsFolder}/${subProjectDirectory}`
 
-  expect(output['lerna.json']).toMatchObject({
-    packages: [subProjectDirectory],
-    version: '4.0.0',
+describe('Happy Path', () => {
+  let parentProject: LernaProject
+
+  beforeEach(() => {
+    parentProject = generateProjects(parentDocsFolder, subProjectDirectory)
   })
 
-  expect(output['tasks.json']).toEqual(
-    expect.objectContaining({
-      tasks: expect.objectContaining({
-        test: expect.objectContaining({
-          steps: expect.arrayContaining([{
-            exec: 'lerna run test --stream',
-          }]),
+  test('lerna file', () => {
+    const output = captureSynth(parentProject)
+    expect(output['lerna.json']).toMatchObject({
+      packages: [subProjectDirectory],
+      version: '4.0.0',
+    })
+  })
+
+  describe('tasks', () => {
+    test('default', () => {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            default: expect.objectContaining({
+              steps: expect.not.arrayContaining([{
+                exec: 'lerna run test --stream',
+              }]),
+            }),
+          }),
         }),
-        default: expect.objectContaining({
-          steps: expect.not.arrayContaining([{
-            exec: 'lerna run test --stream',
-          }]),
+      )
+
+    })
+
+    test('test', () => {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            test: expect.objectContaining({
+              steps: expect.arrayContaining([{
+                exec: 'lerna run test --stream',
+              }]),
+            }),
+          }),
         }),
-        build: expect.objectContaining({
-          steps: expect.arrayContaining([
-            {
-              exec: 'lerna run build --stream',
-            },
-            {
-              exec: 'rm -rf ./dist/*/*',
-            },
-            {
-              exec: `cp -r ./${subProjectDirectory}/dist/* ./dist/`,
-            },
-          ]),
+      )
+
+    })
+
+    test('build', () => {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            build: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run build --stream',
+                },
+                {
+                  exec: 'rm -rf ./dist/*/*',
+                },
+                {
+                  exec: `cp -r ./${subProjectDirectory}/dist/* ./dist/`,
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('should not include docs tasks by default', ()=> {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            build: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: expectedDocsCommand,
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+  })
+})
+
+
+describe('docgen set to true', () => {
+  test('sub project has docs', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, true)
+    const output = captureSynth(parentProject)
+    expect(output['tasks.json']).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          build: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                exec: expectedDocsCommand,
+              },
+            ]),
+          }),
         }),
       }),
-    }),
-  )
+    )
+  })
+
+  test('sub project does not have docs', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, true, false)
+    const output = captureSynth(parentProject)
+    expect(output['tasks.json']).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          build: expect.objectContaining({
+            steps: expect.not.arrayContaining([
+              {
+                exec: expectedDocsCommand,
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
 })
 
 describe('Unhappy Path', () => {
@@ -161,7 +263,6 @@ describe('Unhappy Path', () => {
           level: LogLevel.OFF,
         },
       })
-      const subProjectDirectory = 'packages/test-sub-project'
       const subProject1 = new TypeScriptProject({
         name: 'test-sub-project-1',
         outdir: path.join(parentDirectory, subProjectDirectory),
