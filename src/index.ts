@@ -59,6 +59,8 @@ export class LernaProject extends NodeProject {
       },
     }))
 
+    const bumpTask = this.tasks.tryFind('bump')
+
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
       if (this.docgen && subProjectDocsDirectory) {
@@ -68,6 +70,9 @@ export class LernaProject extends NodeProject {
 
       this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`)
       subProject.tasks.tryFind('default')?.reset()
+
+      if (bumpTask)
+        subProject.tasks.all.push(bumpTask)
     })
   }
 }
