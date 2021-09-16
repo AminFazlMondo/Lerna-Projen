@@ -20,7 +20,6 @@ export class LernaProject extends NodeProject {
     this.subProjects = {}
 
     this.tasks.all
-      .filter(task => task.name !== 'default')
       .forEach(task => {
         task.exec(`lerna run ${task.name} --stream`)
       })
@@ -50,6 +49,9 @@ export class LernaProject extends NodeProject {
       },
     }))
 
-    Object.keys(this.subProjects).forEach(subProjectPath => this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`))
+    Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
+      this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`)
+      subProject.tasks.tryFind('default')?.reset()
+    })
   }
 }
