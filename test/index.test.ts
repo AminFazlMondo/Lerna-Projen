@@ -6,17 +6,17 @@ import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
 
-afterAll((done) => {
-  for (const dir of Array.from(autoRemove)) {
-    try {
-      fs.rmdirSync(dir, {recursive: true})
-    } catch (e) {
-      console.error('Failed to remove temp directory', e)
-    }
-    autoRemove.delete(dir)
-  }
-  done()
-})
+// afterAll((done) => {
+//   for (const dir of Array.from(autoRemove)) {
+//     try {
+//       fs.rmdirSync(dir, {recursive: true})
+//     } catch (e) {
+//       console.error('Failed to remove temp directory', e)
+//     }
+//     autoRemove.delete(dir)
+//   }
+//   done()
+// })
 
 function mkdtemp() {
   const tmpdir = fs.mkdtempSync(path.join(os.tmpdir(), 'projen-test-'))

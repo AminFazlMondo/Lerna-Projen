@@ -71,8 +71,18 @@ export class LernaProject extends NodeProject {
       this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`)
       subProject.tasks.tryFind('default')?.reset()
 
-      if (bumpTask)
-        subProject.tasks.all.push(bumpTask)
+      if (bumpTask) {
+        const subBumpTask = subProject.addTask('bump', {
+          description: bumpTask.description,
+          condition: bumpTask.condition,
+          env: {
+            OUTFILE: 'package.json',
+            CHANGELOG: 'dist/changelog.md',
+            BUMPFILE: 'dist/version.txt',
+          },
+        })
+        subBumpTask.builtin('release/bump-version')
+      }
     })
   }
 }
