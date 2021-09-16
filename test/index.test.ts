@@ -92,7 +92,7 @@ test('Should generate lerna file and tasks', () => {
               exec: 'lerna run build --stream',
             },
             {
-              exec: 'rm -rf ./dist/*',
+              exec: 'rm -rf ./dist/*/*',
             },
             {
               exec: `cp -r ./${subProjectDirectory}/dist/* ./dist/`,
