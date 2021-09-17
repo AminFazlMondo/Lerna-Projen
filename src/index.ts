@@ -60,6 +60,7 @@ export class LernaProject extends NodeProject {
     }))
 
     const bumpTask = this.tasks.tryFind('bump')
+    const unbumpTask = this.tasks.tryFind('unbump')
 
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
@@ -71,17 +72,28 @@ export class LernaProject extends NodeProject {
       this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`)
       subProject.tasks.tryFind('default')?.reset()
 
+      const bumpEnvs = {
+        OUTFILE: 'package.json',
+        CHANGELOG: 'dist/changelog.md',
+        BUMPFILE: 'dist/version.txt',
+      }
+
       if (bumpTask) {
-        const subBumpTask = subProject.addTask('bump', {
+        const subBumpTask = subProject.addTask(bumpTask.name, {
           description: bumpTask.description,
           condition: bumpTask.condition,
-          env: {
-            OUTFILE: 'package.json',
-            CHANGELOG: 'dist/changelog.md',
-            BUMPFILE: 'dist/version.txt',
-          },
+          env: bumpEnvs,
         })
         subBumpTask.builtin('release/bump-version')
+      }
+
+      if (unbumpTask) {
+        const subBumpTask = subProject.addTask(unbumpTask.name, {
+          description: unbumpTask.description,
+          condition: unbumpTask.condition,
+          env: bumpEnvs,
+        })
+        subBumpTask.builtin('release/reset-version')
       }
     })
   }
