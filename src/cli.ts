@@ -27,17 +27,20 @@ program
 program
   .command('move-docs <parentDocsDirectory> <subProjectPath> <subProjectDocsDirectory>')
   .action(async (parentDocsDirectory, subProjectPath, subProjectDocsDirectory) => {
-    await moveDocs(parentDocsDirectory, subProjectPath, subProjectDocsDirectory)
-    await moveDocs(parentDocsDirectory, subProjectPath, 'API.md')
+    await moveDocs(parentDocsDirectory, subProjectPath, subProjectDocsDirectory, false)
+    await moveDocs(parentDocsDirectory, subProjectPath, 'API.md', true)
   })
 
-async function moveDocs(parentDocsDirectory: string, subProjectPath: string, subPath: string): Promise<void> {
+async function moveDocs(parentDocsDirectory: string, subProjectPath: string, subPath: string, isFile: boolean): Promise<void> {
   const subProjectDocs = `./${subProjectPath}/${subPath}`
   if (!existsSync(subProjectDocs))
     return
-
-  const entries = readdirSync(subProjectDocs)
-  await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `./${parentDocsDirectory}/${subProjectPath}/${f}`)))
+  if (isFile) {
+    await move(subProjectDocs, `./${parentDocsDirectory}/${subProjectPath}/${subPath}`)
+  } else {
+    const entries = readdirSync(subProjectDocs)
+    await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `./${parentDocsDirectory}/${subProjectPath}/${f}`)))
+  }
 }
 
 program.parse(process.argv)
