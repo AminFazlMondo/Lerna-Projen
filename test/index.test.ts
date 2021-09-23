@@ -6,17 +6,17 @@ import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
 
-// afterAll((done) => {
-//   for (const dir of Array.from(autoRemove)) {
-//     try {
-//       fs.rmdirSync(dir, {recursive: true})
-//     } catch (e) {
-//       console.error('Failed to remove temp directory', e)
-//     }
-//     autoRemove.delete(dir)
-//   }
-//   done()
-// })
+afterAll((done) => {
+  for (const dir of Array.from(autoRemove)) {
+    try {
+      fs.rmdirSync(dir, {recursive: true})
+    } catch (e) {
+      console.error('Failed to remove temp directory', e)
+    }
+    autoRemove.delete(dir)
+  }
+  done()
+})
 
 function mkdtemp() {
   const tmpdir = fs.mkdtempSync(path.join(os.tmpdir(), 'projen-test-'))
@@ -73,7 +73,7 @@ function generateProjects(parentDocsFolder: string, subProjectDirectory: string,
 
 const parentDocsFolder = 'stub-docs'
 const subProjectDirectory = 'packages/test-sub-project'
-const expectedDocsCommand = `mkdir --parents ./${parentDocsFolder}/${subProjectDirectory} && mv ./${subProjectDirectory}/docs/* ./${parentDocsFolder}/${subProjectDirectory}`
+const expectedDocsCommand = `lerna-projen move-docs ${parentDocsFolder} ${subProjectDirectory} docs`
 
 describe('Happy Path', () => {
   let parentProject: LernaProject
@@ -134,10 +134,10 @@ describe('Happy Path', () => {
                   exec: 'lerna run build --stream',
                 },
                 {
-                  exec: 'rm -rf ./dist/*/*',
+                  exec: 'lerna-projen clean-dist',
                 },
                 {
-                  exec: `cp -r ./${subProjectDirectory}/dist/* ./dist/`,
+                  exec: `lerna-projen copy-dist ${subProjectDirectory}`,
                 },
               ]),
             }),

@@ -5,7 +5,7 @@ export * from './types'
 
 function getDocsDirectory(project: Project) {
   const result = Object.entries(project).find(([key]) => key === 'docsDirectory')
-  return result?.[1]
+  return result?.[1].replace(/\/$/, '')
 }
 
 export class LernaProject extends NodeProject {
@@ -50,7 +50,7 @@ export class LernaProject extends NodeProject {
         task.exec(`lerna run ${task.name} --stream`)
       })
 
-    this.buildTask.exec('rm -rf ./dist/*/*')
+    this.buildTask.exec('lerna-projen clean-dist')
 
     this.files.push(new JsonFile(this, 'lerna.json', {
       obj: {
@@ -64,12 +64,10 @@ export class LernaProject extends NodeProject {
 
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
-      if (this.docgen && subProjectDocsDirectory) {
-        const destination = `./${this.docsDirectory}/${subProjectPath}`
-        this.buildTask.exec(`mkdir --parents ${destination} && mv ./${subProjectPath}/${subProjectDocsDirectory}* ${destination}`)
-      }
+      if (this.docgen && subProjectDocsDirectory)
+        this.buildTask.exec(`lerna-projen move-docs ${this.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
 
-      this.buildTask.exec(`cp -r ./${subProjectPath}/dist/* ./dist/`)
+      this.buildTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
       subProject.tasks.tryFind('default')?.reset()
 
       const bumpEnvs = {

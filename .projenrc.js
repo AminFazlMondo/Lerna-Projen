@@ -21,6 +21,11 @@ const project = new JsiiProject({
   ],
   devDeps: [
     '@types/babel__core',
+    '@types/fs-extra',
+  ],
+  bundledDeps: [
+    'commander',
+    'fs-extra',
   ],
   releaseToNpm: true,
   npmAccess: NpmAccess.PUBLIC,
