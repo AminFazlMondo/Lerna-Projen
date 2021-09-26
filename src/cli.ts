@@ -20,7 +20,7 @@ program
       return
 
     const entries = readdirSync(subProjectDist)
-    await Promise.all(entries.map(f => copy(`${subProjectDist}/${f}`, `${distFolder}/${f}`, {recursive: true})))
+    await Promise.all(entries.map(f => copy(`${subProjectDist}/${f}`, `${distFolder}/${f}`, {recursive: true, overwrite: true})))
   })
 
 
@@ -35,11 +35,12 @@ async function moveDocs(parentDocsDirectory: string, subProjectPath: string, sub
   const subProjectDocs = `./${subProjectPath}/${subPath}`
   if (!existsSync(subProjectDocs))
     return
+  const moveOptions = {overwrite: true}
   if (isFile) {
-    await move(subProjectDocs, `./${parentDocsDirectory}/${subProjectPath}/${subPath}`)
+    await move(subProjectDocs, `./${parentDocsDirectory}/${subProjectPath}/${subPath}`, moveOptions)
   } else {
     const entries = readdirSync(subProjectDocs)
-    await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `./${parentDocsDirectory}/${subProjectPath}/${f}`)))
+    await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `./${parentDocsDirectory}/${subProjectPath}/${f}`, moveOptions)))
   }
 }
 
