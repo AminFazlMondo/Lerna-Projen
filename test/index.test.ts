@@ -134,10 +134,10 @@ describe('Happy Path', () => {
                   exec: 'lerna run build --stream',
                 },
                 {
-                  builtin: 'lerna-projen clean-dist',
+                  exec: 'lerna-projen clean-dist',
                 },
                 {
-                  builtin: `lerna-projen copy-dist ${subProjectDirectory}`,
+                  exec: `lerna-projen copy-dist ${subProjectDirectory}`,
                 },
               ]),
             }),
@@ -155,7 +155,7 @@ describe('Happy Path', () => {
             build: expect.objectContaining({
               steps: expect.not.arrayContaining([
                 {
-                  builtin: expectedDocsCommand,
+                  exec: expectedDocsCommand,
                 },
               ]),
             }),
@@ -179,7 +179,7 @@ describe('docgen set to true', () => {
           build: expect.objectContaining({
             steps: expect.arrayContaining([
               {
-                builtin: expectedDocsCommand,
+                exec: expectedDocsCommand,
               },
             ]),
           }),
@@ -197,7 +197,7 @@ describe('docgen set to true', () => {
           build: expect.objectContaining({
             steps: expect.not.arrayContaining([
               {
-                builtin: expectedDocsCommand,
+                exec: expectedDocsCommand,
               },
             ]),
           }),
