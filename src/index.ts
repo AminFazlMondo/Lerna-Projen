@@ -45,6 +45,8 @@ export class LernaProject extends NodeProject {
   }
 
   preSynthesize() {
+    this.tasks.tryFind('default')?.prependExec('npm i lerna-projen --package-lock=false')
+
     this.tasks.all
       .forEach(task => {
         task.exec(`lerna run ${task.name} --stream`)
