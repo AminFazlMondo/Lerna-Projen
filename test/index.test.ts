@@ -1,20 +1,14 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
+import {removeSync} from 'fs-extra'
 import {LogLevel, NodeProject, TypeScriptProject} from 'projen'
 import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
 
 afterAll((done) => {
-  for (const dir of Array.from(autoRemove)) {
-    try {
-      fs.rmdirSync(dir, {recursive: true})
-    } catch (e) {
-      console.error('Failed to remove temp directory', e)
-    }
-    autoRemove.delete(dir)
-  }
+  Array.from(autoRemove).forEach(dir => removeSync(dir))
   done()
 })
 
