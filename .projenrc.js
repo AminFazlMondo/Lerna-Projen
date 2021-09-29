@@ -35,7 +35,7 @@ const project = new JsiiProject({
       lib: ['es2019'],
     },
   },
-  minNodeVersion: '12.0.0',
+  minNodeVersion: '12.7.0',
 })
 
 const additionalRules = {
