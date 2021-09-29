@@ -14,6 +14,7 @@ export class LernaProject extends NodeProject {
 
   readonly docsDirectory: string
   readonly docgen: boolean
+  readonly sinceLastRelease: boolean
 
   constructor(options: LernaProjectOptions) {
     super({
@@ -28,6 +29,7 @@ export class LernaProject extends NodeProject {
     this.subProjects = {}
     this.docsDirectory = options.docsDirectory ?? 'docs'
     this.docgen = options.docgen ?? false
+    this.sinceLastRelease = options.sinceLastRelease || false
   }
 
   addSubProject(subProject: Project) {
@@ -49,7 +51,9 @@ export class LernaProject extends NodeProject {
 
     this.tasks.all
       .forEach(task => {
-        task.exec(`lerna run ${task.name} --stream`)
+        const mainCommand = `lerna run ${task.name} --stream`
+        const postCommand = this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
+        task.exec(`${mainCommand}${postCommand}`)
       })
 
     this.buildTask.exec('lerna-projen clean-dist')

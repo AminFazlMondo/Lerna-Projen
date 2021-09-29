@@ -1448,6 +1448,19 @@ public readonly docsDirectory: string;
 
 ---
 
+##### `sinceLastRelease`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.sinceLastRelease"></a>
+
+```typescript
+public readonly sinceLastRelease: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+(experimental) Flag to run tasks only for the packages that has changes since last release.
+
+---
+
 ## Classes <a name="Classes"></a>
 
 ### LernaProject <a name="lerna-projen.LernaProject"></a>
@@ -1506,6 +1519,16 @@ public readonly docsDirectory: string;
 ```
 
 - *Type:* `string`
+
+---
+
+##### `sinceLastRelease`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.sinceLastRelease"></a>
+
+```typescript
+public readonly sinceLastRelease: boolean;
+```
+
+- *Type:* `boolean`
 
 ---
 

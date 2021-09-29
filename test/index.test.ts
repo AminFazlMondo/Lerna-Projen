@@ -44,7 +44,8 @@ function captureSynth(project: LernaProject): SynthOutput {
   }
 }
 
-function generateProjects(parentDocsFolder: string, subProjectDirectory: string, docgen = false, subProjectHasDocs = true): LernaProject {
+// eslint-disable-next-line max-len
+function generateProjects(parentDocsFolder: string, subProjectDirectory: string, docgen = false, subProjectHasDocs = true, sinceLastRelease = false): LernaProject {
   const parentDirectory = mkdtemp()
   const parentProject = new LernaProject({
     name: 'test',
@@ -55,6 +56,7 @@ function generateProjects(parentDocsFolder: string, subProjectDirectory: string,
     },
     docsDirectory: parentDocsFolder,
     docgen,
+    sinceLastRelease,
   })
 
   const SubProjectType = subProjectHasDocs ? TypeScriptProject : NodeProject
@@ -198,6 +200,26 @@ describe('docgen set to true', () => {
             steps: expect.not.arrayContaining([
               {
                 exec: expectedDocsCommand,
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
+})
+
+describe('since last release', () => {
+  test('should include since filter', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, false, true, true)
+    const output = captureSynth(parentProject)
+    expect(output['tasks.json']).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          build: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                exec: 'lerna run build --stream --since $(git describe --abbrev=0 --tags --match "v*")',
               },
             ]),
           }),
