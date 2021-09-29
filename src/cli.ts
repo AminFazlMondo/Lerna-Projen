@@ -8,6 +8,9 @@ const distFolder = './dist'
 program
   .command('clean-dist')
   .action(async () => {
+    if (!existsSync(distFolder))
+      return
+
     const entries = readdirSync(distFolder)
     await Promise.all(entries.map(f => remove(`${distFolder}/${f}`)))
   })
