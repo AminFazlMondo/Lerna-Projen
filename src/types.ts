@@ -16,4 +16,12 @@ export interface LernaProjectOptions extends NodeProjectOptions {
    * @experimental
    */
   readonly docsDirectory?: string;
+
+  /**
+   * (experimental) Flag to run tasks only for the packages that has changes since last release
+   *
+   * @default false
+   * @experimental
+   */
+  readonly sinceLastRelease?: boolean;
 }

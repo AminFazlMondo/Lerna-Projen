@@ -1,20 +1,14 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
+import {removeSync} from 'fs-extra'
 import {LogLevel, NodeProject, TypeScriptProject} from 'projen'
 import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
 
 afterAll((done) => {
-  for (const dir of Array.from(autoRemove)) {
-    try {
-      fs.rmdirSync(dir, {recursive: true})
-    } catch (e) {
-      console.error('Failed to remove temp directory', e)
-    }
-    autoRemove.delete(dir)
-  }
+  Array.from(autoRemove).forEach(dir => removeSync(dir))
   done()
 })
 
@@ -44,7 +38,8 @@ function captureSynth(project: LernaProject): SynthOutput {
   }
 }
 
-function generateProjects(parentDocsFolder: string, subProjectDirectory: string, docgen = false, subProjectHasDocs = true): LernaProject {
+// eslint-disable-next-line max-len
+function generateProjects(parentDocsFolder: string, subProjectDirectory: string, docgen = false, subProjectHasDocs = true, sinceLastRelease = false): LernaProject {
   const parentDirectory = mkdtemp()
   const parentProject = new LernaProject({
     name: 'test',
@@ -55,6 +50,7 @@ function generateProjects(parentDocsFolder: string, subProjectDirectory: string,
     },
     docsDirectory: parentDocsFolder,
     docgen,
+    sinceLastRelease,
   })
 
   const SubProjectType = subProjectHasDocs ? TypeScriptProject : NodeProject
@@ -198,6 +194,26 @@ describe('docgen set to true', () => {
             steps: expect.not.arrayContaining([
               {
                 exec: expectedDocsCommand,
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
+})
+
+describe('since last release', () => {
+  test('should include since filter', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, false, true, true)
+    const output = captureSynth(parentProject)
+    expect(output['tasks.json']).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          build: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                exec: 'lerna run build --stream --since $(git describe --abbrev=0 --tags --match "v*")',
               },
             ]),
           }),
