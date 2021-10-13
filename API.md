@@ -505,7 +505,7 @@ public readonly license: string;
 
 License's SPDX identifier.
 
-See https://github.com/projen/projen/tree/master/license-text for a list of supported licenses.
+See https://github.com/projen/projen/tree/main/license-text for a list of supported licenses.
 Use the `licensed` option if you want to no license to be specified.
 
 ---
@@ -868,7 +868,9 @@ be provided for the default branch.
 
 ---
 
-##### `releaseEveryCommit`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseEveryCommit"></a>
+##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseEveryCommit"></a>
+
+- *Deprecated:* Use `releaseTrigger: ReleaseTrigger.continuous()` instead
 
 ```typescript
 public readonly releaseEveryCommit: boolean;
@@ -909,7 +911,9 @@ Only applies if `releaseFailureIssue` is true.
 
 ---
 
-##### `releaseSchedule`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseSchedule"></a>
+##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseSchedule"></a>
+
+- *Deprecated:* Use `releaseTrigger: ReleaseTrigger.scheduled()` instead
 
 ```typescript
 public readonly releaseSchedule: string;
@@ -919,6 +923,37 @@ public readonly releaseSchedule: string;
 - *Default:* no scheduled releases
 
 CRON schedule to trigger new releases.
+
+---
+
+##### `releaseTagPrefix`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseTagPrefix"></a>
+
+```typescript
+public readonly releaseTagPrefix: string;
+```
+
+- *Type:* `string`
+- *Default:* no prefix
+
+Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers.
+
+Note: this prefix is used to detect the latest tagged version
+when bumping, so if you change this on a project with an existing version
+history, you may need to manually tag your latest release
+with the new prefix.
+
+---
+
+##### `releaseTrigger`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseTrigger"></a>
+
+```typescript
+public readonly releaseTrigger: ReleaseTrigger;
+```
+
+- *Type:* [`projen.release.ReleaseTrigger`](#projen.release.ReleaseTrigger)
+- *Default:* Continuous releases (`ReleaseTrigger.continuous()`)
+
+The release trigger to use.
 
 ---
 
@@ -1068,9 +1103,7 @@ The copyright years to put in the LICENSE file.
 
 ---
 
-##### ~~`dependabot`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.dependabot"></a>
-
-- *Deprecated:* - use `depsUpgrade: DependenciesUpgradeMechanism.dependabot()`
+##### `dependabot`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.dependabot"></a>
 
 ```typescript
 public readonly dependabot: boolean;
@@ -1079,13 +1112,13 @@ public readonly dependabot: boolean;
 - *Type:* `boolean`
 - *Default:* false
 
-Include dependabot configuration.
+Use dependabot to handle dependency upgrades.
+
+Cannot be used in conjunction with `depsUpgrade`.
 
 ---
 
-##### ~~`dependabotOptions`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.dependabotOptions"></a>
-
-- *Deprecated:* - use `depsUpgrade: DependenciesUpgradeMechanism.dependabot()`
+##### `dependabotOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.dependabotOptions"></a>
 
 ```typescript
 public readonly dependabotOptions: DependabotOptions;
@@ -1101,13 +1134,28 @@ Options for dependabot.
 ##### `depsUpgrade`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.depsUpgrade"></a>
 
 ```typescript
-public readonly depsUpgrade: DependenciesUpgradeMechanism;
+public readonly depsUpgrade: boolean;
 ```
 
-- *Type:* [`projen.DependenciesUpgradeMechanism`](#projen.DependenciesUpgradeMechanism)
-- *Default:* DependenciesUpgradeMechanism.dependabot if dependabot is true, otherwise a DependenciesUpgradeMechanism.githubWorkflow configured from other passed-in NodeProjectOptions
+- *Type:* `boolean`
+- *Default:* true
 
-How to handle dependency upgrades.
+Use github workflows to handle dependency upgrades.
+
+Cannot be used in conjunction with `dependabot`.
+
+---
+
+##### `depsUpgradeOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.depsUpgradeOptions"></a>
+
+```typescript
+public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
+```
+
+- *Type:* [`projen.UpgradeDependenciesOptions`](#projen.UpgradeDependenciesOptions)
+- *Default:* default options
+
+Options for depsUpgrade.
 
 ---
 
@@ -1345,10 +1393,10 @@ Include a GitHub pull request template.
 ##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.pullRequestTemplateContents"></a>
 
 ```typescript
-public readonly pullRequestTemplateContents: string;
+public readonly pullRequestTemplateContents: string[];
 ```
 
-- *Type:* `string`
+- *Type:* `string`[]
 - *Default:* default content
 
 The contents of the pull request template.
