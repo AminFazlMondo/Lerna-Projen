@@ -2,6 +2,14 @@ import {NodeProjectOptions} from 'projen'
 
 export interface LernaProjectOptions extends NodeProjectOptions {
   /**
+   * (experimental) Use TypeScript for your projenrc file (`.projenrc.ts`).
+   *
+   * @default false
+   * @experimental
+   */
+  readonly projenrcTs?: boolean;
+
+  /**
    * Consolidate sub projects doc files
    *
    * @default false

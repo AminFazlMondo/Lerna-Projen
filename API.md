@@ -1496,6 +1496,19 @@ public readonly docsDirectory: string;
 
 ---
 
+##### `projenrcTs`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcTs"></a>
+
+```typescript
+public readonly projenrcTs: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+(experimental) Use TypeScript for your projenrc file (`.projenrc.ts`).
+
+---
+
 ##### `sinceLastRelease`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.sinceLastRelease"></a>
 
 ```typescript
