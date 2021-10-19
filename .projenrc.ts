@@ -1,6 +1,9 @@
-const {NodePackageManager, NpmAccess, JsiiProject} = require('projen')
+import {NodePackageManager, NpmAccess, JsiiProject} from 'projen'
+
+const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git'
 
 const project = new JsiiProject({
+  projenrcTs: true,
   defaultReleaseBranch: 'main',
   name: 'lerna-project',
   description: 'A lerna project for managing monorepo using lerna',
@@ -13,9 +16,10 @@ const project = new JsiiProject({
   majorVersion: 0,
   packageName: 'lerna-projen',
   packageManager: NodePackageManager.NPM,
-  repository: 'https://github.com/AminFazlMondo/Lerna-Projen.git',
-  authorEmail: 'amin.fazl@mondo.com.au',
-  authorName: 'Amin Fazl',
+  repository,
+  repositoryUrl: repository,
+  authorAddress: 'amin.fazl@mondo.com.au',
+  author: 'Amin Fazl',
   peerDeps: [
     'projen',
   ],
@@ -52,6 +56,6 @@ const additionalRules = {
   'nonblock-statement-body-position': ['error', 'below'],
 }
 
-project.eslint.addRules(additionalRules)
+project.eslint?.addRules(additionalRules)
 
 project.synth()
