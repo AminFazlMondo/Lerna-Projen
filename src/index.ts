@@ -11,25 +11,32 @@ function getDocsDirectory(project: Project) {
 export class LernaProject extends NodeProject {
 
   private subProjects: Record<string, Project>
+  private projenrcTs: boolean
 
   readonly docsDirectory: string
   readonly docgen: boolean
   readonly sinceLastRelease: boolean
 
   constructor(options: LernaProjectOptions) {
+    const devDeps = [
+      'lerna',
+      'lerna-projen',
+    ]
+
+    if (options.projenrcTs)
+      devDeps.push('ts-node', 'typescript')
+
     super({
       ...options,
       jest: false,
-      devDeps: [
-        'lerna',
-        'lerna-projen',
-      ],
+      devDeps,
     })
 
     this.subProjects = {}
     this.docsDirectory = options.docsDirectory ?? 'docs'
     this.docgen = options.docgen ?? false
-    this.sinceLastRelease = options.sinceLastRelease || false
+    this.sinceLastRelease = options.sinceLastRelease ?? false
+    this.projenrcTs = options.projenrcTs ?? false
   }
 
   addSubProject(subProject: Project) {
@@ -47,7 +54,11 @@ export class LernaProject extends NodeProject {
   }
 
   preSynthesize() {
-    this.tasks.tryFind('default')?.prependExec('npm i lerna-projen --package-lock=false')
+    const defaultTask = this.tasks.tryFind('default')
+    defaultTask?.reset('npm i lerna-projen --package-lock=false')
+    const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
+    defaultTask?.exec(projenCommand)
+    defaultTask?.exec('lerna run default --stream')
 
     this.tasks.all
       .forEach(task => {

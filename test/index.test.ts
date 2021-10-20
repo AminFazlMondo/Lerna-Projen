@@ -37,9 +37,29 @@ function captureSynth(project: LernaProject): SynthOutput {
     'tasks.json': readJson(path.join(outdir, '.projen', 'tasks.json')),
   }
 }
+interface GenerateProjectsParams {
+  /**
+   * @default false
+   */
+  docgen?: boolean;
 
+  /**
+   * @default true
+   */
+  subProjectHasDocs?: boolean;
+
+  /**
+   * @default false
+   */
+  sinceLastRelease?: boolean;
+
+  /**
+   * @default false
+   */
+  projenrcTs?: boolean;
+}
 // eslint-disable-next-line max-len
-function generateProjects(parentDocsFolder: string, subProjectDirectory: string, docgen = false, subProjectHasDocs = true, sinceLastRelease = false): LernaProject {
+function generateProjects(parentDocsFolder: string, subProjectDirectory: string, params: GenerateProjectsParams = {}): LernaProject {
   const parentDirectory = mkdtemp()
   const parentProject = new LernaProject({
     name: 'test',
@@ -49,11 +69,12 @@ function generateProjects(parentDocsFolder: string, subProjectDirectory: string,
       level: LogLevel.OFF,
     },
     docsDirectory: parentDocsFolder,
-    docgen,
-    sinceLastRelease,
+    docgen: params.docgen ?? false,
+    sinceLastRelease: params.sinceLastRelease ?? false,
+    projenrcTs: params.projenrcTs ?? false,
   })
 
-  const SubProjectType = subProjectHasDocs ? TypeScriptProject : NodeProject
+  const SubProjectType = (params.subProjectHasDocs ?? true) ? TypeScriptProject : NodeProject
   const subProject = new SubProjectType({
     name: 'test-sub-project',
     parent: parentProject,
@@ -167,7 +188,7 @@ describe('Happy Path', () => {
 
 describe('docgen set to true', () => {
   test('sub project has docs', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, true)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true})
     const output = captureSynth(parentProject)
     expect(output['tasks.json']).toEqual(
       expect.objectContaining({
@@ -185,7 +206,7 @@ describe('docgen set to true', () => {
   })
 
   test('sub project does not have docs', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, true, false)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true, subProjectHasDocs: false})
     const output = captureSynth(parentProject)
     expect(output['tasks.json']).toEqual(
       expect.objectContaining({
@@ -205,7 +226,7 @@ describe('docgen set to true', () => {
 
 describe('since last release', () => {
   test('should include since filter', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, false, true, true)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {sinceLastRelease: true})
     const output = captureSynth(parentProject)
     expect(output['tasks.json']).toEqual(
       expect.objectContaining({
@@ -214,6 +235,26 @@ describe('since last release', () => {
             steps: expect.arrayContaining([
               {
                 exec: 'lerna run build --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
+})
+
+describe('typescript projenrc file', () => {
+  test('should use the projenrc.ts file', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {projenrcTs: true})
+    const output = captureSynth(parentProject)
+    expect(output['tasks.json']).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          default: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                exec: 'ts-node --skip-project .projenrc.ts',
               },
             ]),
           }),
