@@ -254,7 +254,7 @@ describe('typescript projenrc file', () => {
           default: expect.objectContaining({
             steps: expect.arrayContaining([
               {
-                exec: 'ts-node --skip-project .projenrc.ts',
+                exec: 'ts-eager .projenrc.ts',
               },
             ]),
           }),
