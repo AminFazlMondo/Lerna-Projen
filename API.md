@@ -1457,6 +1457,19 @@ Workflow steps to use in order to bootstrap this repo.
 
 ---
 
+##### `workflowGitIdentity`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowGitIdentity"></a>
+
+```typescript
+public readonly workflowGitIdentity: GitIdentity;
+```
+
+- *Type:* [`projen.github.GitIdentity`](#projen.github.GitIdentity)
+- *Default:* GitHub Actions
+
+The git identity to use in workflows.
+
+---
+
 ##### `workflowNodeVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowNodeVersion"></a>
 
 ```typescript

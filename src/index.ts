@@ -47,9 +47,6 @@ export class LernaProject extends NodeProject {
 
     const relativeOutDir = outdir.replace(`${this.outdir}/`, '')
 
-    if (this.subProjects[relativeOutDir])
-      throw new Error('A sub project is defined with the same output path')
-
     this.subProjects[relativeOutDir] = subProject
   }
 
