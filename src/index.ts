@@ -24,7 +24,7 @@ export class LernaProject extends NodeProject {
     ]
 
     if (options.projenrcTs)
-      devDeps.push('ts-node', 'typescript')
+      devDeps.push('ts-eager', 'typescript')
 
     super({
       ...options,
@@ -53,7 +53,7 @@ export class LernaProject extends NodeProject {
   preSynthesize() {
     const defaultTask = this.tasks.tryFind('default')
     defaultTask?.reset('npm i lerna-projen --package-lock=false')
-    const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
+    const projenCommand = this.projenrcTs ? 'ts-eager .projenrc.ts' : 'node .projenrc.js'
     defaultTask?.exec(projenCommand)
     defaultTask?.exec('lerna run default --stream')
 
