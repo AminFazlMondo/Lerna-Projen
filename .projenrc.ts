@@ -40,6 +40,9 @@ const project = new JsiiProject({
     },
   },
   minNodeVersion: '12.7.0',
+  depsUpgradeOptions: {
+    ignoreProjen: false,
+  },
 })
 
 const additionalRules = {
