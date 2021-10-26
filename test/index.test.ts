@@ -311,37 +311,6 @@ describe('Unhappy Path', () => {
       expect(() => project.addSubProject(subProject)).toThrow('A sub project out dir should exists within the lerna package')
     })
 
-    test('Should fail adding two sub projects with the same output directory', () => {
-      const parentDirectory = mkdtemp()
-      const project = new LernaProject({
-        name: 'test',
-        outdir: parentDirectory,
-        defaultReleaseBranch: 'test',
-        logging: {
-          level: LogLevel.OFF,
-        },
-      })
-      const subProject1 = new TypeScriptProject({
-        name: 'test-sub-project-1',
-        outdir: path.join(parentDirectory, subProjectDirectory),
-        defaultReleaseBranch: 'test',
-        logging: {
-          level: LogLevel.OFF,
-        },
-      })
-      project.addSubProject(subProject1)
-
-      const subProject2 = new TypeScriptProject({
-        name: 'test-sub-project-2',
-        outdir: path.join(parentDirectory, subProjectDirectory),
-        defaultReleaseBranch: 'test',
-        logging: {
-          level: LogLevel.OFF,
-        },
-      })
-      expect(() => project.addSubProject(subProject2)).toThrow('A sub project is defined with the same output path')
-    })
-
   })
 
 })
