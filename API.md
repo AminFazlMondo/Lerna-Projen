@@ -396,6 +396,19 @@ this will be what you `package.json` will eventually include.
 
 ---
 
+##### `codeArtifactOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.codeArtifactOptions"></a>
+
+```typescript
+public readonly codeArtifactOptions: CodeArtifactOptions;
+```
+
+- *Type:* [`projen.CodeArtifactOptions`](#projen.CodeArtifactOptions)
+- *Default:* undefined
+
+Options for publishing npm package to AWS CodeArtifact.
+
+---
+
 ##### `deps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.deps"></a>
 
 ```typescript
@@ -1048,6 +1061,18 @@ public readonly buildWorkflow: boolean;
 - *Default:* true if not a subproject
 
 Define a GitHub workflow for building PRs.
+
+---
+
+##### `bundlerOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bundlerOptions"></a>
+
+```typescript
+public readonly bundlerOptions: BundlerCommonOptions;
+```
+
+- *Type:* [`projen.javascript.BundlerCommonOptions`](#projen.javascript.BundlerCommonOptions)
+
+Options for `Bundler`.
 
 ---
 
