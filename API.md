@@ -70,6 +70,21 @@ The parent project, if this project is part of a bigger project.
 
 ---
 
+##### `projenCommand`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenCommand"></a>
+
+```typescript
+public readonly projenCommand: string;
+```
+
+- *Type:* `string`
+- *Default:* "npx projen"
+
+The shell command to use in order to run the projen CLI.
+
+Can be used to customize in special environments.
+
+---
+
 ##### `projenrcJson`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcJson"></a>
 
 ```typescript
@@ -204,6 +219,21 @@ public readonly mergify: boolean;
 - *Default:* true
 
 Whether mergify should be enabled on this repository or not.
+
+---
+
+##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.mergifyOptions"></a>
+
+- *Deprecated:* use `githubOptions.mergifyOptions` instead
+
+```typescript
+public readonly mergifyOptions: MergifyOptions;
+```
+
+- *Type:* [`projen.github.MergifyOptions`](#projen.github.MergifyOptions)
+- *Default:* default options
+
+Options for mergify.
 
 ---
 
@@ -710,21 +740,6 @@ test your module against the lowest peer version required.
 
 ---
 
-##### `projenCommand`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenCommand"></a>
-
-```typescript
-public readonly projenCommand: string;
-```
-
-- *Type:* `string`
-- *Default:* "npx projen"
-
-The shell command to use in order to run the projen CLI.
-
-Can be used to customize in special environments.
-
----
-
 ##### `repository`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.repository"></a>
 
 ```typescript
@@ -1222,19 +1237,6 @@ Jest options.
 
 ---
 
-##### `mergifyOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.mergifyOptions"></a>
-
-```typescript
-public readonly mergifyOptions: MergifyOptions;
-```
-
-- *Type:* [`projen.github.MergifyOptions`](#projen.github.MergifyOptions)
-- *Default:* default options
-
-Options for mergify.
-
----
-
 ##### `mutableBuild`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.mutableBuild"></a>
 
 ```typescript
@@ -1291,24 +1293,6 @@ public readonly projenDevDependency: boolean;
 - *Default:* true
 
 Indicates of "projen" should be installed as a devDependency.
-
----
-
-##### `projenDuringBuild`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenDuringBuild"></a>
-
-```typescript
-public readonly projenDuringBuild: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* true
-
-Execute `projen` as the first step of the `build` task to synthesize project files.
-
-This applies both to local builds and to CI builds.
-
-Disabling this feature is NOT RECOMMENDED and means that manual changes to
-synthesized project files will be persisted.
 
 ---
 

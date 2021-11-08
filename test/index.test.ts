@@ -146,12 +146,54 @@ describe('Happy Path', () => {
         expect.objectContaining({
           tasks: expect.objectContaining({
             build: expect.objectContaining({
-              steps: expect.arrayContaining([
+              steps: expect.not.arrayContaining([
                 {
                   exec: 'lerna run build --stream',
                 },
                 {
                   exec: 'lerna-projen clean-dist',
+                },
+                {
+                  exec: `lerna-projen copy-dist ${subProjectDirectory}`,
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('pre-compile', () => {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['pre-compile']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna-projen clean-dist',
+                },
+                {
+                  exec: 'lerna run pre-compile --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('post-compile', () => {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-compile']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run post-compile --stream',
                 },
                 {
                   exec: `lerna-projen copy-dist ${subProjectDirectory}`,
@@ -193,7 +235,7 @@ describe('docgen set to true', () => {
     expect(output['tasks.json']).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
-          build: expect.objectContaining({
+          ['post-compile']: expect.objectContaining({
             steps: expect.arrayContaining([
               {
                 exec: expectedDocsCommand,
@@ -231,10 +273,10 @@ describe('since last release', () => {
     expect(output['tasks.json']).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
-          build: expect.objectContaining({
+          compile: expect.objectContaining({
             steps: expect.arrayContaining([
               {
-                exec: 'lerna run build --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+                exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
               },
             ]),
           }),
