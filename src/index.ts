@@ -59,12 +59,15 @@ export class LernaProject extends NodeProject {
 
     this.tasks.all
       .forEach(task => {
+        if (task.name === 'build')
+          return
+
         const mainCommand = `lerna run ${task.name} --stream`
         const postCommand = this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
         task.exec(`${mainCommand}${postCommand}`)
       })
 
-    this.buildTask.exec('lerna-projen clean-dist')
+    this.preCompileTask.exec('lerna-projen clean-dist')
 
     this.files.push(new JsonFile(this, 'lerna.json', {
       obj: {
@@ -79,9 +82,9 @@ export class LernaProject extends NodeProject {
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
       if (this.docgen && subProjectDocsDirectory)
-        this.buildTask.exec(`lerna-projen move-docs ${this.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
+        this.postCompileTask.exec(`lerna-projen move-docs ${this.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
 
-      this.buildTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
+      this.postCompileTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
       subProject.tasks.tryFind('default')?.reset()
 
       const bumpEnvs = {
