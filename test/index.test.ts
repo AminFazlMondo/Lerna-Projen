@@ -185,15 +185,15 @@ describe('Happy Path', () => {
 
     })
 
-    test('post-compile', () => {
+    test('package', () => {
       const output = captureSynth(parentProject)
       expect(output['tasks.json']).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
-            ['post-compile']: expect.objectContaining({
+            package: expect.objectContaining({
               steps: expect.arrayContaining([
                 {
-                  exec: 'lerna run post-compile --stream',
+                  exec: 'lerna run package --stream',
                 },
                 {
                   exec: `lerna-projen copy-dist ${subProjectDirectory}`,
