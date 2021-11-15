@@ -1010,6 +1010,21 @@ A set of workflow steps to execute in order to setup the workflow container.
 
 ---
 
+##### `versionrcOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.versionrcOptions"></a>
+
+```typescript
+public readonly versionrcOptions: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: `any`}
+- *Default:* standard configuration applicable for GitHub repositories
+
+Custom configuration used when creating changelog with standard-version package.
+
+Given values either append to default configuration or overwrite values in it.
+
+---
+
 ##### `workflowContainerImage`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowContainerImage"></a>
 
 ```typescript
