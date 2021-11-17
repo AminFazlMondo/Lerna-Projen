@@ -1097,10 +1097,10 @@ Define a GitHub workflow for building PRs.
 ##### `bundlerOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bundlerOptions"></a>
 
 ```typescript
-public readonly bundlerOptions: BundlerCommonOptions;
+public readonly bundlerOptions: BundlerOptions;
 ```
 
-- *Type:* [`projen.javascript.BundlerCommonOptions`](#projen.javascript.BundlerCommonOptions)
+- *Type:* [`projen.javascript.BundlerOptions`](#projen.javascript.BundlerOptions)
 
 Options for `Bundler`.
 
