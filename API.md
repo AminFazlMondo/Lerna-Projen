@@ -1591,10 +1591,10 @@ public addSubProject(subProject: Project)
 
 ---
 
-##### `preSynthesize` <a name="lerna-projen.LernaProject.preSynthesize"></a>
+##### `synth` <a name="lerna-projen.LernaProject.synth"></a>
 
 ```typescript
-public preSynthesize()
+public synth()
 ```
 
 

@@ -50,7 +50,7 @@ export class LernaProject extends NodeProject {
     this.subProjects[relativeOutDir] = subProject
   }
 
-  preSynthesize() {
+  synth() {
     const defaultTask = this.tasks.tryFind('default')
     defaultTask?.reset('npm i lerna-projen --package-lock=false')
     const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
@@ -111,5 +111,8 @@ export class LernaProject extends NodeProject {
         subBumpTask.builtin('release/reset-version')
       }
     })
+    const upgradeTask = this.tasks.tryFind('upgrade')
+    upgradeTask?.prependExec('lerna run upgrade --stream')
+    super.synth()
   }
 }
