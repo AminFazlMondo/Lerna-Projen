@@ -1,4 +1,4 @@
-import {JsonFile, NodeProject, Project} from 'projen'
+import {JsonFile, javascript, Project} from 'projen'
 import {LernaProjectOptions} from './types'
 
 export * from './types'
@@ -8,7 +8,7 @@ function getDocsDirectory(project: Project) {
   return result?.[1].replace(/\/$/, '')
 }
 
-export class LernaProject extends NodeProject {
+export class LernaProject extends javascript.NodeProject {
 
   private subProjects: Record<string, Project>
   private projenrcTs: boolean

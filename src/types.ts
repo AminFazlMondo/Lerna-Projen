@@ -1,6 +1,6 @@
-import {NodeProjectOptions} from 'projen'
+import {javascript} from 'projen'
 
-export interface LernaProjectOptions extends NodeProjectOptions {
+export interface LernaProjectOptions extends javascript.NodeProjectOptions {
   /**
    * (experimental) Use TypeScript for your projenrc file (`.projenrc.ts`).
    *

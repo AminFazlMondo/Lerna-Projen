@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
 import {removeSync} from 'fs-extra'
-import {LogLevel, NodeProject, TypeScriptProject} from 'projen'
+import {LogLevel, javascript, typescript} from 'projen'
 import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
@@ -74,7 +74,7 @@ function generateProjects(parentDocsFolder: string, subProjectDirectory: string,
     projenrcTs: params.projenrcTs ?? false,
   })
 
-  const SubProjectType = (params.subProjectHasDocs ?? true) ? TypeScriptProject : NodeProject
+  const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
   const subProject = new SubProjectType({
     name: 'test-sub-project',
     parent: parentProject,
@@ -321,7 +321,7 @@ describe('Unhappy Path', () => {
         },
       })
 
-      const subProject = new TypeScriptProject({
+      const subProject = new typescript.TypeScriptProject({
         name: 'test-sub-project',
         defaultReleaseBranch: 'test',
         logging: {
@@ -342,7 +342,7 @@ describe('Unhappy Path', () => {
         },
       })
 
-      const subProject = new TypeScriptProject({
+      const subProject = new typescript.TypeScriptProject({
         name: 'test-sub-project',
         outdir: mkdtemp(),
         defaultReleaseBranch: 'test',

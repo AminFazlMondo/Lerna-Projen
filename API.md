@@ -104,7 +104,7 @@ Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .pr
 public readonly projenrcJsonOptions: ProjenrcOptions;
 ```
 
-- *Type:* [`projen.json.ProjenrcOptions`](#projen.json.ProjenrcOptions)
+- *Type:* [`projen.ProjenrcOptions`](#projen.ProjenrcOptions)
 - *Default:* default options
 
 Options for .projenrc.json.
@@ -432,7 +432,7 @@ this will be what you `package.json` will eventually include.
 public readonly codeArtifactOptions: CodeArtifactOptions;
 ```
 
-- *Type:* [`projen.CodeArtifactOptions`](#projen.CodeArtifactOptions)
+- *Type:* [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions)
 - *Default:* undefined
 
 Options for publishing npm package to AWS CodeArtifact.
@@ -598,7 +598,7 @@ Minimum Node.js version to require via package.json `engines` (inclusive).
 public readonly npmAccess: NpmAccess;
 ```
 
-- *Type:* [`projen.NpmAccess`](#projen.NpmAccess)
+- *Type:* [`projen.javascript.NpmAccess`](#projen.javascript.NpmAccess)
 - *Default:* for scoped packages (e.g. `foo@bar`), the default is
 `NpmAccess.RESTRICTED`, for non-scoped packages, the default is
 `NpmAccess.PUBLIC`.
@@ -681,7 +681,7 @@ GitHub secret which contains the NPM token to use when publishing packages.
 public readonly packageManager: NodePackageManager;
 ```
 
-- *Type:* [`projen.NodePackageManager`](#projen.NodePackageManager)
+- *Type:* [`projen.javascript.NodePackageManager`](#projen.javascript.NodePackageManager)
 - *Default:* NodePackageManager.YARN
 
 The Node Package Manager used to execute scripts.
@@ -707,7 +707,7 @@ The "name" in package.json.
 public readonly peerDependencyOptions: PeerDependencyOptions;
 ```
 
-- *Type:* [`projen.PeerDependencyOptions`](#projen.PeerDependencyOptions)
+- *Type:* [`projen.javascript.PeerDependencyOptions`](#projen.javascript.PeerDependencyOptions)
 
 Options for `peerDeps`.
 
@@ -1207,7 +1207,7 @@ Cannot be used in conjunction with `dependabot`.
 public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
 ```
 
-- *Type:* [`projen.UpgradeDependenciesOptions`](#projen.UpgradeDependenciesOptions)
+- *Type:* [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions)
 - *Default:* default options
 
 Options for depsUpgrade.
@@ -1245,7 +1245,7 @@ Setup jest unit tests.
 public readonly jestOptions: JestOptions;
 ```
 
-- *Type:* [`projen.JestOptions`](#projen.JestOptions)
+- *Type:* [`projen.javascript.JestOptions`](#projen.javascript.JestOptions)
 - *Default:* default options
 
 Jest options.

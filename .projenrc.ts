@@ -1,8 +1,8 @@
-import {NodePackageManager, NpmAccess, JsiiProject} from 'projen'
+import {javascript, cdk} from 'projen'
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git'
 
-const project = new JsiiProject({
+const project = new cdk.JsiiProject({
   projenrcTs: true,
   defaultReleaseBranch: 'main',
   name: 'lerna-project',
@@ -15,7 +15,7 @@ const project = new JsiiProject({
   ],
   majorVersion: 0,
   packageName: 'lerna-projen',
-  packageManager: NodePackageManager.NPM,
+  packageManager: javascript.NodePackageManager.NPM,
   repository,
   repositoryUrl: repository,
   authorAddress: 'amin.fazl@mondo.com.au',
@@ -32,7 +32,7 @@ const project = new JsiiProject({
     'fs-extra',
   ],
   releaseToNpm: true,
-  npmAccess: NpmAccess.PUBLIC,
+  npmAccess: javascript.NpmAccess.PUBLIC,
   docgen: true,
   tsconfig: {
     compilerOptions: {
