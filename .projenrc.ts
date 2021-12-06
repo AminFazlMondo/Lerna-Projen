@@ -39,7 +39,7 @@ const project = new cdk.JsiiProject({
       lib: ['es2019'],
     },
   },
-  minNodeVersion: '12.7.0',
+  workflowNodeVersion: '14.18.1',
   depsUpgradeOptions: {
     ignoreProjen: false,
   },
