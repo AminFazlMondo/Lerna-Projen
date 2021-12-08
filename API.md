@@ -1038,6 +1038,19 @@ Container image to use for GitHub workflows.
 
 ---
 
+##### `workflowRunsOn`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowRunsOn"></a>
+
+```typescript
+public readonly workflowRunsOn: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* ["ubuntu-latest"]
+
+Github Runner selection labels.
+
+---
+
 ##### `defaultReleaseBranch`<sup>Required</sup> <a name="lerna-projen.LernaProjectOptions.property.defaultReleaseBranch"></a>
 
 ```typescript
