@@ -607,30 +607,6 @@ Access level of the npm package.
 
 ---
 
-##### `npmDistTag`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmDistTag"></a>
-
-```typescript
-public readonly npmDistTag: string;
-```
-
-- *Type:* `string`
-- *Default:* "latest"
-
-Tags can be used to provide an alias instead of version numbers.
-
-For example, a project might choose to have multiple streams of development
-and use a different tag for each stream, e.g., stable, beta, dev, canary.
-
-By default, the `latest` tag is used by npm to identify the current version
-of a package, and `npm install <pkg>` (without any `@<version>` or `@<tag>`
-specifier) installs the latest tag. Typically, projects only use the
-`latest` tag for stable release versions, and use other tags for unstable
-versions such as prereleases.
-
-The `next` tag is used by some projects to identify the upcoming version.
-
----
-
 ##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmRegistry"></a>
 
 - *Deprecated:* use `npmRegistryUrl` instead
@@ -849,6 +825,22 @@ If not specified, we bump the global latest version.
 
 ---
 
+##### `npmDistTag`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmDistTag"></a>
+
+```typescript
+public readonly npmDistTag: string;
+```
+
+- *Type:* `string`
+- *Default:* "latest"
+
+The npmDistTag to use when publishing from the default branch.
+
+To set the npm dist-tag for release branches, set the `npmDistTag` property
+for each branch.
+
+---
+
 ##### `postBuildSteps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.postBuildSteps"></a>
 
 ```typescript
@@ -872,6 +864,22 @@ public readonly prerelease: string;
 - *Default:* normal semantic versions
 
 Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `publishTasks`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.publishTasks"></a>
+
+```typescript
+public readonly publishTasks: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Define publishing tasks that can be executed manually as well as workflows.
+
+Normally, publishing only happens within automated workflows. Enable this
+in order to create a publishing task for each publishing activity.
 
 ---
 
