@@ -20,6 +20,8 @@
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "pre-compile": "npx projen pre-compile",
+    "publish:github": "npx projen publish:github",
+    "publish:npm": "npx projen publish:npm",
     "release": "npx projen release",
     "test": "npx projen test",
     "test:update": "npx projen test:update",

@@ -43,6 +43,7 @@ const project = new cdk.JsiiProject({
   depsUpgradeOptions: {
     ignoreProjen: false,
   },
+  publishTasks: true,
 })
 
 const additionalRules = {
