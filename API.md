@@ -252,6 +252,22 @@ Which type of project this is (library/app).
 
 ---
 
+##### `projenTokenSecret`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenTokenSecret"></a>
+
+```typescript
+public readonly projenTokenSecret: string;
+```
+
+- *Type:* `string`
+- *Default:* "PROJEN_GITHUB_TOKEN"
+
+The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows.
+
+This token needs to have the `repo`, `workflows`
+and `packages` scope.
+
+---
+
 ##### `readme`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.readme"></a>
 
 ```typescript
@@ -400,6 +416,30 @@ Binary programs vended with your module.
 You can use this option to add/customize how binaries are represented in
 your `package.json`, but unless `autoDetectBin` is `false`, every
 executable file under `bin` will automatically be added to this section.
+
+---
+
+##### `bugsEmail`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bugsEmail"></a>
+
+```typescript
+public readonly bugsEmail: string;
+```
+
+- *Type:* `string`
+
+The email address to which issues should be reported.
+
+---
+
+##### `bugsUrl`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bugsUrl"></a>
+
+```typescript
+public readonly bugsUrl: string;
+```
+
+- *Type:* `string`
+
+The url to your project's issue tracker.
 
 ---
 
@@ -770,32 +810,6 @@ Package's Stability.
 
 ---
 
-##### `antitamper`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.antitamper"></a>
-
-```typescript
-public readonly antitamper: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* true
-
-Checks that after build there are no modified files on git.
-
----
-
-##### `artifactsDirectory`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.artifactsDirectory"></a>
-
-```typescript
-public readonly artifactsDirectory: string;
-```
-
-- *Type:* `string`
-- *Default:* "dist"
-
-A directory which will contain artifacts to be published to npm.
-
----
-
 ##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion"></a>
 
 ```typescript
@@ -864,6 +878,19 @@ public readonly prerelease: string;
 - *Default:* normal semantic versions
 
 Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `publishDryRun`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.publishDryRun"></a>
+
+```typescript
+public readonly publishDryRun: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Instead of actually publishing to package managers, just print the publishing command.
 
 ---
 
@@ -1069,6 +1096,19 @@ public readonly defaultReleaseBranch: string;
 - *Default:* "main"
 
 The name of the main release branch.
+
+---
+
+##### `artifactsDirectory`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.artifactsDirectory"></a>
+
+```typescript
+public readonly artifactsDirectory: string;
+```
+
+- *Type:* `string`
+- *Default:* "dist"
+
+A directory which will contain build artifacts.
 
 ---
 
@@ -1319,6 +1359,45 @@ Defines an .npmignore file. Normally this is only needed for libraries that are 
 
 ---
 
+##### `package`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.package"></a>
+
+```typescript
+public readonly package: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
+
+---
+
+##### `prettier`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.prettier"></a>
+
+```typescript
+public readonly prettier: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Setup prettier.
+
+---
+
+##### `prettierOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.prettierOptions"></a>
+
+```typescript
+public readonly prettierOptions: PrettierOptions;
+```
+
+- *Type:* [`projen.javascript.PrettierOptions`](#projen.javascript.PrettierOptions)
+- *Default:* default options
+
+Prettier options.
+
+---
+
 ##### `projenDevDependency`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenDevDependency"></a>
 
 ```typescript
@@ -1388,7 +1467,9 @@ Customize the projenUpgrade schedule in cron expression.
 
 ---
 
-##### `projenUpgradeSecret`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenUpgradeSecret"></a>
+##### ~~`projenUpgradeSecret`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenUpgradeSecret"></a>
+
+- *Deprecated:* use `githubTokenSecret` instead.
 
 ```typescript
 public readonly projenUpgradeSecret: string;
