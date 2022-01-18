@@ -224,6 +224,24 @@ describe('Happy Path', () => {
 
     })
 
+    test('post-upgrade', () => {
+      const output = captureSynth(parentProject)
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-upgrade']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {exec: 'lerna run upgrade --stream'},
+                {exec: 'npx projen'},
+                {exec: 'lerna run post-upgrade --stream'},
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
   })
 })
 
