@@ -51,21 +51,12 @@ export class LernaProject extends javascript.NodeProject {
   }
 
   preSynthesize() {
-    const defaultTask = this.tasks.tryFind('default')
-    defaultTask?.reset('npm i lerna-projen --package-lock=false')
     const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
-    defaultTask?.exec(projenCommand)
-    defaultTask?.exec('lerna run default --stream')
+    this.defaultTask.reset('npm i lerna-projen --package-lock=false')
+    this.defaultTask.exec(projenCommand)
+    this.packageTask.reset(`mkdir -p ${this.artifactsJavascriptDirectory}`)
 
-    this.tasks.all
-      .forEach(task => {
-        if (task.name === 'build')
-          return
-
-        const mainCommand = `lerna run ${task.name} --stream`
-        const postCommand = this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
-        task.exec(`${mainCommand}${postCommand}`)
-      })
+    this.appendLernaCommands()
 
     this.preCompileTask.exec('lerna-projen clean-dist')
 
@@ -76,6 +67,22 @@ export class LernaProject extends javascript.NodeProject {
       },
     }))
 
+    this.updateSubProjects()
+  }
+
+  private appendLernaCommands() {
+    this.tasks.all
+      .forEach(task => {
+        if (task.name === 'build')
+          return
+
+        const mainCommand = `lerna run ${task.name} --stream`
+        const postCommand = this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
+        task.exec(`${mainCommand}${postCommand}`)
+      })
+  }
+
+  private updateSubProjects() {
     const bumpTask = this.tasks.tryFind('bump')
     const unbumpTask = this.tasks.tryFind('unbump')
 
@@ -85,7 +92,7 @@ export class LernaProject extends javascript.NodeProject {
         this.postCompileTask.exec(`lerna-projen move-docs ${this.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
 
       this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
-      subProject.tasks.tryFind('default')?.reset()
+      subProject.defaultTask.reset()
 
       const bumpEnvs = {
         OUTFILE: 'package.json',
