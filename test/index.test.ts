@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
 import {removeSync} from 'fs-extra'
-import {LogLevel, javascript, typescript} from 'projen'
+import {LogLevel, javascript, typescript, cdk} from 'projen'
 import {LernaProject} from '../src'
 
 const autoRemove = new Set<string>()
@@ -92,7 +92,7 @@ const parentDocsFolder = 'stub-docs'
 const subProjectDirectory = 'packages/test-sub-project'
 const expectedDocsCommand = `lerna-projen move-docs ${parentDocsFolder} ${subProjectDirectory} docs`
 
-describe('Happy Path', () => {
+describe('Happy Path for Typescript', () => {
   let parentProject: LernaProject
 
   beforeEach(() => {
@@ -245,6 +245,48 @@ describe('Happy Path', () => {
   })
 })
 
+describe('Happy Path for Jsii sub project', () => {
+  test('sub project has docs', () => {
+    const parentDirectory = mkdtemp()
+    const parentProject = new LernaProject({
+      name: 'test',
+      outdir: parentDirectory,
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+    })
+
+    const subProject = new cdk.JsiiProject({
+      name: 'test-sub-project',
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+      outdir: subProjectDirectory,
+      parent: parentProject,
+      repositoryUrl: '',
+      author: '',
+      authorAddress: '',
+    })
+    parentProject.addSubProject(subProject)
+    parentProject.synth()
+    const tasks = readJson(path.join(subProject.outdir, '.projen', 'tasks.json'))
+    expect(tasks).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          ['package']: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                spawn: 'package-all',
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
+})
 
 describe('docgen set to true', () => {
   test('sub project has docs', () => {

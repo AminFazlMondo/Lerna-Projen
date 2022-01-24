@@ -109,7 +109,13 @@ export class LernaProject extends javascript.NodeProject {
       if (this.docgen && subProjectDocsDirectory)
         this.postCompileTask.exec(`lerna-projen move-docs ${this.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
 
+      const packageAllTask = subProject.tasks.tryFind('package-all')
+
+      if (packageAllTask)
+        subProject.packageTask.spawn(packageAllTask)
+
       this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
+
       subProject.defaultTask.reset()
 
       const bumpEnvs = {
