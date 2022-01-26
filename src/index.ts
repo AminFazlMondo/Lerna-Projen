@@ -52,8 +52,11 @@ export class LernaProject extends javascript.NodeProject {
 
   preSynthesize() {
     const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
-    this.defaultTask.reset('npm i lerna-projen --package-lock=false')
-    this.defaultTask.exec(projenCommand)
+    const {defaultTask} = this
+    if (!defaultTask)
+      throw new Error('Could not find default task')
+    defaultTask.reset('npm i lerna-projen --package-lock=false')
+    defaultTask.exec(projenCommand)
     this.packageTask.reset(`mkdir -p ${this.artifactsJavascriptDirectory}`)
 
     this.addUpgradeForSubProjects()
@@ -116,7 +119,7 @@ export class LernaProject extends javascript.NodeProject {
 
       this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
 
-      subProject.defaultTask.reset()
+      subProject.defaultTask?.reset()
 
       const bumpEnvs = {
         OUTFILE: 'package.json',

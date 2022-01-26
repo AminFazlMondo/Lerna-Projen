@@ -1155,6 +1155,19 @@ Define a GitHub workflow for building PRs.
 
 ---
 
+##### `buildWorkflowTriggers`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.buildWorkflowTriggers"></a>
+
+```typescript
+public readonly buildWorkflowTriggers: Triggers;
+```
+
+- *Type:* [`projen.github.workflows.Triggers`](#projen.github.workflows.Triggers)
+- *Default:* "{ pullRequest: {}, workflowDispatch: {} }"
+
+Build workflow triggers.
+
+---
+
 ##### `bundlerOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bundlerOptions"></a>
 
 ```typescript
