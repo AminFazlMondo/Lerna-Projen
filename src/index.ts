@@ -32,6 +32,8 @@ export class LernaProject extends javascript.NodeProject {
       devDeps,
     })
 
+    this.addDevDeps('lerna-projen')
+
     this.subProjects = {}
     this.docsDirectory = options.docsDirectory ?? 'docs'
     this.docgen = options.docgen ?? false
