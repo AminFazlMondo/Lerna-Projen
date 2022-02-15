@@ -211,7 +211,7 @@
           "exec": "test \"$(git branch --show-current)\" = \"main\""
         },
         {
-          "exec": "npx -p jsii-release@latest jsii-release-npm"
+          "exec": "npx -p publib@latest publib-npm"
         }
       ]
     },
