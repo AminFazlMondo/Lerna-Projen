@@ -44,6 +44,10 @@ const project = new cdk.JsiiProject({
     ignoreProjen: false,
   },
   publishTasks: true,
+  autoApproveOptions: {
+    allowedUsernames: ['AminFazlMondo'],
+  },
+  autoApproveUpgrades: true,
 })
 
 const additionalRules = {

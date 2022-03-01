@@ -134,7 +134,10 @@
       "description": "Creates the distribution package",
       "steps": [
         {
-          "exec": "if [ ! -z ${CI} ]; then mkdir -p dist && rsync -a . dist --exclude .git --exclude node_modules; else npx projen package-all; fi"
+          "exec": "mkdir -p dist"
+        },
+        {
+          "exec": "rsync -a . dist --exclude .git --exclude node_modules"
         }
       ]
     },
@@ -208,7 +211,7 @@
           "exec": "test \"$(git branch --show-current)\" = \"main\""
         },
         {
-          "exec": "npx -p publib@latest publib-npm"
+          "exec": "npx -p jsii-release@latest jsii-release-npm"
         }
       ]
     },
