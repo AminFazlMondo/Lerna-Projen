@@ -1,42 +1,13 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
-import {removeSync} from 'fs-extra'
 import {LogLevel, javascript, typescript, cdk} from 'projen'
+import {synthSnapshot} from 'projen/lib/util/synth'
 import {LernaProject} from '../src'
 
-const autoRemove = new Set<string>()
+const tasksFilePath = '.projen/tasks.json'
+const lernaFilePath = 'lerna.json'
 
-afterAll((done) => {
-  Array.from(autoRemove).forEach(dir => removeSync(dir))
-  done()
-})
-
-function mkdtemp() {
-  const tmpdir = fs.mkdtempSync(path.join(os.tmpdir(), 'projen-test-'))
-  autoRemove.add(tmpdir)
-  return tmpdir
-}
-
-interface SynthOutput {
-  'lerna.json': any;
-  'tasks.json': any;
-}
-
-function readJson(filePath: string): any {
-  const content = fs.readFileSync(filePath, 'utf-8')
-  return JSON.parse(content)
-}
-
-function captureSynth(project: LernaProject): SynthOutput {
-  process.env.PROJEN_DISABLE_POST = 'true'
-  project.synth()
-  const {outdir} = project
-  return {
-    'lerna.json': readJson(path.join(outdir, 'lerna.json')),
-    'tasks.json': readJson(path.join(outdir, '.projen', 'tasks.json')),
-  }
-}
 interface GenerateProjectsParams {
   /**
    * @default false
@@ -58,12 +29,15 @@ interface GenerateProjectsParams {
    */
   projenrcTs?: boolean;
 }
-// eslint-disable-next-line max-len
+
+function mkdtemp() {
+  const tmpdir = fs.mkdtempSync(path.join(os.tmpdir(), 'projen-test-'))
+  return tmpdir
+}
+
 function generateProjects(parentDocsFolder: string, subProjectDirectory: string, params: GenerateProjectsParams = {}): LernaProject {
-  const parentDirectory = mkdtemp()
   const parentProject = new LernaProject({
     name: 'test',
-    outdir: parentDirectory,
     defaultReleaseBranch: 'test',
     logging: {
       level: LogLevel.OFF,
@@ -100,8 +74,8 @@ describe('Happy Path for Typescript', () => {
   })
 
   test('lerna file', () => {
-    const output = captureSynth(parentProject)
-    expect(output['lerna.json']).toMatchObject({
+    const synthOutput = synthSnapshot(parentProject)
+    expect(synthOutput[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       version: '4.0.0',
     })
@@ -109,8 +83,8 @@ describe('Happy Path for Typescript', () => {
 
   describe('tasks', () => {
     test('default', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             default: expect.objectContaining({
@@ -125,8 +99,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('test', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             test: expect.objectContaining({
@@ -141,8 +115,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('build', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             build: expect.objectContaining({
@@ -165,8 +139,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('pre-compile', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             ['pre-compile']: expect.objectContaining({
@@ -186,8 +160,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('package', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             package: expect.objectContaining({
@@ -207,8 +181,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('should not include docs tasks by default', ()=> {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             build: expect.objectContaining({
@@ -225,8 +199,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('upgrade', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             upgrade: expect.objectContaining({
@@ -241,8 +215,8 @@ describe('Happy Path for Typescript', () => {
     })
 
     test('post-upgrade', () => {
-      const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
+      const synthOutput = synthSnapshot(parentProject)
+      expect(synthOutput[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
             ['post-upgrade']: expect.objectContaining({
@@ -261,10 +235,8 @@ describe('Happy Path for Typescript', () => {
 
 describe('Happy Path for Jsii sub project', () => {
   test('sub project has docs', () => {
-    const parentDirectory = mkdtemp()
     const parentProject = new LernaProject({
       name: 'test',
-      outdir: parentDirectory,
       defaultReleaseBranch: 'test',
       logging: {
         level: LogLevel.OFF,
@@ -284,9 +256,9 @@ describe('Happy Path for Jsii sub project', () => {
       authorAddress: '',
     })
     parentProject.addSubProject(subProject)
-    parentProject.synth()
-    const tasks = readJson(path.join(subProject.outdir, '.projen', 'tasks.json'))
-    expect(tasks).toEqual(
+    const synthOutput = synthSnapshot(parentProject)
+    const subProjectTaskFilePath = path.join(subProjectDirectory, '.projen', 'tasks.json')
+    expect(synthOutput[subProjectTaskFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
           ['package']: expect.objectContaining({
@@ -305,8 +277,8 @@ describe('Happy Path for Jsii sub project', () => {
 describe('docgen set to true', () => {
   test('sub project has docs', () => {
     const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true})
-    const output = captureSynth(parentProject)
-    expect(output['tasks.json']).toEqual(
+    const synthOutput = synthSnapshot(parentProject)
+    expect(synthOutput[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
           ['post-compile']: expect.objectContaining({
@@ -323,8 +295,8 @@ describe('docgen set to true', () => {
 
   test('sub project does not have docs', () => {
     const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true, subProjectHasDocs: false})
-    const output = captureSynth(parentProject)
-    expect(output['tasks.json']).toEqual(
+    const synthOutput = synthSnapshot(parentProject)
+    expect(synthOutput[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
           build: expect.objectContaining({
@@ -343,8 +315,8 @@ describe('docgen set to true', () => {
 describe('since last release', () => {
   test('should include since filter', () => {
     const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {sinceLastRelease: true})
-    const output = captureSynth(parentProject)
-    expect(output['tasks.json']).toEqual(
+    const synthOutput = synthSnapshot(parentProject)
+    expect(synthOutput[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
           compile: expect.objectContaining({
@@ -363,8 +335,8 @@ describe('since last release', () => {
 describe('typescript projenrc file', () => {
   test('should use the projenrc.ts file', () => {
     const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {projenrcTs: true})
-    const output = captureSynth(parentProject)
-    expect(output['tasks.json']).toEqual(
+    const synthOutput = synthSnapshot(parentProject)
+    expect(synthOutput[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
           default: expect.objectContaining({
@@ -385,10 +357,8 @@ describe('Unhappy Path', () => {
   describe('output directory', () => {
 
     test('Should fail if sub project does not have output directory', () => {
-      const parentDirectory = mkdtemp()
       const project = new LernaProject({
         name: 'test',
-        outdir: parentDirectory,
         defaultReleaseBranch: 'test',
         logging: {
           level: LogLevel.OFF,
@@ -406,10 +376,8 @@ describe('Unhappy Path', () => {
     })
 
     test('Should fail if sub project does not have output directory outside of parent root', () => {
-      const parentDirectory = mkdtemp()
       const project = new LernaProject({
         name: 'test',
-        outdir: parentDirectory,
         defaultReleaseBranch: 'test',
         logging: {
           level: LogLevel.OFF,
