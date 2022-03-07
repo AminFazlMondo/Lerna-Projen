@@ -61,8 +61,6 @@ export class LernaProject extends javascript.NodeProject {
     defaultTask.exec(projenCommand)
     this.packageTask.reset(`mkdir -p ${this.artifactsJavascriptDirectory}`)
 
-    this.addUpgradeForSubProjects()
-
     this.appendLernaCommands()
 
     this.preCompileTask.exec('lerna-projen clean-dist')
@@ -77,23 +75,16 @@ export class LernaProject extends javascript.NodeProject {
     this.updateSubProjects()
   }
 
-  private addUpgradeForSubProjects() {
-    const postUpgradeTask = this.tasks.tryFind('post-upgrade')
-
-    if (!postUpgradeTask) {
-      console.error('Could not find post-upgrade task')
-      return
-    }
-
-    postUpgradeTask.exec(this.getLernaCommand('upgrade'))
-    postUpgradeTask.exec('npx projen')
-  }
-
   private appendLernaCommands() {
     this.tasks.all
       .forEach(task => {
         if (task.name === 'build')
           return
+
+        if (task.name === 'upgrade') {
+          task.prependExec(this.getLernaCommand(task.name))
+          return
+        }
 
         task.exec(this.getLernaCommand(task.name))
       })
