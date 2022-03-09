@@ -226,18 +226,33 @@ describe('Happy Path for Typescript', () => {
 
     test('upgrade', () => {
       const output = captureSynth(parentProject)
-      expect(output['tasks.json']).toEqual(
-        expect.objectContaining({
-          tasks: expect.objectContaining({
-            upgrade: expect.objectContaining({
-              steps: expect.arrayContaining([
-                {exec: 'lerna run upgrade --stream'},
-              ]),
+      try {
+        expect(output['tasks.json']).toEqual(
+          expect.objectContaining({
+            tasks: expect.objectContaining({
+              upgrade: expect.objectContaining({
+                steps: expect.arrayContaining([
+                  {exec: 'lerna run upgrade --stream'},
+                ]),
+              }),
             }),
           }),
-        }),
-      )
-
+        )
+      } catch {
+        expect(output['tasks.json']).toEqual(
+          expect.objectContaining({
+            tasks: expect.objectContaining({
+              ['post-upgrade']: expect.objectContaining({
+                steps: [
+                  {exec: 'lerna run upgrade --stream'},
+                  {exec: 'npx projen'},
+                  {exec: 'lerna run post-upgrade --stream'},
+                ],
+              }),
+            }),
+          }),
+        )
+      }
     })
 
     test('post-upgrade', () => {
