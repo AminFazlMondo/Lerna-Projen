@@ -53,6 +53,7 @@ export class LernaProject extends javascript.NodeProject {
   }
 
   preSynthesize() {
+    super.preSynthesize()
     const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
     const {defaultTask} = this
     if (!defaultTask)
@@ -76,12 +77,19 @@ export class LernaProject extends javascript.NodeProject {
   }
 
   private appendLernaCommands() {
+    const upgradeTaskName = 'upgrade'
+    if (!this.tasks.tryFind(upgradeTaskName)) {
+      const postUpgradeTask = this.tasks.tryFind('post-upgrade')
+      postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName))
+      postUpgradeTask?.exec('npx projen')
+    }
+
     this.tasks.all
       .forEach(task => {
         if (task.name === 'build')
           return
 
-        if (task.name === 'upgrade') {
+        if (task.name === upgradeTaskName) {
           task.prependExec(this.getLernaCommand(task.name))
           return
         }
