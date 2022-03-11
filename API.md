@@ -1586,10 +1586,10 @@ DEPRECATED: renamed to `release`.
 ##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowBootstrapSteps"></a>
 
 ```typescript
-public readonly workflowBootstrapSteps: any[];
+public readonly workflowBootstrapSteps: JobStep[];
 ```
 
-- *Type:* `any`[]
+- *Type:* [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[]
 - *Default:* "yarn install --frozen-lockfile && yarn projen"
 
 Workflow steps to use in order to bootstrap this repo.
