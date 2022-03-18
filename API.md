@@ -288,7 +288,7 @@ public readonly stale: boolean;
 ```
 
 - *Type:* `boolean`
-- *Default:* true
+- *Default:* false
 
 Auto-close of stale issues and pull request.
 
