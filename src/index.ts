@@ -8,6 +8,8 @@ function getDocsDirectory(project: Project) {
   return result?.[1].replace(/\/$/, '')
 }
 
+const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen']
+
 export class LernaProject extends javascript.NodeProject {
 
   private subProjects: Record<string, Project>
@@ -78,21 +80,16 @@ export class LernaProject extends javascript.NodeProject {
 
   private appendLernaCommands() {
     const upgradeTaskName = 'upgrade'
-    if (!this.tasks.tryFind(upgradeTaskName)) {
-      const postUpgradeTask = this.tasks.tryFind('post-upgrade')
-      postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName))
-      postUpgradeTask?.exec('npx projen')
-    }
+    const postUpgradeTaskName = 'post-upgrade'
+    const postUpgradeTask = this.tasks.tryFind(postUpgradeTaskName)
+    postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName))
+    postUpgradeTask?.exec('npx projen')
+    postUpgradeTask?.exec(this.getLernaCommand(postUpgradeTaskName))
 
     this.tasks.all
       .forEach(task => {
-        if (task.name === 'build')
+        if (lockedTaskNames.includes(task.name) || task.name === postUpgradeTaskName)
           return
-
-        if (task.name === upgradeTaskName) {
-          task.prependExec(this.getLernaCommand(task.name))
-          return
-        }
 
         task.exec(this.getLernaCommand(task.name))
       })
