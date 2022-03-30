@@ -40,9 +40,6 @@ const project = new cdk.JsiiProject({
     },
   },
   workflowNodeVersion: '14.18.1',
-  depsUpgradeOptions: {
-    ignoreProjen: false,
-  },
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],

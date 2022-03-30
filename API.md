@@ -252,7 +252,22 @@ Which type of project this is (library/app).
 
 ---
 
-##### `projenTokenSecret`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenTokenSecret"></a>
+##### `projenCredentials`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenCredentials"></a>
+
+```typescript
+public readonly projenCredentials: GithubCredentials;
+```
+
+- *Type:* [`projen.github.GithubCredentials`](#projen.github.GithubCredentials)
+- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+
+Choose a method of providing GitHub API access for projen workflows.
+
+---
+
+##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenTokenSecret"></a>
+
+- *Deprecated:* use `projenCredentials`
 
 ```typescript
 public readonly projenTokenSecret: string;
@@ -1112,21 +1127,6 @@ A directory which will contain build artifacts.
 
 ---
 
-##### `autoApproveProjenUpgrades`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoApproveProjenUpgrades"></a>
-
-```typescript
-public readonly autoApproveProjenUpgrades: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* false
-
-Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued).
-
-Throw if set to true but `autoApproveOptions` are not defined.
-
----
-
 ##### `autoApproveUpgrades`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoApproveUpgrades"></a>
 
 ```typescript
@@ -1284,7 +1284,7 @@ public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
 - *Type:* [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions)
 - *Default:* default options
 
-Options for depsUpgrade.
+Options for `UpgradeDependencies`.
 
 ---
 
@@ -1447,59 +1447,6 @@ public readonly projenrcJsOptions: ProjenrcOptions;
 - *Default:* default options
 
 Options for .projenrc.js.
-
----
-
-##### ~~`projenUpgradeAutoMerge`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenUpgradeAutoMerge"></a>
-
-- *Deprecated:* use `autoApproveProjenUpgrades`.
-
-```typescript
-public readonly projenUpgradeAutoMerge: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* false
-
-Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued).
-
-Throw if set to true but `autoApproveOptions` are not defined.
-
----
-
-##### `projenUpgradeSchedule`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenUpgradeSchedule"></a>
-
-```typescript
-public readonly projenUpgradeSchedule: string[];
-```
-
-- *Type:* `string`[]
-- *Default:* [ "0 6 * * *" ]
-
-Customize the projenUpgrade schedule in cron expression.
-
----
-
-##### ~~`projenUpgradeSecret`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenUpgradeSecret"></a>
-
-- *Deprecated:* use `githubTokenSecret` instead.
-
-```typescript
-public readonly projenUpgradeSecret: string;
-```
-
-- *Type:* `string`
-- *Default:* no automatic projen upgrade pull requests
-
-Periodically submits a pull request for projen upgrades (executes `yarn projen:upgrade`).
-
-This setting is a GitHub secret name which contains a GitHub Access Token
-with `repo` and `workflow` permissions.
-
-This token is used to submit the upgrade pull request, which will likely
-include workflow updates.
-
-To create a personal access token see https://github.com/settings/tokens
 
 ---
 
