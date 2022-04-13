@@ -490,7 +490,9 @@ public readonly codeArtifactOptions: CodeArtifactOptions;
 - *Type:* [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions)
 - *Default:* undefined
 
-Options for publishing npm package to AWS CodeArtifact.
+Options for npm packages using AWS CodeArtifact.
+
+This is required if publishing packages to, or installing scoped packages from AWS CodeArtifact
 
 ---
 
@@ -794,6 +796,19 @@ public readonly repositoryDirectory: string;
 - *Type:* `string`
 
 If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives.
+
+---
+
+##### `scopedPackagesOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.scopedPackagesOptions"></a>
+
+```typescript
+public readonly scopedPackagesOptions: ScopedPackagesOptions[];
+```
+
+- *Type:* [`projen.javascript.ScopedPackagesOptions`](#projen.javascript.ScopedPackagesOptions)[]
+- *Default:* fetch all scoped packages from the public npm registry
+
+Options for privately hosted scoped packages.
 
 ---
 
