@@ -124,6 +124,22 @@ Enable and configure the 'auto approve' workflow.
 
 ---
 
+##### `autoMerge`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoMerge"></a>
+
+```typescript
+public readonly autoMerge: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Enable automatic merging on GitHub.
+
+Has no effect if `github.mergify`
+is set to false.
+
+---
+
 ##### `autoMergeOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoMergeOptions"></a>
 
 ```typescript
@@ -136,7 +152,7 @@ public readonly autoMergeOptions: AutoMergeOptions;
 Configure options for automatic merging on GitHub.
 
 Has no effect if
-`github.mergify` is set to false.
+`github.mergify` or `autoMerge` is set to false.
 
 ---
 
