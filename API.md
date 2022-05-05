@@ -111,6 +111,32 @@ Options for .projenrc.json.
 
 ---
 
+##### `renovatebot`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.renovatebot"></a>
+
+```typescript
+public readonly renovatebot: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Use renovatebot to handle dependency upgrades.
+
+---
+
+##### `renovatebotOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.renovatebotOptions"></a>
+
+```typescript
+public readonly renovatebotOptions: RenovatebotOptions;
+```
+
+- *Type:* [`projen.RenovatebotOptions`](#projen.RenovatebotOptions)
+- *Default:* default options
+
+Options for renovatebot.
+
+---
+
 ##### `autoApproveOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoApproveOptions"></a>
 
 ```typescript
