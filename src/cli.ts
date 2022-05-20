@@ -23,7 +23,13 @@ program
       return
 
     const entries = readdirSync(subProjectDist)
-    await Promise.all(entries.map(f => copy(`${subProjectDist}/${f}`, `${distFolder}/${f}`, {recursive: true, overwrite: true})))
+    await Promise.all(entries.map(f => /* TODO: JSFIX could not patch the breaking change:
+    Allow copying broken symlinks */
+    copy(
+      `${subProjectDist}/${f}`,
+      `${distFolder}/${f}`,
+      {recursive: true, overwrite: true}
+    )))
   })
 
 
