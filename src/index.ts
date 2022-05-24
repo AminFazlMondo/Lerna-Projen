@@ -170,14 +170,13 @@ export class LernaProject extends javascript.NodeProject {
       if (!subProjectDocsDirectory)
         return
 
-      const subProjectDocsFullPath = `${subProjectPath}/${subProjectDocsDirectory}`
       const jsiiDocsOutput = extractJsiiDocsOutput(subProject.tasks)
       if (jsiiDocsOutput) {
-        const path = `${subProjectDocsFullPath}/${jsiiDocsOutput}`
+        const path = `${subProjectPath}/${jsiiDocsOutput}`
         indexMarkdown.line(`- ## [${subProject.name}](${path})`)
         subProjectsDocs[subProject.name] = path
       } else {
-        subProjectsDocs[subProject.name] = `${subProjectDocsFullPath}/index.html`
+        subProjectsDocs[subProject.name] = `${subProjectPath}/index.html`
       }
     })
 

@@ -6,7 +6,7 @@ exports[`Happy Path for Jsii sub project sub project has docs docs index 1`] = `
 <body>
   <ul>
     <li>
-      <a href=\\"packages/test-sub-project/docs/API.md\\">
+      <a href=\\"packages/test-sub-project/API.md\\">
         test-sub-project
       </a>
     </li>
@@ -16,7 +16,7 @@ exports[`Happy Path for Jsii sub project sub project has docs docs index 1`] = `
 "
 `;
 
-exports[`Happy Path for Jsii sub project sub project has docs docs index 2`] = `"- ## [test-sub-project](packages/test-sub-project/docs/API.md)"`;
+exports[`Happy Path for Jsii sub project sub project has docs docs index 2`] = `"- ## [test-sub-project](packages/test-sub-project/API.md)"`;
 
 exports[`docgen set to true multiple sub-projects 1`] = `
 "<!DOCTYPE html>
@@ -24,17 +24,17 @@ exports[`docgen set to true multiple sub-projects 1`] = `
 <body>
   <ul>
     <li>
-      <a href=\\"packages/test-sub-project-1/docs/API.md\\">
+      <a href=\\"packages/test-sub-project-1/API.md\\">
         test-sub-project-1
       </a>
     </li>
     <li>
-      <a href=\\"packages/test-sub-project-2/docs/index.html\\">
+      <a href=\\"packages/test-sub-project-2/index.html\\">
         test-sub-project-2
       </a>
     </li>
     <li>
-      <a href=\\"packages/test-sub-project-4/docs/API.md\\">
+      <a href=\\"packages/test-sub-project-4/API.md\\">
         test-sub-project-4
       </a>
     </li>
@@ -45,8 +45,8 @@ exports[`docgen set to true multiple sub-projects 1`] = `
 `;
 
 exports[`docgen set to true multiple sub-projects 2`] = `
-"- ## [test-sub-project-1](packages/test-sub-project-1/docs/API.md)
-- ## [test-sub-project-4](packages/test-sub-project-4/docs/API.md)"
+"- ## [test-sub-project-1](packages/test-sub-project-1/API.md)
+- ## [test-sub-project-4](packages/test-sub-project-4/API.md)"
 `;
 
 exports[`docgen set to true sub project has docs docs index 1`] = `
@@ -55,7 +55,7 @@ exports[`docgen set to true sub project has docs docs index 1`] = `
 <body>
   <ul>
     <li>
-      <a href=\\"packages/test-sub-project/docs/index.html\\">
+      <a href=\\"packages/test-sub-project/index.html\\">
         test-sub-project
       </a>
     </li>
