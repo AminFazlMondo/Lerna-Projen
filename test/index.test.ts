@@ -21,11 +21,23 @@ function mkdtemp() {
 interface SynthOutput {
   'lerna.json': any;
   'tasks.json': any;
+  docs: () => {
+    'index.md': any;
+    'index.html': any;
+  };
 }
 
 function readJson(filePath: string): any {
   const content = fs.readFileSync(filePath, 'utf-8')
   return JSON.parse(content)
+}
+
+function parentProjectDocumentsReader(project: LernaProject) {
+  const {outdir, docsDirectory} = project
+  return () => ({
+    'index.md': fs.readFileSync(path.join(outdir, docsDirectory, 'index.md')).toString(),
+    'index.html': fs.readFileSync(path.join(outdir, docsDirectory, 'index.html')).toString(),
+  })
 }
 
 function captureSynth(project: LernaProject): SynthOutput {
@@ -35,6 +47,7 @@ function captureSynth(project: LernaProject): SynthOutput {
   return {
     'lerna.json': readJson(path.join(outdir, 'lerna.json')),
     'tasks.json': readJson(path.join(outdir, '.projen', 'tasks.json')),
+    'docs': parentProjectDocumentsReader(project),
   }
 }
 interface GenerateProjectsParams {
@@ -58,8 +71,12 @@ interface GenerateProjectsParams {
    */
   projenrcTs?: boolean;
 }
-// eslint-disable-next-line max-len
-function generateProjects(parentDocsFolder: string, subProjectDirectory: string, params: GenerateProjectsParams = {}): LernaProject {
+
+function generateProjects(
+  parentDocsFolder: string,
+  subProjectDirectory: string,
+  params: GenerateProjectsParams = {}): LernaProject {
+
   const parentDirectory = mkdtemp()
   const parentProject = new LernaProject({
     name: 'test',
@@ -275,7 +292,7 @@ describe('Happy Path for Typescript', () => {
 })
 
 describe('Happy Path for Jsii sub project', () => {
-  test('sub project has docs', () => {
+  describe('sub project has docs', () => {
     const parentDirectory = mkdtemp()
     const parentProject = new LernaProject({
       name: 'test',
@@ -284,6 +301,7 @@ describe('Happy Path for Jsii sub project', () => {
       logging: {
         level: LogLevel.OFF,
       },
+      docgen: true,
     })
 
     const subProject = new cdk.JsiiProject({
@@ -301,39 +319,57 @@ describe('Happy Path for Jsii sub project', () => {
     parentProject.addSubProject(subProject)
     parentProject.synth()
     const tasks = readJson(path.join(subProject.outdir, '.projen', 'tasks.json'))
-    expect(tasks).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          ['package']: expect.objectContaining({
-            steps: expect.arrayContaining([
-              {
-                spawn: 'package-all',
-              },
-            ]),
+
+    test('package-all is added', () => {
+      expect(tasks).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['package']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  spawn: 'package-all',
+                },
+              ]),
+            }),
           }),
         }),
-      }),
-    )
+      )
+    })
+
+    test('docs index', () => {
+      const outputDocs = parentProjectDocumentsReader(parentProject)()
+      expect(outputDocs['index.html']).toMatchSnapshot()
+      expect(outputDocs['index.md']).toMatchSnapshot()
+    })
   })
 })
 
 describe('docgen set to true', () => {
-  test('sub project has docs', () => {
+  describe('sub project has docs', () => {
     const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true})
     const output = captureSynth(parentProject)
-    expect(output['tasks.json']).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          ['post-compile']: expect.objectContaining({
-            steps: expect.arrayContaining([
-              {
-                exec: expectedDocsCommand,
-              },
-            ]),
+
+    test('document generator step added to post-compile', () => {
+      expect(output['tasks.json']).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-compile']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: expectedDocsCommand,
+                },
+              ]),
+            }),
           }),
         }),
-      }),
-    )
+      )
+    })
+
+    test('docs index', () => {
+      const outputDocs = output.docs()
+      expect(outputDocs['index.html']).toMatchSnapshot()
+      expect(outputDocs['index.md']).toMatchSnapshot()
+    })
   })
 
   test('sub project does not have docs', () => {
@@ -353,6 +389,72 @@ describe('docgen set to true', () => {
       }),
     )
   })
+
+  test('multiple sub-projects', () => {
+    const parentDirectory = mkdtemp()
+    const parentProject = new LernaProject({
+      name: 'test',
+      outdir: parentDirectory,
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+      docgen: true,
+    })
+
+    parentProject.addSubProject(new cdk.JsiiProject({
+      name: 'test-sub-project-1',
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+      outdir: `${subProjectDirectory}-1`,
+      parent: parentProject,
+      repositoryUrl: '',
+      author: '',
+      authorAddress: '',
+    }))
+
+    parentProject.addSubProject(new typescript.TypeScriptProject({
+      name: 'test-sub-project-2',
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+      outdir: `${subProjectDirectory}-2`,
+      parent: parentProject,
+    }))
+
+    parentProject.addSubProject(new javascript.NodeProject({
+      name: 'test-sub-project-3',
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+      outdir: `${subProjectDirectory}-3`,
+      parent: parentProject,
+    }))
+
+    parentProject.addSubProject(new cdk.JsiiProject({
+      name: 'test-sub-project-4',
+      defaultReleaseBranch: 'test',
+      logging: {
+        level: LogLevel.OFF,
+      },
+      outdir: `${subProjectDirectory}-4`,
+      parent: parentProject,
+      repositoryUrl: '',
+      author: '',
+      authorAddress: '',
+    }))
+
+    parentProject.synth()
+
+    const outputDocs = parentProjectDocumentsReader(parentProject)()
+    expect(outputDocs['index.html']).toMatchSnapshot()
+    expect(outputDocs['index.md']).toMatchSnapshot()
+  })
+
 })
 
 describe('since last release', () => {
