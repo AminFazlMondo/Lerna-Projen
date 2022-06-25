@@ -59,14 +59,14 @@
     "jsii-pacmak": "^1.61.0",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
-    "projen": "^0.58.15",
+    "projen": "^0.58.17",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.4"
   },
   "peerDependencies": {
-    "projen": "^0.58.15"
+    "projen": "^0.58.17"
   },
   "dependencies": {
     "commander": "^6.2.1",
