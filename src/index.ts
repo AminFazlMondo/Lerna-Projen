@@ -32,7 +32,7 @@ export class LernaProject extends javascript.NodeProject {
 
   constructor(options: LernaProjectOptions) {
     const devDeps = [
-      'lerna',
+      'lerna@5',
       'lerna-projen',
     ]
 
