@@ -1,5 +1,5 @@
 import {Command} from 'commander'
-import {copy, readdirSync, remove, existsSync, move, emptyDirSync} from 'fs-extra'
+import {copy, readdirSync, existsSync, move, emptyDirSync} from 'fs-extra'
 
 const program = new Command()
 
