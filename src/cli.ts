@@ -1,5 +1,5 @@
 import {Command} from 'commander'
-import {copy, readdirSync, remove, existsSync, move} from 'fs-extra'
+import {copy, readdirSync, remove, existsSync, move, emptyDirSync} from 'fs-extra'
 
 const program = new Command()
 
@@ -8,11 +8,7 @@ const distFolder = './dist'
 program
   .command('clean-dist')
   .action(async () => {
-    if (!existsSync(distFolder))
-      return
-
-    const entries = readdirSync(distFolder)
-    await Promise.all(entries.map(f => remove(`${distFolder}/${f}`)))
+    emptyDirSync(distFolder)
   })
 
 program
@@ -38,12 +34,15 @@ async function moveDocs(parentDocsDirectory: string, subProjectPath: string, sub
   const subProjectDocs = `./${subProjectPath}/${subPath}`
   if (!existsSync(subProjectDocs))
     return
+
+  const destinationFolder = `./${parentDocsDirectory}/${subProjectPath}`
+  emptyDirSync(destinationFolder)
   const moveOptions = {overwrite: true}
   if (isFile) {
-    await move(subProjectDocs, `./${parentDocsDirectory}/${subProjectPath}/${subPath}`, moveOptions)
+    await move(subProjectDocs, `${destinationFolder}/${subPath}`, moveOptions)
   } else {
     const entries = readdirSync(subProjectDocs)
-    await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `./${parentDocsDirectory}/${subProjectPath}/${f}`, moveOptions)))
+    await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `${destinationFolder}/${f}`, moveOptions)))
   }
 }
 
