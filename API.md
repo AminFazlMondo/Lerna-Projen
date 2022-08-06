@@ -26,6 +26,19 @@ This is the name of your project.
 
 ---
 
+##### `commitGenerated`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.commitGenerated"></a>
+
+```typescript
+public readonly commitGenerated: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Whether to commit the managed files by default.
+
+---
+
 ##### `logging`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.logging"></a>
 
 ```typescript
