@@ -94,7 +94,7 @@ export class LernaProject extends javascript.NodeProject {
     const upgradeTaskName = 'upgrade'
     const postUpgradeTaskName = 'post-upgrade'
     const postUpgradeTask = this.tasks.tryFind(postUpgradeTaskName)
-    postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName))
+    postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName, false))
     postUpgradeTask?.exec('npx projen')
     postUpgradeTask?.exec(this.getLernaCommand(postUpgradeTaskName))
 
@@ -107,9 +107,9 @@ export class LernaProject extends javascript.NodeProject {
       })
   }
 
-  private getLernaCommand(taskName: string) {
+  private getLernaCommand(taskName: string, useSinceFlag = true) {
     const mainCommand = `lerna run ${taskName} --stream`
-    const postCommand = this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
+    const postCommand = useSinceFlag && this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
     return `${mainCommand}${postCommand}`
   }
 

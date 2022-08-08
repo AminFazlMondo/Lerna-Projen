@@ -393,9 +393,9 @@ describe('docgen set to true', () => {
 })
 
 describe('since last release', () => {
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {sinceLastRelease: true})
+  const output = synthSnapshot(parentProject)
   test('should include since filter', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {sinceLastRelease: true})
-    const output = synthSnapshot(parentProject)
     expect(output[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
@@ -403,6 +403,21 @@ describe('since last release', () => {
             steps: expect.arrayContaining([
               {
                 exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
+  test('should not include since filter for upgrade task', () => {
+    expect(output[tasksFilePath]).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          ['post-upgrade']: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                exec: 'lerna run upgrade --stream',
               },
             ]),
           }),
