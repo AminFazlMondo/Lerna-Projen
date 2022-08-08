@@ -36,21 +36,15 @@ export class LernaProject extends javascript.NodeProject {
   readonly sinceLastRelease: boolean
 
   constructor(options: LernaProjectOptions) {
-    const devDeps = [
-      'lerna@5',
-      'lerna-projen',
-    ]
-
-    if (options.projenrcTs)
-      devDeps.push('ts-node', 'typescript')
-
     super({
       ...options,
       jest: false,
-      devDeps,
     })
 
-    this.addDevDeps('lerna-projen')
+    this.addDevDeps('lerna-projen', 'lerna@5')
+
+    if (options.projenrcTs)
+      this.addDevDeps('ts-node', 'typescript')
 
     this.subProjects = {}
     this.docsDirectory = options.docsDirectory ?? 'docs'
@@ -132,14 +126,18 @@ export class LernaProject extends javascript.NodeProject {
       if (packageAllTask)
         subProject.packageTask.spawn(packageAllTask)
 
-      this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}/${getArtifactsDirectory(subProject)} ${this.artifactsDirectory}`)
+      const artifactsDirectory = getArtifactsDirectory(subProject)
+
+      this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}/${artifactsDirectory} ${this.artifactsDirectory}`)
 
       subProject.defaultTask?.reset()
 
       const bumpEnvs = {
         OUTFILE: 'package.json',
-        CHANGELOG: 'dist/changelog.md',
-        BUMPFILE: 'dist/version.txt',
+        CHANGELOG: `${artifactsDirectory}/changelog.md`,
+        BUMPFILE: `${artifactsDirectory}/version.txt`,
+        RELEASETAG: `${artifactsDirectory}/releasetag.txt`,
+        RELEASE_TAG_PREFIX: '',
       }
 
       if (bumpTask) {
