@@ -8,6 +8,11 @@ function getDocsDirectory(project: Project) {
   return result?.[1].replace(/\/$/, '')
 }
 
+function getArtifactsDirectory(project: Project) {
+  const result = Object.entries(project).find(([key]) => key === 'artifactsDirectory')
+  return result?.[1]
+}
+
 const jsiiTaskPattern = /jsii-docgen -o (?<output>.+)$/i
 
 function extractJsiiDocsOutput(tasks: Tasks): string | undefined {
@@ -77,7 +82,7 @@ export class LernaProject extends javascript.NodeProject {
 
     this.appendLernaCommands()
 
-    this.preCompileTask.exec('lerna-projen clean-dist')
+    this.preCompileTask.exec(`lerna-projen clean-dist ${this.artifactsDirectory}`)
 
     this.files.push(new JsonFile(this, 'lerna.json', {
       obj: {
@@ -127,7 +132,7 @@ export class LernaProject extends javascript.NodeProject {
       if (packageAllTask)
         subProject.packageTask.spawn(packageAllTask)
 
-      this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}`)
+      this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}/${getArtifactsDirectory(subProject)} ${this.artifactsDirectory}`)
 
       subProject.defaultTask?.reset()
 

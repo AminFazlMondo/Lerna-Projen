@@ -3,23 +3,21 @@ import {copy, readdirSync, existsSync, move, emptyDirSync} from 'fs-extra'
 
 const program = new Command()
 
-const distFolder = './dist'
-
 program
-  .command('clean-dist')
-  .action(async () => {
+  .command('clean-dist <distFolder>')
+  .action(async (distFolder) => {
     emptyDirSync(distFolder)
   })
 
 program
-  .command('copy-dist <subProjectPath>')
-  .action(async (subProjectPath) => {
-    const subProjectDist = `./${subProjectPath}/dist`
+  .command('copy-dist <subProjectDist> <parentDist>')
+  .action(async (subProjectPath, parentDist) => {
+    const subProjectDist = `./${subProjectPath}`
     if (!existsSync(subProjectDist))
       return
 
     const entries = readdirSync(subProjectDist)
-    await Promise.all(entries.map(f => copy(`${subProjectDist}/${f}`, `${distFolder}/${f}`, {recursive: true, overwrite: true})))
+    await Promise.all(entries.map(f => copy(`${subProjectDist}/${f}`, `${parentDist}/${f}`, {recursive: true, overwrite: true})))
   })
 
 

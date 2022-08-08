@@ -135,7 +135,7 @@ describe('Happy Path for Typescript', () => {
             ['pre-compile']: expect.objectContaining({
               steps: expect.arrayContaining([
                 {
-                  exec: 'lerna-projen clean-dist',
+                  exec: 'lerna-projen clean-dist dist',
                 },
                 {
                   exec: 'lerna run pre-compile --stream',
@@ -158,7 +158,7 @@ describe('Happy Path for Typescript', () => {
                   exec: 'lerna run package --stream',
                 },
                 {
-                  exec: `lerna-projen copy-dist ${subProjectDirectory}`,
+                  exec: `lerna-projen copy-dist ${subProjectDirectory}/dist dist`,
                 },
               ]),
             }),
