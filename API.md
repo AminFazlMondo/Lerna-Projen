@@ -1709,6 +1709,19 @@ public readonly sinceLastRelease: boolean;
 
 ---
 
+##### `useNx`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.useNx"></a>
+
+```typescript
+public readonly useNx: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Whether or not to use Nx for task scheduling https://lerna.js.org/docs/lerna-and-nx.
+
+---
+
 ## Classes <a name="Classes"></a>
 
 ### LernaProject <a name="lerna-projen.LernaProject"></a>
@@ -1774,6 +1787,16 @@ public readonly docsDirectory: string;
 
 ```typescript
 public readonly sinceLastRelease: boolean;
+```
+
+- *Type:* `boolean`
+
+---
+
+##### `useNx`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.useNx"></a>
+
+```typescript
+public readonly useNx: boolean;
 ```
 
 - *Type:* `boolean`

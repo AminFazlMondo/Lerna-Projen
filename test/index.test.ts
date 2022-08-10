@@ -22,6 +22,8 @@ interface GenerateProjectsParams {
    * @default false
    */
   projenrcTs?: boolean;
+
+  useNx?:boolean;
 }
 
 function generateProjects(
@@ -39,6 +41,7 @@ function generateProjects(
     docgen: params.docgen ?? false,
     sinceLastRelease: params.sinceLastRelease ?? false,
     projenrcTs: params.projenrcTs ?? false,
+    useNx: params.useNx,
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -70,7 +73,7 @@ describe('Happy Path for Typescript', () => {
   test('lerna file', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
-      version: '4.0.0',
+      useNx: false,
     })
   })
 
@@ -389,6 +392,17 @@ describe('docgen set to true', () => {
 
     expect(output[docsHtmlFilePath]).toMatchSnapshot()
     expect(output[docsMarkdownFilePath]).toMatchSnapshot()
+  })
+})
+
+describe('useNx', () => {
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {useNx: true})
+  const output = synthSnapshot(parentProject)
+  test('lerna file', () => {
+    expect(output[lernaFilePath]).toMatchObject({
+      packages: [subProjectDirectory],
+      useNx: true,
+    })
   })
 })
 
