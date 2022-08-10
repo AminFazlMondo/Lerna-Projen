@@ -1,12 +1,21 @@
 import {Command} from 'commander'
-import {copy, readdirSync, existsSync, move, emptyDirSync} from 'fs-extra'
+import {copy, readdirSync, existsSync, move, emptyDirSync, readFileSync, writeFileSync} from 'fs-extra'
 
 const program = new Command()
 
 program
   .command('clean-dist <distFolder>')
   .action(async (distFolder) => {
+    const changeLogFilePath = `${distFolder}/changelog.md`
+    const versionFilePath = `${distFolder}/version.txt`
+    const releaseTagFilePath = `${distFolder}/releasetag.txt`
+    const changeLogFile = readFileSync(changeLogFilePath)
+    const versionFile = readFileSync(versionFilePath)
+    const releaseTagFile = readFileSync(releaseTagFilePath)
     emptyDirSync(distFolder)
+    writeFileSync(changeLogFilePath, changeLogFile)
+    writeFileSync(versionFilePath, versionFile)
+    writeFileSync(releaseTagFilePath, releaseTagFile)
   })
 
 program
