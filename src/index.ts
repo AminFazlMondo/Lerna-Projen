@@ -84,6 +84,7 @@ export class LernaProject extends javascript.NodeProject {
       obj: {
         packages: Object.keys(this.subProjects),
         useNx: this.useNx,
+        version: '0.0.0',
       },
     }))
 

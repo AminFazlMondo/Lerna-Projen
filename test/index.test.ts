@@ -74,6 +74,7 @@ describe('Happy Path for Typescript', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       useNx: false,
+      version: '0.0.0',
     })
   })
 
@@ -402,6 +403,7 @@ describe('useNx', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       useNx: true,
+      version: '0.0.0',
     })
   })
 })
