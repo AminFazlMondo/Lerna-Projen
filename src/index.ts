@@ -34,6 +34,7 @@ export class LernaProject extends javascript.NodeProject {
   readonly docsDirectory: string
   readonly docgen: boolean
   readonly sinceLastRelease: boolean
+  readonly useNx: boolean
 
   constructor(options: LernaProjectOptions) {
     super({
@@ -50,6 +51,7 @@ export class LernaProject extends javascript.NodeProject {
     this.docsDirectory = options.docsDirectory ?? 'docs'
     this.docgen = options.docgen ?? false
     this.sinceLastRelease = options.sinceLastRelease ?? false
+    this.useNx = options.useNx ?? false
     this.projenrcTs = options.projenrcTs ?? false
   }
 
@@ -81,7 +83,7 @@ export class LernaProject extends javascript.NodeProject {
     this.files.push(new JsonFile(this, 'lerna.json', {
       obj: {
         packages: Object.keys(this.subProjects),
-        version: '4.0.0',
+        useNx: this.useNx,
       },
     }))
 

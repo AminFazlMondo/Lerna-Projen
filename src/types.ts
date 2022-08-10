@@ -32,4 +32,12 @@ export interface LernaProjectOptions extends javascript.NodeProjectOptions {
    * @experimental
    */
   readonly sinceLastRelease?: boolean;
+
+  /**
+   * Whether or not to use Nx for task scheduling
+   * https://lerna.js.org/docs/lerna-and-nx
+   *
+   * @default false
+   */
+  readonly useNx?: boolean;
 }
