@@ -3,19 +3,22 @@ import {copy, readdirSync, existsSync, move, emptyDirSync, readFileSync, writeFi
 
 const program = new Command()
 
+interface FileDetailsType {
+  path: string;
+  content?: Buffer | undefined;
+}
+
 program
   .command('clean-dist <distFolder>')
   .action(async (distFolder) => {
-    const changeLogFilePath = `${distFolder}/changelog.md`
-    const versionFilePath = `${distFolder}/version.txt`
-    const releaseTagFilePath = `${distFolder}/releasetag.txt`
-    const changeLogFile = readFileSync(changeLogFilePath)
-    const versionFile = readFileSync(versionFilePath)
-    const releaseTagFile = readFileSync(releaseTagFilePath)
+    const existingFiles: string[] = [
+      `${distFolder}/changelog.md`,
+      `${distFolder}/version.txt`,
+      `${distFolder}/releasetag.txt`,
+    ]
+    const fileDetails = existingFiles.map(readFileIfExists)
     emptyDirSync(distFolder)
-    writeFileSync(changeLogFilePath, changeLogFile)
-    writeFileSync(versionFilePath, versionFile)
-    writeFileSync(releaseTagFilePath, releaseTagFile)
+    fileDetails.forEach(writeFileIfExists)
   })
 
 program
@@ -51,6 +54,23 @@ async function moveDocs(parentDocsDirectory: string, subProjectPath: string, sub
     const entries = readdirSync(subProjectDocs)
     await Promise.all(entries.map(f => move(`${subProjectDocs}/${f}`, `${destinationFolder}/${f}`, moveOptions)))
   }
+}
+
+function readFileIfExists(filePath: string): FileDetailsType {
+  if (!(existsSync(filePath)))
+    return {path: filePath}
+
+  return {
+    path: filePath,
+    content: readFileSync(filePath),
+  }
+}
+
+function writeFileIfExists(details: FileDetailsType): void {
+  if (!details.content)
+    return
+
+  writeFileSync(details.path, details.content)
 }
 
 program.parse(process.argv)
