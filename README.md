@@ -1,8 +1,6 @@
 # lerna-projen
 
-A forked version of Amin Fazl's [lerna-projen](https://github.com/AminFazlMondo/Lerna-Projen)
-
-It adds the [independent version mode ](https://lerna.js.org/docs/features/version-and-publish#independent-mode) to allow sub-projects to be versioned independently
+Inspired by [projen](https://github.com/projen/projen) and [lerna](https://github.com/lerna/lerna)
 
 This is a library to use manage mono repositories using projen.
 
@@ -29,7 +27,6 @@ const { TypeScriptProject } = require('projen');
 
 const parentProject = new LernaProject({
   name: 'my-parent-project',
-  independentMode: true
   ...
 });
 
