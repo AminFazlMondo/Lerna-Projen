@@ -1,6 +1,6 @@
 import {javascript, cdk} from 'projen'
 
-const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git'
+const repository = 'https://github.com/Dazza65/Lerna-Projen.git'
 
 const project = new cdk.JsiiProject({
   projenrcTs: true,
@@ -14,12 +14,12 @@ const project = new cdk.JsiiProject({
     'typescript',
   ],
   majorVersion: 0,
-  packageName: 'lerna-projen',
+  packageName: 'dazza-lerna-projen',
   packageManager: javascript.NodePackageManager.NPM,
   repository,
   repositoryUrl: repository,
-  authorAddress: 'amin.fazl@mondo.com.au',
-  author: 'Amin Fazl',
+  authorAddress: 'dazza@icloud.com',
+  author: 'Darren Harris',
   peerDeps: [
     'projen',
   ],
@@ -42,7 +42,7 @@ const project = new cdk.JsiiProject({
   workflowNodeVersion: '14.18.1',
   publishTasks: true,
   autoApproveOptions: {
-    allowedUsernames: ['AminFazlMondo'],
+    allowedUsernames: ['dazza65'],
   },
   autoApproveUpgrades: true,
 })

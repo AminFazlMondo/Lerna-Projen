@@ -3,17 +3,17 @@
 
 ## Structs <a name="Structs"></a>
 
-### LernaProjectOptions <a name="lerna-projen.LernaProjectOptions"></a>
+### LernaProjectOptions <a name="dazza-lerna-projen.LernaProjectOptions"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>
 
 ```typescript
-import { LernaProjectOptions } from 'lerna-projen'
+import { LernaProjectOptions } from 'dazza-lerna-projen'
 
 const lernaProjectOptions: LernaProjectOptions = { ... }
 ```
 
-##### `name`<sup>Required</sup> <a name="lerna-projen.LernaProjectOptions.property.name"></a>
+##### `name`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -26,7 +26,7 @@ This is the name of your project.
 
 ---
 
-##### `commitGenerated`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.commitGenerated"></a>
+##### `commitGenerated`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.commitGenerated"></a>
 
 ```typescript
 public readonly commitGenerated: boolean;
@@ -39,7 +39,7 @@ Whether to commit the managed files by default.
 
 ---
 
-##### `logging`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.logging"></a>
+##### `logging`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.logging"></a>
 
 ```typescript
 public readonly logging: LoggerOptions;
@@ -52,7 +52,7 @@ Configure logging options such as verbosity.
 
 ---
 
-##### `outdir`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.outdir"></a>
+##### `outdir`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.outdir"></a>
 
 ```typescript
 public readonly outdir: string;
@@ -71,7 +71,7 @@ sub-projects.
 
 ---
 
-##### `parent`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.parent"></a>
+##### `parent`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.parent"></a>
 
 ```typescript
 public readonly parent: Project;
@@ -83,7 +83,7 @@ The parent project, if this project is part of a bigger project.
 
 ---
 
-##### `projenCommand`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenCommand"></a>
+##### `projenCommand`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenCommand"></a>
 
 ```typescript
 public readonly projenCommand: string;
@@ -98,7 +98,7 @@ Can be used to customize in special environments.
 
 ---
 
-##### `projenrcJson`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcJson"></a>
+##### `projenrcJson`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenrcJson"></a>
 
 ```typescript
 public readonly projenrcJson: boolean;
@@ -111,7 +111,7 @@ Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .pr
 
 ---
 
-##### `projenrcJsonOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcJsonOptions"></a>
+##### `projenrcJsonOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenrcJsonOptions"></a>
 
 ```typescript
 public readonly projenrcJsonOptions: ProjenrcOptions;
@@ -124,7 +124,7 @@ Options for .projenrc.json.
 
 ---
 
-##### `renovatebot`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.renovatebot"></a>
+##### `renovatebot`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.renovatebot"></a>
 
 ```typescript
 public readonly renovatebot: boolean;
@@ -137,7 +137,7 @@ Use renovatebot to handle dependency upgrades.
 
 ---
 
-##### `renovatebotOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.renovatebotOptions"></a>
+##### `renovatebotOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.renovatebotOptions"></a>
 
 ```typescript
 public readonly renovatebotOptions: RenovatebotOptions;
@@ -150,7 +150,7 @@ Options for renovatebot.
 
 ---
 
-##### `autoApproveOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoApproveOptions"></a>
+##### `autoApproveOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.autoApproveOptions"></a>
 
 ```typescript
 public readonly autoApproveOptions: AutoApproveOptions;
@@ -163,7 +163,7 @@ Enable and configure the 'auto approve' workflow.
 
 ---
 
-##### `autoMerge`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoMerge"></a>
+##### `autoMerge`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.autoMerge"></a>
 
 ```typescript
 public readonly autoMerge: boolean;
@@ -179,7 +179,7 @@ is set to false.
 
 ---
 
-##### `autoMergeOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoMergeOptions"></a>
+##### `autoMergeOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.autoMergeOptions"></a>
 
 ```typescript
 public readonly autoMergeOptions: AutoMergeOptions;
@@ -195,7 +195,7 @@ Has no effect if
 
 ---
 
-##### `clobber`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.clobber"></a>
+##### `clobber`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.clobber"></a>
 
 ```typescript
 public readonly clobber: boolean;
@@ -208,7 +208,7 @@ Add a `clobber` task which resets the repo to origin.
 
 ---
 
-##### `devContainer`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.devContainer"></a>
+##### `devContainer`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.devContainer"></a>
 
 ```typescript
 public readonly devContainer: boolean;
@@ -221,7 +221,7 @@ Add a VSCode development environment (used for GitHub Codespaces).
 
 ---
 
-##### `github`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.github"></a>
+##### `github`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.github"></a>
 
 ```typescript
 public readonly github: boolean;
@@ -236,7 +236,7 @@ Enabled by default for root projects. Disabled for non-root projects.
 
 ---
 
-##### `githubOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.githubOptions"></a>
+##### `githubOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.githubOptions"></a>
 
 ```typescript
 public readonly githubOptions: GitHubOptions;
@@ -249,7 +249,7 @@ Options for GitHub integration.
 
 ---
 
-##### `gitpod`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.gitpod"></a>
+##### `gitpod`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.gitpod"></a>
 
 ```typescript
 public readonly gitpod: boolean;
@@ -262,7 +262,7 @@ Add a Gitpod development environment.
 
 ---
 
-##### ~~`mergify`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.mergify"></a>
+##### ~~`mergify`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.mergify"></a>
 
 - *Deprecated:* use `githubOptions.mergify` instead
 
@@ -277,7 +277,7 @@ Whether mergify should be enabled on this repository or not.
 
 ---
 
-##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.mergifyOptions"></a>
+##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.mergifyOptions"></a>
 
 - *Deprecated:* use `githubOptions.mergifyOptions` instead
 
@@ -292,7 +292,7 @@ Options for mergify.
 
 ---
 
-##### ~~`projectType`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projectType"></a>
+##### ~~`projectType`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projectType"></a>
 
 - *Deprecated:* no longer supported at the base project level
 
@@ -307,7 +307,7 @@ Which type of project this is (library/app).
 
 ---
 
-##### `projenCredentials`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenCredentials"></a>
+##### `projenCredentials`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenCredentials"></a>
 
 ```typescript
 public readonly projenCredentials: GithubCredentials;
@@ -320,7 +320,7 @@ Choose a method of providing GitHub API access for projen workflows.
 
 ---
 
-##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenTokenSecret"></a>
+##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenTokenSecret"></a>
 
 - *Deprecated:* use `projenCredentials`
 
@@ -338,7 +338,7 @@ and `packages` scope.
 
 ---
 
-##### `readme`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.readme"></a>
+##### `readme`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.readme"></a>
 
 ```typescript
 public readonly readme: SampleReadmeProps;
@@ -351,7 +351,7 @@ The README setup.
 
 ---
 
-##### `stale`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.stale"></a>
+##### `stale`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.stale"></a>
 
 ```typescript
 public readonly stale: boolean;
@@ -366,7 +366,7 @@ See `staleOptions` for options.
 
 ---
 
-##### `staleOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.staleOptions"></a>
+##### `staleOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.staleOptions"></a>
 
 ```typescript
 public readonly staleOptions: StaleOptions;
@@ -381,7 +381,7 @@ To disable set `stale` to `false`.
 
 ---
 
-##### `vscode`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.vscode"></a>
+##### `vscode`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.vscode"></a>
 
 ```typescript
 public readonly vscode: boolean;
@@ -396,7 +396,7 @@ Enabled by default for root projects. Disabled for non-root projects.
 
 ---
 
-##### `allowLibraryDependencies`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.allowLibraryDependencies"></a>
+##### `allowLibraryDependencies`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.allowLibraryDependencies"></a>
 
 ```typescript
 public readonly allowLibraryDependencies: boolean;
@@ -412,7 +412,7 @@ for specifying these.
 
 ---
 
-##### `authorEmail`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.authorEmail"></a>
+##### `authorEmail`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.authorEmail"></a>
 
 ```typescript
 public readonly authorEmail: string;
@@ -424,7 +424,7 @@ Author's e-mail.
 
 ---
 
-##### `authorName`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.authorName"></a>
+##### `authorName`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.authorName"></a>
 
 ```typescript
 public readonly authorName: string;
@@ -436,7 +436,7 @@ Author's name.
 
 ---
 
-##### `authorOrganization`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.authorOrganization"></a>
+##### `authorOrganization`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.authorOrganization"></a>
 
 ```typescript
 public readonly authorOrganization: boolean;
@@ -448,7 +448,7 @@ Author's Organization.
 
 ---
 
-##### `authorUrl`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.authorUrl"></a>
+##### `authorUrl`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.authorUrl"></a>
 
 ```typescript
 public readonly authorUrl: string;
@@ -460,7 +460,7 @@ Author's URL / Website.
 
 ---
 
-##### `autoDetectBin`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoDetectBin"></a>
+##### `autoDetectBin`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.autoDetectBin"></a>
 
 ```typescript
 public readonly autoDetectBin: boolean;
@@ -473,7 +473,7 @@ Automatically add all executables under the `bin` directory to your `package.jso
 
 ---
 
-##### `bin`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bin"></a>
+##### `bin`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.bin"></a>
 
 ```typescript
 public readonly bin: {[ key: string ]: string};
@@ -489,7 +489,7 @@ executable file under `bin` will automatically be added to this section.
 
 ---
 
-##### `bugsEmail`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bugsEmail"></a>
+##### `bugsEmail`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.bugsEmail"></a>
 
 ```typescript
 public readonly bugsEmail: string;
@@ -501,7 +501,7 @@ The email address to which issues should be reported.
 
 ---
 
-##### `bugsUrl`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bugsUrl"></a>
+##### `bugsUrl`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.bugsUrl"></a>
 
 ```typescript
 public readonly bugsUrl: string;
@@ -513,7 +513,7 @@ The url to your project's issue tracker.
 
 ---
 
-##### `bundledDeps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bundledDeps"></a>
+##### `bundledDeps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.bundledDeps"></a>
 
 ```typescript
 public readonly bundledDeps: string[];
@@ -536,7 +536,7 @@ this will be what you `package.json` will eventually include.
 
 ---
 
-##### `codeArtifactOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.codeArtifactOptions"></a>
+##### `codeArtifactOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.codeArtifactOptions"></a>
 
 ```typescript
 public readonly codeArtifactOptions: CodeArtifactOptions;
@@ -551,7 +551,7 @@ This is required if publishing packages to, or installing scoped packages from A
 
 ---
 
-##### `deps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.deps"></a>
+##### `deps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.deps"></a>
 
 ```typescript
 public readonly deps: string[];
@@ -571,7 +571,7 @@ this will be what you `package.json` will eventually include.
 
 ---
 
-##### `description`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -586,7 +586,7 @@ See https://classic.yarnpkg.com/en/docs/package-json/#toc-description
 
 ---
 
-##### `devDeps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.devDeps"></a>
+##### `devDeps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.devDeps"></a>
 
 ```typescript
 public readonly devDeps: string[];
@@ -610,7 +610,7 @@ this will be what you `package.json` will eventually include.
 
 ---
 
-##### `entrypoint`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.entrypoint"></a>
+##### `entrypoint`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.entrypoint"></a>
 
 ```typescript
 public readonly entrypoint: string;
@@ -625,7 +625,7 @@ Set to an empty string to not include `main` in your package.json
 
 ---
 
-##### `homepage`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.homepage"></a>
+##### `homepage`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.homepage"></a>
 
 ```typescript
 public readonly homepage: string;
@@ -637,7 +637,7 @@ Package's Homepage / Website.
 
 ---
 
-##### `keywords`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.keywords"></a>
+##### `keywords`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.keywords"></a>
 
 ```typescript
 public readonly keywords: string[];
@@ -649,7 +649,7 @@ Keywords to include in `package.json`.
 
 ---
 
-##### `license`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.license"></a>
+##### `license`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.license"></a>
 
 ```typescript
 public readonly license: string;
@@ -665,7 +665,7 @@ Use the `licensed` option if you want to no license to be specified.
 
 ---
 
-##### `licensed`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.licensed"></a>
+##### `licensed`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.licensed"></a>
 
 ```typescript
 public readonly licensed: boolean;
@@ -678,7 +678,7 @@ Indicates if a license should be added.
 
 ---
 
-##### `maxNodeVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.maxNodeVersion"></a>
+##### `maxNodeVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.maxNodeVersion"></a>
 
 ```typescript
 public readonly maxNodeVersion: string;
@@ -691,7 +691,7 @@ Minimum node.js version to require via `engines` (inclusive).
 
 ---
 
-##### `minNodeVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.minNodeVersion"></a>
+##### `minNodeVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.minNodeVersion"></a>
 
 ```typescript
 public readonly minNodeVersion: string;
@@ -704,7 +704,7 @@ Minimum Node.js version to require via package.json `engines` (inclusive).
 
 ---
 
-##### `npmAccess`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmAccess"></a>
+##### `npmAccess`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmAccess"></a>
 
 ```typescript
 public readonly npmAccess: NpmAccess;
@@ -719,7 +719,7 @@ Access level of the npm package.
 
 ---
 
-##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmRegistry"></a>
+##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmRegistry"></a>
 
 - *Deprecated:* use `npmRegistryUrl` instead
 
@@ -735,7 +735,7 @@ Cannot be set together with `npmRegistryUrl`.
 
 ---
 
-##### `npmRegistryUrl`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmRegistryUrl"></a>
+##### `npmRegistryUrl`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmRegistryUrl"></a>
 
 ```typescript
 public readonly npmRegistryUrl: string;
@@ -750,7 +750,7 @@ Must be a URL (e.g. start with "https://" or "http://")
 
 ---
 
-##### `npmTokenSecret`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmTokenSecret"></a>
+##### `npmTokenSecret`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmTokenSecret"></a>
 
 ```typescript
 public readonly npmTokenSecret: string;
@@ -763,7 +763,7 @@ GitHub secret which contains the NPM token to use when publishing packages.
 
 ---
 
-##### `packageManager`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.packageManager"></a>
+##### `packageManager`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.packageManager"></a>
 
 ```typescript
 public readonly packageManager: NodePackageManager;
@@ -776,7 +776,7 @@ The Node Package Manager used to execute scripts.
 
 ---
 
-##### `packageName`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.packageName"></a>
+##### `packageName`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.packageName"></a>
 
 ```typescript
 public readonly packageName: string;
@@ -789,7 +789,7 @@ The "name" in package.json.
 
 ---
 
-##### `peerDependencyOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.peerDependencyOptions"></a>
+##### `peerDependencyOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.peerDependencyOptions"></a>
 
 ```typescript
 public readonly peerDependencyOptions: PeerDependencyOptions;
@@ -801,7 +801,7 @@ Options for `peerDeps`.
 
 ---
 
-##### `peerDeps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.peerDeps"></a>
+##### `peerDeps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.peerDeps"></a>
 
 ```typescript
 public readonly peerDeps: string[];
@@ -828,7 +828,7 @@ test your module against the lowest peer version required.
 
 ---
 
-##### `repository`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.repository"></a>
+##### `repository`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.repository"></a>
 
 ```typescript
 public readonly repository: string;
@@ -842,7 +842,7 @@ See https://classic.yarnpkg.com/en/docs/package-json/#toc-repository
 
 ---
 
-##### `repositoryDirectory`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.repositoryDirectory"></a>
+##### `repositoryDirectory`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.repositoryDirectory"></a>
 
 ```typescript
 public readonly repositoryDirectory: string;
@@ -854,7 +854,7 @@ If the package.json for your package is not in the root directory (for example i
 
 ---
 
-##### `scopedPackagesOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.scopedPackagesOptions"></a>
+##### `scopedPackagesOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.scopedPackagesOptions"></a>
 
 ```typescript
 public readonly scopedPackagesOptions: ScopedPackagesOptions[];
@@ -867,7 +867,7 @@ Options for privately hosted scoped packages.
 
 ---
 
-##### `scripts`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.scripts"></a>
+##### `scripts`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.scripts"></a>
 
 ```typescript
 public readonly scripts: {[ key: string ]: string};
@@ -883,7 +883,7 @@ the standard script will be overwritten.
 
 ---
 
-##### `stability`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.stability"></a>
+##### `stability`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.stability"></a>
 
 ```typescript
 public readonly stability: string;
@@ -895,7 +895,7 @@ Package's Stability.
 
 ---
 
-##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion"></a>
+##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion"></a>
 
 ```typescript
 public readonly jsiiReleaseVersion: string;
@@ -908,7 +908,7 @@ Version requirement of `publib` which is used to publish modules to npm.
 
 ---
 
-##### `majorVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.majorVersion"></a>
+##### `majorVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.majorVersion"></a>
 
 ```typescript
 public readonly majorVersion: number;
@@ -924,7 +924,7 @@ If not specified, we bump the global latest version.
 
 ---
 
-##### `minMajorVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.minMajorVersion"></a>
+##### `minMajorVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.minMajorVersion"></a>
 
 ```typescript
 public readonly minMajorVersion: number;
@@ -942,7 +942,7 @@ Can not be set together with `majorVersion`.
 
 ---
 
-##### `npmDistTag`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmDistTag"></a>
+##### `npmDistTag`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmDistTag"></a>
 
 ```typescript
 public readonly npmDistTag: string;
@@ -958,7 +958,7 @@ for each branch.
 
 ---
 
-##### `postBuildSteps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.postBuildSteps"></a>
+##### `postBuildSteps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.postBuildSteps"></a>
 
 ```typescript
 public readonly postBuildSteps: JobStep[];
@@ -971,7 +971,7 @@ Steps to execute after build as part of the release workflow.
 
 ---
 
-##### `prerelease`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.prerelease"></a>
+##### `prerelease`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.prerelease"></a>
 
 ```typescript
 public readonly prerelease: string;
@@ -984,7 +984,7 @@ Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pr
 
 ---
 
-##### `publishDryRun`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.publishDryRun"></a>
+##### `publishDryRun`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.publishDryRun"></a>
 
 ```typescript
 public readonly publishDryRun: boolean;
@@ -997,7 +997,7 @@ Instead of actually publishing to package managers, just print the publishing co
 
 ---
 
-##### `publishTasks`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.publishTasks"></a>
+##### `publishTasks`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.publishTasks"></a>
 
 ```typescript
 public readonly publishTasks: boolean;
@@ -1013,7 +1013,7 @@ in order to create a publishing task for each publishing activity.
 
 ---
 
-##### `releaseBranches`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseBranches"></a>
+##### `releaseBranches`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseBranches"></a>
 
 ```typescript
 public readonly releaseBranches: {[ key: string ]: BranchOptions};
@@ -1034,7 +1034,7 @@ be provided for the default branch.
 
 ---
 
-##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseEveryCommit"></a>
+##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseEveryCommit"></a>
 
 - *Deprecated:* Use `releaseTrigger: ReleaseTrigger.continuous()` instead
 
@@ -1049,7 +1049,7 @@ Automatically release new versions every commit to one of branches in `releaseBr
 
 ---
 
-##### `releaseFailureIssue`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseFailureIssue"></a>
+##### `releaseFailureIssue`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseFailureIssue"></a>
 
 ```typescript
 public readonly releaseFailureIssue: boolean;
@@ -1062,7 +1062,7 @@ Create a github issue on every failed publishing task.
 
 ---
 
-##### `releaseFailureIssueLabel`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseFailureIssueLabel"></a>
+##### `releaseFailureIssueLabel`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseFailureIssueLabel"></a>
 
 ```typescript
 public readonly releaseFailureIssueLabel: string;
@@ -1077,7 +1077,7 @@ Only applies if `releaseFailureIssue` is true.
 
 ---
 
-##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseSchedule"></a>
+##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseSchedule"></a>
 
 - *Deprecated:* Use `releaseTrigger: ReleaseTrigger.scheduled()` instead
 
@@ -1092,7 +1092,7 @@ CRON schedule to trigger new releases.
 
 ---
 
-##### `releaseTagPrefix`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseTagPrefix"></a>
+##### `releaseTagPrefix`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseTagPrefix"></a>
 
 ```typescript
 public readonly releaseTagPrefix: string;
@@ -1110,7 +1110,7 @@ with the new prefix.
 
 ---
 
-##### `releaseTrigger`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseTrigger"></a>
+##### `releaseTrigger`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseTrigger"></a>
 
 ```typescript
 public readonly releaseTrigger: ReleaseTrigger;
@@ -1123,7 +1123,7 @@ The release trigger to use.
 
 ---
 
-##### `releaseWorkflowName`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseWorkflowName"></a>
+##### `releaseWorkflowName`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseWorkflowName"></a>
 
 ```typescript
 public readonly releaseWorkflowName: string;
@@ -1136,7 +1136,7 @@ The name of the default release workflow.
 
 ---
 
-##### `releaseWorkflowSetupSteps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseWorkflowSetupSteps"></a>
+##### `releaseWorkflowSetupSteps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseWorkflowSetupSteps"></a>
 
 ```typescript
 public readonly releaseWorkflowSetupSteps: JobStep[];
@@ -1148,7 +1148,7 @@ A set of workflow steps to execute in order to setup the workflow container.
 
 ---
 
-##### `versionrcOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.versionrcOptions"></a>
+##### `versionrcOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.versionrcOptions"></a>
 
 ```typescript
 public readonly versionrcOptions: {[ key: string ]: any};
@@ -1163,7 +1163,7 @@ Given values either append to default configuration or overwrite values in it.
 
 ---
 
-##### `workflowContainerImage`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowContainerImage"></a>
+##### `workflowContainerImage`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.workflowContainerImage"></a>
 
 ```typescript
 public readonly workflowContainerImage: string;
@@ -1176,7 +1176,7 @@ Container image to use for GitHub workflows.
 
 ---
 
-##### `workflowRunsOn`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowRunsOn"></a>
+##### `workflowRunsOn`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.workflowRunsOn"></a>
 
 ```typescript
 public readonly workflowRunsOn: string[];
@@ -1189,7 +1189,7 @@ Github Runner selection labels.
 
 ---
 
-##### `defaultReleaseBranch`<sup>Required</sup> <a name="lerna-projen.LernaProjectOptions.property.defaultReleaseBranch"></a>
+##### `defaultReleaseBranch`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.defaultReleaseBranch"></a>
 
 ```typescript
 public readonly defaultReleaseBranch: string;
@@ -1202,7 +1202,7 @@ The name of the main release branch.
 
 ---
 
-##### `artifactsDirectory`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.artifactsDirectory"></a>
+##### `artifactsDirectory`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.artifactsDirectory"></a>
 
 ```typescript
 public readonly artifactsDirectory: string;
@@ -1215,7 +1215,7 @@ A directory which will contain build artifacts.
 
 ---
 
-##### `autoApproveUpgrades`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.autoApproveUpgrades"></a>
+##### `autoApproveUpgrades`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.autoApproveUpgrades"></a>
 
 ```typescript
 public readonly autoApproveUpgrades: boolean;
@@ -1230,7 +1230,7 @@ Throw if set to true but `autoApproveOptions` are not defined.
 
 ---
 
-##### `buildWorkflow`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.buildWorkflow"></a>
+##### `buildWorkflow`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.buildWorkflow"></a>
 
 ```typescript
 public readonly buildWorkflow: boolean;
@@ -1243,7 +1243,7 @@ Define a GitHub workflow for building PRs.
 
 ---
 
-##### `buildWorkflowTriggers`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.buildWorkflowTriggers"></a>
+##### `buildWorkflowTriggers`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.buildWorkflowTriggers"></a>
 
 ```typescript
 public readonly buildWorkflowTriggers: Triggers;
@@ -1256,7 +1256,7 @@ Build workflow triggers.
 
 ---
 
-##### `bundlerOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.bundlerOptions"></a>
+##### `bundlerOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.bundlerOptions"></a>
 
 ```typescript
 public readonly bundlerOptions: BundlerOptions;
@@ -1268,7 +1268,7 @@ Options for `Bundler`.
 
 ---
 
-##### `codeCov`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.codeCov"></a>
+##### `codeCov`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.codeCov"></a>
 
 ```typescript
 public readonly codeCov: boolean;
@@ -1281,7 +1281,7 @@ Define a GitHub workflow step for sending code coverage metrics to https://codec
 
 ---
 
-##### `codeCovTokenSecret`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.codeCovTokenSecret"></a>
+##### `codeCovTokenSecret`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.codeCovTokenSecret"></a>
 
 ```typescript
 public readonly codeCovTokenSecret: string;
@@ -1294,7 +1294,7 @@ Define the secret name for a specified https://codecov.io/ token A secret is req
 
 ---
 
-##### `copyrightOwner`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.copyrightOwner"></a>
+##### `copyrightOwner`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.copyrightOwner"></a>
 
 ```typescript
 public readonly copyrightOwner: string;
@@ -1307,7 +1307,7 @@ License copyright owner.
 
 ---
 
-##### `copyrightPeriod`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.copyrightPeriod"></a>
+##### `copyrightPeriod`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.copyrightPeriod"></a>
 
 ```typescript
 public readonly copyrightPeriod: string;
@@ -1320,7 +1320,7 @@ The copyright years to put in the LICENSE file.
 
 ---
 
-##### `dependabot`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.dependabot"></a>
+##### `dependabot`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.dependabot"></a>
 
 ```typescript
 public readonly dependabot: boolean;
@@ -1335,7 +1335,7 @@ Cannot be used in conjunction with `depsUpgrade`.
 
 ---
 
-##### `dependabotOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.dependabotOptions"></a>
+##### `dependabotOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.dependabotOptions"></a>
 
 ```typescript
 public readonly dependabotOptions: DependabotOptions;
@@ -1348,7 +1348,7 @@ Options for dependabot.
 
 ---
 
-##### `depsUpgrade`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.depsUpgrade"></a>
+##### `depsUpgrade`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.depsUpgrade"></a>
 
 ```typescript
 public readonly depsUpgrade: boolean;
@@ -1363,7 +1363,7 @@ Cannot be used in conjunction with `dependabot`.
 
 ---
 
-##### `depsUpgradeOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.depsUpgradeOptions"></a>
+##### `depsUpgradeOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.depsUpgradeOptions"></a>
 
 ```typescript
 public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
@@ -1376,7 +1376,7 @@ Options for `UpgradeDependencies`.
 
 ---
 
-##### `gitignore`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.gitignore"></a>
+##### `gitignore`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.gitignore"></a>
 
 ```typescript
 public readonly gitignore: string[];
@@ -1388,7 +1388,7 @@ Additional entries to .gitignore.
 
 ---
 
-##### `jest`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.jest"></a>
+##### `jest`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.jest"></a>
 
 ```typescript
 public readonly jest: boolean;
@@ -1401,7 +1401,7 @@ Setup jest unit tests.
 
 ---
 
-##### `jestOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.jestOptions"></a>
+##### `jestOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.jestOptions"></a>
 
 ```typescript
 public readonly jestOptions: JestOptions;
@@ -1414,7 +1414,7 @@ Jest options.
 
 ---
 
-##### `mutableBuild`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.mutableBuild"></a>
+##### `mutableBuild`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.mutableBuild"></a>
 
 ```typescript
 public readonly mutableBuild: boolean;
@@ -1433,7 +1433,7 @@ Implies that PR builds do not have anti-tamper checks.
 
 ---
 
-##### ~~`npmignore`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmignore"></a>
+##### ~~`npmignore`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmignore"></a>
 
 - *Deprecated:* - use `project.addPackageIgnore`
 
@@ -1447,7 +1447,7 @@ Additional entries to .npmignore.
 
 ---
 
-##### `npmignoreEnabled`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.npmignoreEnabled"></a>
+##### `npmignoreEnabled`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.npmignoreEnabled"></a>
 
 ```typescript
 public readonly npmignoreEnabled: boolean;
@@ -1460,7 +1460,7 @@ Defines an .npmignore file. Normally this is only needed for libraries that are 
 
 ---
 
-##### `package`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.package"></a>
+##### `package`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.package"></a>
 
 ```typescript
 public readonly package: boolean;
@@ -1473,7 +1473,7 @@ Defines a `package` task that will produce an npm tarball under the artifacts di
 
 ---
 
-##### `prettier`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.prettier"></a>
+##### `prettier`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.prettier"></a>
 
 ```typescript
 public readonly prettier: boolean;
@@ -1486,7 +1486,7 @@ Setup prettier.
 
 ---
 
-##### `prettierOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.prettierOptions"></a>
+##### `prettierOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.prettierOptions"></a>
 
 ```typescript
 public readonly prettierOptions: PrettierOptions;
@@ -1499,7 +1499,7 @@ Prettier options.
 
 ---
 
-##### `projenDevDependency`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenDevDependency"></a>
+##### `projenDevDependency`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenDevDependency"></a>
 
 ```typescript
 public readonly projenDevDependency: boolean;
@@ -1512,7 +1512,7 @@ Indicates of "projen" should be installed as a devDependency.
 
 ---
 
-##### `projenrcJs`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcJs"></a>
+##### `projenrcJs`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenrcJs"></a>
 
 ```typescript
 public readonly projenrcJs: boolean;
@@ -1525,7 +1525,7 @@ Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable
 
 ---
 
-##### `projenrcJsOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcJsOptions"></a>
+##### `projenrcJsOptions`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenrcJsOptions"></a>
 
 ```typescript
 public readonly projenrcJsOptions: ProjenrcOptions;
@@ -1538,7 +1538,7 @@ Options for .projenrc.js.
 
 ---
 
-##### `projenVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenVersion"></a>
+##### `projenVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenVersion"></a>
 
 ```typescript
 public readonly projenVersion: string;
@@ -1551,7 +1551,7 @@ Version of projen to install.
 
 ---
 
-##### `pullRequestTemplate`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.pullRequestTemplate"></a>
+##### `pullRequestTemplate`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.pullRequestTemplate"></a>
 
 ```typescript
 public readonly pullRequestTemplate: boolean;
@@ -1564,7 +1564,7 @@ Include a GitHub pull request template.
 
 ---
 
-##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.pullRequestTemplateContents"></a>
+##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.pullRequestTemplateContents"></a>
 
 ```typescript
 public readonly pullRequestTemplateContents: string[];
@@ -1577,7 +1577,7 @@ The contents of the pull request template.
 
 ---
 
-##### `release`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.release"></a>
+##### `release`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.release"></a>
 
 ```typescript
 public readonly release: boolean;
@@ -1590,7 +1590,7 @@ Add release management to this project.
 
 ---
 
-##### `releaseToNpm`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseToNpm"></a>
+##### `releaseToNpm`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseToNpm"></a>
 
 ```typescript
 public readonly releaseToNpm: boolean;
@@ -1603,7 +1603,7 @@ Automatically release to npm when new versions are introduced.
 
 ---
 
-##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.releaseWorkflow"></a>
+##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.releaseWorkflow"></a>
 
 - *Deprecated:* see `release`.
 
@@ -1618,7 +1618,7 @@ DEPRECATED: renamed to `release`.
 
 ---
 
-##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowBootstrapSteps"></a>
+##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.workflowBootstrapSteps"></a>
 
 ```typescript
 public readonly workflowBootstrapSteps: JobStep[];
@@ -1631,7 +1631,7 @@ Workflow steps to use in order to bootstrap this repo.
 
 ---
 
-##### `workflowGitIdentity`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowGitIdentity"></a>
+##### `workflowGitIdentity`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.workflowGitIdentity"></a>
 
 ```typescript
 public readonly workflowGitIdentity: GitIdentity;
@@ -1644,7 +1644,7 @@ The git identity to use in workflows.
 
 ---
 
-##### `workflowNodeVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.workflowNodeVersion"></a>
+##### `workflowNodeVersion`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.workflowNodeVersion"></a>
 
 ```typescript
 public readonly workflowNodeVersion: string;
@@ -1657,7 +1657,7 @@ The node version to use in GitHub workflows.
 
 ---
 
-##### `docgen`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.docgen"></a>
+##### `docgen`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.docgen"></a>
 
 ```typescript
 public readonly docgen: boolean;
@@ -1670,7 +1670,7 @@ Consolidate sub projects doc files.
 
 ---
 
-##### `docsDirectory`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.docsDirectory"></a>
+##### `docsDirectory`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.docsDirectory"></a>
 
 ```typescript
 public readonly docsDirectory: string;
@@ -1683,7 +1683,20 @@ public readonly docsDirectory: string;
 
 ---
 
-##### `projenrcTs`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcTs"></a>
+##### `independentMode`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.independentMode"></a>
+
+```typescript
+public readonly independentMode: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode.
+
+---
+
+##### `projenrcTs`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.projenrcTs"></a>
 
 ```typescript
 public readonly projenrcTs: boolean;
@@ -1696,7 +1709,7 @@ public readonly projenrcTs: boolean;
 
 ---
 
-##### `sinceLastRelease`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.sinceLastRelease"></a>
+##### `sinceLastRelease`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.sinceLastRelease"></a>
 
 ```typescript
 public readonly sinceLastRelease: boolean;
@@ -1709,7 +1722,7 @@ public readonly sinceLastRelease: boolean;
 
 ---
 
-##### `useNx`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.useNx"></a>
+##### `useNx`<sup>Optional</sup> <a name="dazza-lerna-projen.LernaProjectOptions.property.useNx"></a>
 
 ```typescript
 public readonly useNx: boolean;
@@ -1724,37 +1737,37 @@ Whether or not to use Nx for task scheduling https://lerna.js.org/docs/lerna-and
 
 ## Classes <a name="Classes"></a>
 
-### LernaProject <a name="lerna-projen.LernaProject"></a>
+### LernaProject <a name="dazza-lerna-projen.LernaProject"></a>
 
-#### Initializers <a name="lerna-projen.LernaProject.Initializer"></a>
+#### Initializers <a name="dazza-lerna-projen.LernaProject.Initializer"></a>
 
 ```typescript
-import { LernaProject } from 'lerna-projen'
+import { LernaProject } from 'dazza-lerna-projen'
 
 new LernaProject(options: LernaProjectOptions)
 ```
 
-##### `options`<sup>Required</sup> <a name="lerna-projen.LernaProject.parameter.options"></a>
+##### `options`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.parameter.options"></a>
 
-- *Type:* [`lerna-projen.LernaProjectOptions`](#lerna-projen.LernaProjectOptions)
+- *Type:* [`dazza-lerna-projen.LernaProjectOptions`](#dazza-lerna-projen.LernaProjectOptions)
 
 ---
 
 #### Methods <a name="Methods"></a>
 
-##### `addSubProject` <a name="lerna-projen.LernaProject.addSubProject"></a>
+##### `addSubProject` <a name="dazza-lerna-projen.LernaProject.addSubProject"></a>
 
 ```typescript
 public addSubProject(subProject: Project)
 ```
 
-###### `subProject`<sup>Required</sup> <a name="lerna-projen.LernaProject.parameter.subProject"></a>
+###### `subProject`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.parameter.subProject"></a>
 
 - *Type:* [`projen.Project`](#projen.Project)
 
 ---
 
-##### `preSynthesize` <a name="lerna-projen.LernaProject.preSynthesize"></a>
+##### `preSynthesize` <a name="dazza-lerna-projen.LernaProject.preSynthesize"></a>
 
 ```typescript
 public preSynthesize()
@@ -1763,7 +1776,7 @@ public preSynthesize()
 
 #### Properties <a name="Properties"></a>
 
-##### `docgen`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.docgen"></a>
+##### `docgen`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.property.docgen"></a>
 
 ```typescript
 public readonly docgen: boolean;
@@ -1773,7 +1786,7 @@ public readonly docgen: boolean;
 
 ---
 
-##### `docsDirectory`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.docsDirectory"></a>
+##### `docsDirectory`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.property.docsDirectory"></a>
 
 ```typescript
 public readonly docsDirectory: string;
@@ -1783,7 +1796,17 @@ public readonly docsDirectory: string;
 
 ---
 
-##### `sinceLastRelease`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.sinceLastRelease"></a>
+##### `independentMode`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.property.independentMode"></a>
+
+```typescript
+public readonly independentMode: boolean;
+```
+
+- *Type:* `boolean`
+
+---
+
+##### `sinceLastRelease`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.property.sinceLastRelease"></a>
 
 ```typescript
 public readonly sinceLastRelease: boolean;
@@ -1793,7 +1816,7 @@ public readonly sinceLastRelease: boolean;
 
 ---
 
-##### `useNx`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.useNx"></a>
+##### `useNx`<sup>Required</sup> <a name="dazza-lerna-projen.LernaProject.property.useNx"></a>
 
 ```typescript
 public readonly useNx: boolean;

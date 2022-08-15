@@ -1,9 +1,9 @@
 {
-  "name": "lerna-projen",
+  "name": "dazza-lerna-projen",
   "description": "A lerna project for managing monorepo using lerna",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AminFazlMondo/Lerna-Projen.git"
+    "url": "https://github.com/Dazza65/Lerna-Projen.git"
   },
   "bin": {
     "lerna-projen": "bin/lerna-projen"
@@ -36,8 +36,8 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "Amin Fazl",
-    "email": "amin.fazl@mondo.com.au",
+    "name": "Darren Harris",
+    "email": "dazza@icloud.com",
     "organization": false
   },
   "devDependencies": {

@@ -40,4 +40,13 @@ export interface LernaProjectOptions extends javascript.NodeProjectOptions {
    * @default false
    */
   readonly useNx?: boolean;
+
+  /**
+   * Whether or not to use independent versioning for sub-projects
+   * https://lerna.js.org/docs/features/version-and-publish#independent-mode
+   *
+   * @default false
+   */
+  readonly independentMode?: boolean;
+
 }

@@ -24,6 +24,11 @@ interface GenerateProjectsParams {
   projenrcTs?: boolean;
 
   useNx?:boolean;
+
+  /**
+   * @default false
+   */
+  independentMode?: boolean;
 }
 
 function generateProjects(
@@ -42,6 +47,7 @@ function generateProjects(
     sinceLastRelease: params.sinceLastRelease ?? false,
     projenrcTs: params.projenrcTs ?? false,
     useNx: params.useNx,
+    independentMode: params.independentMode,
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -404,6 +410,18 @@ describe('useNx', () => {
       packages: [subProjectDirectory],
       useNx: true,
       version: '0.0.0',
+    })
+  })
+})
+
+describe('independentMode', () => {
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {independentMode: true})
+  const output = synthSnapshot(parentProject)
+  test('lerna file', () => {
+    expect(output[lernaFilePath]).toMatchObject({
+      packages: [subProjectDirectory],
+      useNx: false,
+      version: 'independent',
     })
   })
 })
