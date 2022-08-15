@@ -1683,6 +1683,19 @@ public readonly docsDirectory: string;
 
 ---
 
+##### `independentMode`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.independentMode"></a>
+
+```typescript
+public readonly independentMode: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode.
+
+---
+
 ##### `projenrcTs`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.projenrcTs"></a>
 
 ```typescript
@@ -1780,6 +1793,16 @@ public readonly docsDirectory: string;
 ```
 
 - *Type:* `string`
+
+---
+
+##### `independentMode`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.independentMode"></a>
+
+```typescript
+public readonly independentMode: boolean;
+```
+
+- *Type:* `boolean`
 
 ---
 

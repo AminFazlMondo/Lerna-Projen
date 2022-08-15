@@ -35,6 +35,7 @@ export class LernaProject extends javascript.NodeProject {
   readonly docgen: boolean
   readonly sinceLastRelease: boolean
   readonly useNx: boolean
+  readonly independentMode: boolean
 
   constructor(options: LernaProjectOptions) {
     super({
@@ -53,6 +54,7 @@ export class LernaProject extends javascript.NodeProject {
     this.sinceLastRelease = options.sinceLastRelease ?? false
     this.useNx = options.useNx ?? false
     this.projenrcTs = options.projenrcTs ?? false
+    this.independentMode = options.independentMode ?? false
   }
 
   addSubProject(subProject: Project) {
@@ -84,7 +86,7 @@ export class LernaProject extends javascript.NodeProject {
       obj: {
         packages: Object.keys(this.subProjects),
         useNx: this.useNx,
-        version: '0.0.0',
+        version: this.independentMode ? 'independent' : '0.0.0',
       },
     }))
 
