@@ -74,8 +74,7 @@ export class LernaProject extends javascript.NodeProject {
     const {defaultTask} = this
     if (!defaultTask)
       throw new Error('Could not find default task')
-    defaultTask.reset('npm i lerna-projen --package-lock=false')
-    defaultTask.exec(projenCommand)
+    defaultTask.reset(projenCommand)
     this.packageTask.reset(`mkdir -p ${this.artifactsJavascriptDirectory}`)
 
     this.appendLernaCommands()
