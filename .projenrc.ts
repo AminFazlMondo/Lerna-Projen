@@ -39,7 +39,7 @@ const project = new cdk.JsiiProject({
       lib: ['es2019'],
     },
   },
-  workflowNodeVersion: '14.18.1',
+  workflowNodeVersion: '14',
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
