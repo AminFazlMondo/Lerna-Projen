@@ -68,6 +68,7 @@ const parentDocsFolder = 'stub-docs'
 const lernaFilePath = 'lerna.json'
 const tasksFilePath = '.projen/tasks.json'
 const docsMarkdownFilePath = `${parentDocsFolder}/index.md`
+const docsReadmeFilePath = `${parentDocsFolder}/README.md`
 const docsHtmlFilePath = `${parentDocsFolder}/index.html`
 const subProjectDirectory = 'packages/test-sub-project'
 const expectedDocsCommand = `lerna-projen move-docs ${parentDocsFolder} ${subProjectDirectory} docs`
@@ -289,6 +290,7 @@ describe('Happy Path for Jsii sub project', () => {
     test('docs index', () => {
       expect(output[docsHtmlFilePath]).toMatchSnapshot()
       expect(output[docsMarkdownFilePath]).toMatchSnapshot()
+      expect(output[docsReadmeFilePath]).toMatchSnapshot()
     })
   })
 })
@@ -317,6 +319,7 @@ describe('docgen set to true', () => {
     test('docs index', () => {
       expect(output[docsHtmlFilePath]).toMatchSnapshot()
       expect(output[docsMarkdownFilePath]).toMatchSnapshot()
+      expect(output[docsReadmeFilePath]).toMatchSnapshot()
     })
   })
 
@@ -399,6 +402,7 @@ describe('docgen set to true', () => {
 
     expect(output[docsHtmlFilePath]).toMatchSnapshot()
     expect(output[docsMarkdownFilePath]).toMatchSnapshot()
+    expect(output[docsReadmeFilePath]).toMatchSnapshot()
   })
 })
 

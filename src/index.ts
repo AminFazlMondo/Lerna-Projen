@@ -171,6 +171,7 @@ export class LernaProject extends javascript.NodeProject {
     const subProjectsDocs: Record<string, string> = {}
 
     const indexMarkdown = new SourceCode(this, `${this.docsDirectory}/index.md`)
+    const readmeMarkdown = new SourceCode(this, `${this.docsDirectory}/README.md`)
 
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
@@ -181,6 +182,7 @@ export class LernaProject extends javascript.NodeProject {
       if (jsiiDocsOutput) {
         const path = `${subProjectPath}/${jsiiDocsOutput}`
         indexMarkdown.line(`- ## [${subProject.name}](${path})`)
+        readmeMarkdown.line(`- ## [${subProject.name}](${subProjectPath}/README.md)`)
         subProjectsDocs[subProject.name] = path
       } else {
         subProjectsDocs[subProject.name] = `${subProjectPath}/index.html`
