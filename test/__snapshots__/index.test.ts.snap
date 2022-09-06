@@ -18,6 +18,8 @@ exports[`Happy Path for Jsii sub project sub project has docs docs index 1`] = `
 
 exports[`Happy Path for Jsii sub project sub project has docs docs index 2`] = `"- ## [test-sub-project](packages/test-sub-project/API.md)"`;
 
+exports[`Happy Path for Jsii sub project sub project has docs docs index 3`] = `"- ## [test-sub-project](packages/test-sub-project/README.md)"`;
+
 exports[`docgen set to true multiple sub-projects 1`] = `
 "<!DOCTYPE html>
 <html>
@@ -49,6 +51,11 @@ exports[`docgen set to true multiple sub-projects 2`] = `
 - ## [test-sub-project-4](packages/test-sub-project-4/API.md)"
 `;
 
+exports[`docgen set to true multiple sub-projects 3`] = `
+"- ## [test-sub-project-1](packages/test-sub-project-1/README.md)
+- ## [test-sub-project-4](packages/test-sub-project-4/README.md)"
+`;
+
 exports[`docgen set to true sub project has docs docs index 1`] = `
 "<!DOCTYPE html>
 <html>
@@ -66,3 +73,5 @@ exports[`docgen set to true sub project has docs docs index 1`] = `
 `;
 
 exports[`docgen set to true sub project has docs docs index 2`] = `""`;
+
+exports[`docgen set to true sub project has docs docs index 3`] = `""`;
