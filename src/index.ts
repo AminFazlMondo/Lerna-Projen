@@ -182,7 +182,7 @@ export class LernaProject extends javascript.NodeProject {
       if (jsiiDocsOutput) {
         const path = `${subProjectPath}/${jsiiDocsOutput}`
         indexMarkdown.line(`- ## [${subProject.name}](${path})`)
-        readmeMarkdown.line(`- ## [${subProject.name}](${subProjectPath}/README.md)`)
+        readmeMarkdown.line(`- ## [${subProject.name}](../${subProjectPath}/README.md)`)
         subProjectsDocs[subProject.name] = path
       } else {
         subProjectsDocs[subProject.name] = `${subProjectPath}/index.html`
