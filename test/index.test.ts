@@ -67,6 +67,7 @@ function generateProjects(
 const parentDocsFolder = 'stub-docs'
 const lernaFilePath = 'lerna.json'
 const tasksFilePath = '.projen/tasks.json'
+const gitAttributesFilesPath = '.gitattributes'
 const docsMarkdownFilePath = `${parentDocsFolder}/index.md`
 const docsReadmeFilePath = `${parentDocsFolder}/README.md`
 const docsHtmlFilePath = `${parentDocsFolder}/index.html`
@@ -292,6 +293,10 @@ describe('Happy Path for Jsii sub project', () => {
       expect(output[docsMarkdownFilePath]).toMatchSnapshot()
       expect(output[docsReadmeFilePath]).toMatchSnapshot()
     })
+
+    test('gitattributes', () => {
+      expect(output[gitAttributesFilesPath]).toContain(`/${parentDocsFolder}/** linguist-generated`)
+    })
   })
 })
 
@@ -320,6 +325,10 @@ describe('docgen set to true', () => {
       expect(output[docsHtmlFilePath]).toMatchSnapshot()
       expect(output[docsMarkdownFilePath]).toMatchSnapshot()
       expect(output[docsReadmeFilePath]).toMatchSnapshot()
+    })
+
+    test('gitattributes', () => {
+      expect(output[gitAttributesFilesPath]).toContain(`/${parentDocsFolder}/** linguist-generated`)
     })
   })
 
@@ -403,6 +412,15 @@ describe('docgen set to true', () => {
     expect(output[docsHtmlFilePath]).toMatchSnapshot()
     expect(output[docsMarkdownFilePath]).toMatchSnapshot()
     expect(output[docsReadmeFilePath]).toMatchSnapshot()
+  })
+})
+
+describe('docgen set to false', () => {
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: false})
+  const output = synthSnapshot(parentProject)
+
+  test('should not add gitattributes for docs folder', () => {
+    expect(output[gitAttributesFilesPath]).not.toContain(`/${parentDocsFolder}/** linguist-generated`)
   })
 })
 
