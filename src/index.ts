@@ -205,5 +205,7 @@ export class LernaProject extends javascript.NodeProject {
     indexHtml.close('</body>')
     indexHtml.line('</html>')
     indexHtml.line()
+
+    this.gitattributes.addAttributes(`/${this.docsDirectory}/**`, 'linguist-generated')
   }
 }
