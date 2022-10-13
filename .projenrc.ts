@@ -1,6 +1,7 @@
-import {javascript, cdk} from 'projen'
+import {javascript, cdk, TextFile} from 'projen'
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git'
+const nodeVersion = '16'
 
 const project = new cdk.JsiiProject({
   projenrcTs: true,
@@ -39,7 +40,7 @@ const project = new cdk.JsiiProject({
       lib: ['es2019'],
     },
   },
-  workflowNodeVersion: '14',
+  workflowNodeVersion: nodeVersion,
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
@@ -62,5 +63,9 @@ const additionalRules = {
 }
 
 project.eslint?.addRules(additionalRules)
+
+new TextFile(project, '.nvmrc', {
+  lines: [nodeVersion],
+})
 
 project.synth()
