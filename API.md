@@ -444,7 +444,7 @@ public readonly authorOrganization: boolean;
 
 - *Type:* `boolean`
 
-Author's Organization.
+Is the author an organization.
 
 ---
 
@@ -1099,7 +1099,7 @@ public readonly releaseTagPrefix: string;
 ```
 
 - *Type:* `string`
-- *Default:* no prefix
+- *Default:* "v"
 
 Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers.
 
