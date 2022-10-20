@@ -49,4 +49,11 @@ export interface LernaProjectOptions extends javascript.NodeProjectOptions {
    */
   readonly independentMode?: boolean;
 
+  /**
+   * Whether or not to use workspaces in the package.json file
+   * Otherwise, will add packages to lerna.json
+   *
+   * @default false
+   */
+  readonly useWorkspaces?: boolean;
 }

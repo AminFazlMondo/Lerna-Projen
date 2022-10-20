@@ -36,6 +36,7 @@ export class LernaProject extends javascript.NodeProject {
   readonly sinceLastRelease: boolean
   readonly useNx: boolean
   readonly independentMode: boolean
+  readonly useWorkspaces: boolean
 
   constructor(options: LernaProjectOptions) {
     super({
@@ -55,6 +56,7 @@ export class LernaProject extends javascript.NodeProject {
     this.useNx = options.useNx ?? false
     this.projenrcTs = options.projenrcTs ?? false
     this.independentMode = options.independentMode ?? false
+    this.useWorkspaces = options.useWorkspaces ?? false
   }
 
   addSubProject(subProject: Project) {
@@ -81,16 +83,28 @@ export class LernaProject extends javascript.NodeProject {
 
     this.preCompileTask.exec(`lerna-projen clean-dist ${this.artifactsDirectory}`)
 
-    this.files.push(new JsonFile(this, 'lerna.json', {
-      obj: {
-        packages: Object.keys(this.subProjects),
-        useNx: this.useNx,
-        version: this.independentMode ? 'independent' : '0.0.0',
-      },
-    }))
-
+    this.addCrossLinks()
     this.updateSubProjects()
     this.addDocumentsIndex()
+  }
+
+  private addCrossLinks() {
+    const lernaConfig: any = {
+      useNx: this.useNx,
+      version: this.independentMode ? 'independent' : '0.0.0',
+    }
+
+    const packages = Object.keys(this.subProjects)
+
+    if (this.useWorkspaces)
+      this.package.addField('packages', packages)
+    else
+      lernaConfig.packages = packages
+
+
+    new JsonFile(this, 'lerna.json', {
+      obj: lernaConfig,
+    })
   }
 
   private appendLernaCommands() {

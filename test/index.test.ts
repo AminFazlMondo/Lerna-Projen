@@ -29,6 +29,11 @@ interface GenerateProjectsParams {
    * @default false
    */
   independentMode?: boolean;
+
+  /**
+   * @default false
+   */
+  useWorkspaces?: boolean;
 }
 
 function generateProjects(
@@ -47,6 +52,7 @@ function generateProjects(
     sinceLastRelease: params.sinceLastRelease ?? false,
     projenrcTs: params.projenrcTs ?? false,
     useNx: params.useNx,
+    useWorkspaces: params.useWorkspaces,
     independentMode: params.independentMode,
   })
 
@@ -66,6 +72,7 @@ function generateProjects(
 
 const parentDocsFolder = 'stub-docs'
 const lernaFilePath = 'lerna.json'
+const packageJsonFilePath = 'package.json'
 const tasksFilePath = '.projen/tasks.json'
 const gitAttributesFilesPath = '.gitattributes'
 const docsMarkdownFilePath = `${parentDocsFolder}/index.md`
@@ -432,6 +439,22 @@ describe('useNx', () => {
       packages: [subProjectDirectory],
       useNx: true,
       version: '0.0.0',
+    })
+  })
+})
+
+describe('useWorkspaces', () => {
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {useWorkspaces: true})
+  const output = synthSnapshot(parentProject)
+  test('lerna file', () => {
+    expect(output[lernaFilePath]).not.toHaveProperty('packages')
+    expect(output[lernaFilePath]).toMatchObject({
+      version: '0.0.0',
+    })
+  })
+  test('package.json', () => {
+    expect(output[packageJsonFilePath]).toMatchObject({
+      packages: expect.arrayContaining([subProjectDirectory]),
     })
   })
 })
