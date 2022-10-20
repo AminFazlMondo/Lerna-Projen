@@ -1735,6 +1735,19 @@ Whether or not to use Nx for task scheduling https://lerna.js.org/docs/lerna-and
 
 ---
 
+##### `useWorkspaces`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.useWorkspaces"></a>
+
+```typescript
+public readonly useWorkspaces: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Whether or not to use workspaces in the package.json file Otherwise, will add packages to lerna.json.
+
+---
+
 ## Classes <a name="Classes"></a>
 
 ### LernaProject <a name="lerna-projen.LernaProject"></a>
@@ -1820,6 +1833,16 @@ public readonly sinceLastRelease: boolean;
 
 ```typescript
 public readonly useNx: boolean;
+```
+
+- *Type:* `boolean`
+
+---
+
+##### `useWorkspaces`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.useWorkspaces"></a>
+
+```typescript
+public readonly useWorkspaces: boolean;
 ```
 
 - *Type:* `boolean`
