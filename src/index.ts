@@ -59,11 +59,26 @@ export class LernaProject extends javascript.NodeProject {
     this.useWorkspaces = options.useWorkspaces ?? false
   }
 
+  /**
+   * Adds a sub-project to this project.
+   *
+   * This is automatically called when a new project is created with `parent`
+   * pointing to this project, so there is no real need to call this manually.
+   *
+   * @param sub-project The child project to add.
+   * @internal
+   */
+  _addSubProject(subproject: Project): void {
+    super._addSubProject(subproject)
+
+    this.addSubProject(subproject)
+  }
+
+  /**
+   * @deprecated This is automatically called when a new project is created with `parent`
+   */
   addSubProject(subProject: Project) {
     const {outdir} = subProject
-
-    if (!outdir || !outdir.includes(this.outdir))
-      throw new Error('A sub project out dir should exists within the lerna package')
 
     const relativeOutDir = outdir.replace(`${this.outdir}/`, '')
 
