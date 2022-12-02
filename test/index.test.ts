@@ -57,7 +57,7 @@ function generateProjects(
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
-  const subProject = new SubProjectType({
+  new SubProjectType({
     name: 'test-sub-project',
     parent: parentProject,
     outdir: subProjectDirectory,
@@ -66,7 +66,6 @@ function generateProjects(
       level: LogLevel.OFF,
     },
   })
-  parentProject.addSubProject(subProject)
   return parentProject
 }
 
@@ -264,7 +263,7 @@ describe('Happy Path for Jsii sub project', () => {
       docsDirectory: parentDocsFolder,
     })
 
-    const subProject = new cdk.JsiiProject({
+    new cdk.JsiiProject({
       name: 'test-sub-project',
       defaultReleaseBranch: 'test',
       logging: {
@@ -276,7 +275,6 @@ describe('Happy Path for Jsii sub project', () => {
       author: '',
       authorAddress: '',
     })
-    parentProject.addSubProject(subProject)
     const output = synthSnapshot(parentProject)
 
     test('package-all is added', () => {
@@ -368,7 +366,7 @@ describe('docgen set to true', () => {
       docsDirectory: parentDocsFolder,
     })
 
-    parentProject.addSubProject(new cdk.JsiiProject({
+    new cdk.JsiiProject({
       name: 'test-sub-project-1',
       defaultReleaseBranch: 'test',
       logging: {
@@ -379,9 +377,9 @@ describe('docgen set to true', () => {
       repositoryUrl: '',
       author: '',
       authorAddress: '',
-    }))
+    })
 
-    parentProject.addSubProject(new typescript.TypeScriptProject({
+    new typescript.TypeScriptProject({
       name: 'test-sub-project-2',
       defaultReleaseBranch: 'test',
       logging: {
@@ -389,9 +387,9 @@ describe('docgen set to true', () => {
       },
       outdir: `${subProjectDirectory}-2`,
       parent: parentProject,
-    }))
+    })
 
-    parentProject.addSubProject(new javascript.NodeProject({
+    new javascript.NodeProject({
       name: 'test-sub-project-3',
       defaultReleaseBranch: 'test',
       logging: {
@@ -399,9 +397,9 @@ describe('docgen set to true', () => {
       },
       outdir: `${subProjectDirectory}-3`,
       parent: parentProject,
-    }))
+    })
 
-    parentProject.addSubProject(new cdk.JsiiProject({
+    new cdk.JsiiProject({
       name: 'test-sub-project-4',
       defaultReleaseBranch: 'test',
       logging: {
@@ -412,7 +410,7 @@ describe('docgen set to true', () => {
       repositoryUrl: '',
       author: '',
       authorAddress: '',
-    }))
+    })
 
     const output = synthSnapshot(parentProject)
 
@@ -539,35 +537,14 @@ describe('Unhappy Path', () => {
         },
       })
 
-      const subProject = new typescript.TypeScriptProject({
+      expect(() => new typescript.TypeScriptProject({
         name: 'test-sub-project',
         defaultReleaseBranch: 'test',
+        parent: project,
         logging: {
           level: LogLevel.OFF,
         },
-      })
-      expect(() => project.addSubProject(subProject)).toThrow('A sub project out dir should exists within the lerna package')
-    })
-
-    test('Should fail if sub project does not have output directory outside of parent root', () => {
-      const project = new LernaProject({
-        name: 'test',
-        outdir: 'parentDir',
-        defaultReleaseBranch: 'test',
-        logging: {
-          level: LogLevel.OFF,
-        },
-      })
-
-      const subProject = new typescript.TypeScriptProject({
-        name: 'test-sub-project',
-        outdir: 'subProjectDir',
-        defaultReleaseBranch: 'test',
-        logging: {
-          level: LogLevel.OFF,
-        },
-      })
-      expect(() => project.addSubProject(subProject)).toThrow('A sub project out dir should exists within the lerna package')
+      })).toThrow('"outdir" must be specified for subprojects')
     })
 
   })

@@ -1768,7 +1768,7 @@ new LernaProject(options: LernaProjectOptions)
 
 #### Methods <a name="Methods"></a>
 
-##### `addSubProject` <a name="lerna-projen.LernaProject.addSubProject"></a>
+##### ~~`addSubProject`~~ <a name="lerna-projen.LernaProject.addSubProject"></a>
 
 ```typescript
 public addSubProject(subProject: Project)
