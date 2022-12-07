@@ -13,7 +13,7 @@ console
 $ mkdir my-project
 $ cd my-project
 $ git init
-$ npx projen new --from lerna-projen
+$ npx projen new --from lerna-projen lerna-project
 🤖 Synthesizing project...
 ...
 ```

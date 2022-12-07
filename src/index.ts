@@ -35,6 +35,9 @@ interface ILernaProject {
   readonly docgen?: boolean;
 }
 
+/**
+ * @pjid lerna-project
+ */
 export class LernaProject extends javascript.NodeProject implements ILernaProject {
 
   private projenrcTs: boolean
@@ -98,6 +101,9 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   }
 }
 
+/**
+ * @pjid lerna-ts-project
+ */
 export class LernaTypescriptProject extends typescript.TypeScriptProject implements ILernaProject {
   readonly sinceLastRelease: boolean
   readonly useNx: boolean
