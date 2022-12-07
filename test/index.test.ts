@@ -1,6 +1,6 @@
 import {LogLevel, javascript, typescript, cdk} from 'projen'
 import {synthSnapshot} from 'projen/lib/util/synth'
-import {LernaProject} from '../src'
+import {LernaProject, LernaTypescriptProject} from '../src'
 
 interface GenerateProjectsParams {
   /**
@@ -69,6 +69,39 @@ function generateProjects(
   return parentProject
 }
 
+function generateProjectsTypescript(
+  parentDocsFolder: string,
+  subProjectDirectory: string,
+  params: GenerateProjectsParams = {}): LernaTypescriptProject {
+
+  const parentProject = new LernaTypescriptProject({
+    name: 'test',
+    defaultReleaseBranch: 'test',
+    logging: {
+      level: LogLevel.OFF,
+    },
+    docsDirectory: parentDocsFolder,
+    docgen: params.docgen ?? false,
+    sinceLastRelease: params.sinceLastRelease ?? false,
+    projenrcTs: params.projenrcTs ?? false,
+    useNx: params.useNx,
+    useWorkspaces: params.useWorkspaces,
+    independentMode: params.independentMode,
+  })
+
+  const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
+  new SubProjectType({
+    name: 'test-sub-project',
+    parent: parentProject,
+    outdir: subProjectDirectory,
+    defaultReleaseBranch: 'test',
+    logging: {
+      level: LogLevel.OFF,
+    },
+  })
+  return parentProject
+}
+
 const parentDocsFolder = 'stub-docs'
 const lernaFilePath = 'lerna.json'
 const packageJsonFilePath = 'package.json'
@@ -80,8 +113,179 @@ const docsHtmlFilePath = `${parentDocsFolder}/index.html`
 const subProjectDirectory = 'packages/test-sub-project'
 const expectedDocsCommand = `lerna-projen move-docs ${parentDocsFolder} ${subProjectDirectory} docs`
 
-describe('Happy Path for Typescript', () => {
+describe('Happy Path for Javascript', () => {
   const parentProject = generateProjects(parentDocsFolder, subProjectDirectory)
+  const output = synthSnapshot(parentProject)
+
+  test('lerna file', () => {
+    expect(output[lernaFilePath]).toMatchObject({
+      packages: [subProjectDirectory],
+      useNx: false,
+      version: '0.0.0',
+    })
+  })
+
+  describe('tasks', () => {
+    test('default', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            default: expect.objectContaining({
+              steps: expect.not.arrayContaining([{
+                exec: 'lerna run test --stream',
+              }]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('test', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            test: expect.objectContaining({
+              steps: expect.arrayContaining([{
+                exec: 'lerna run test --stream',
+              }]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('build', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            build: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: 'lerna run build --stream',
+                },
+                {
+                  exec: 'lerna-projen clean-dist',
+                },
+                {
+                  exec: `lerna-projen copy-dist ${subProjectDirectory}`,
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('pre-compile', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['pre-compile']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna-projen clean-dist dist',
+                },
+                {
+                  exec: 'lerna run pre-compile --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('package', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            package: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run package --stream',
+                },
+                {
+                  exec: `lerna-projen copy-dist ${subProjectDirectory}/dist dist`,
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('should not include docs tasks by default', ()=> {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            build: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: expectedDocsCommand,
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+    test('upgrade', () => {
+      try {
+        expect(output[tasksFilePath]).toEqual(
+          expect.objectContaining({
+            tasks: expect.objectContaining({
+              upgrade: expect.objectContaining({
+                steps: expect.arrayContaining([
+                  {exec: 'lerna run upgrade --stream'},
+                ]),
+              }),
+            }),
+          }),
+        )
+      } catch {
+        expect(output[tasksFilePath]).toEqual(
+          expect.objectContaining({
+            tasks: expect.objectContaining({
+              ['post-upgrade']: expect.objectContaining({
+                steps: [
+                  {exec: 'lerna run upgrade --stream'},
+                  {exec: 'npx projen'},
+                  {exec: 'lerna run post-upgrade --stream'},
+                ],
+              }),
+            }),
+          }),
+        )
+      }
+    })
+
+    test('post-upgrade', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-upgrade']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {exec: 'lerna run post-upgrade --stream'},
+              ]),
+            }),
+          }),
+        }),
+      )
+
+    })
+
+  })
+})
+
+describe('Happy Path for Typescript', () => {
+  const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory)
   const output = synthSnapshot(parentProject)
 
   test('lerna file', () => {

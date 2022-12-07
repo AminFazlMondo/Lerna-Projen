@@ -1,4 +1,4 @@
-import {javascript} from 'projen'
+import {javascript, typescript} from 'projen'
 
 export interface LernaProjectOptions extends javascript.NodeProjectOptions {
   /**
@@ -57,3 +57,5 @@ export interface LernaProjectOptions extends javascript.NodeProjectOptions {
    */
   readonly useWorkspaces?: boolean;
 }
+
+export interface LernaTypescriptProjectOptions extends LernaProjectOptions, typescript.TypeScriptProjectOptions {}

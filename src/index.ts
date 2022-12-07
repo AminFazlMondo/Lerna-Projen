@@ -1,5 +1,5 @@
-import {JsonFile, javascript, Project, Tasks, SourceCode} from 'projen'
-import {LernaProjectOptions} from './types'
+import {JsonFile, javascript, Project, Tasks, SourceCode, typescript} from 'projen'
+import {LernaProjectOptions, LernaTypescriptProjectOptions} from './types'
 
 export * from './types'
 
@@ -26,9 +26,17 @@ function extractJsiiDocsOutput(tasks: Tasks): string | undefined {
 
 const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen']
 
-export class LernaProject extends javascript.NodeProject {
+interface ILernaProject {
+  readonly sinceLastRelease: boolean;
+  readonly useNx: boolean;
+  readonly independentMode: boolean;
+  readonly useWorkspaces: boolean;
+  readonly docsDirectory: string;
+  readonly docgen?: boolean;
+}
 
-  private subProjects: Record<string, Project>
+export class LernaProject extends javascript.NodeProject implements ILernaProject {
+
   private projenrcTs: boolean
 
   readonly docsDirectory: string
@@ -38,18 +46,14 @@ export class LernaProject extends javascript.NodeProject {
   readonly independentMode: boolean
   readonly useWorkspaces: boolean
 
-  constructor(options: LernaProjectOptions) {
-    super({
-      ...options,
-      jest: false,
-    })
+  private readonly factory: LernaProjectFactory
 
-    this.addDevDeps('lerna-projen', 'lerna@5')
+  constructor(options: LernaProjectOptions) {
+    super(options)
 
     if (options.projenrcTs)
       this.addDevDeps('ts-node', 'typescript')
 
-    this.subProjects = {}
     this.docsDirectory = options.docsDirectory ?? 'docs'
     this.docgen = options.docgen ?? false
     this.sinceLastRelease = options.sinceLastRelease ?? false
@@ -57,6 +61,60 @@ export class LernaProject extends javascript.NodeProject {
     this.projenrcTs = options.projenrcTs ?? false
     this.independentMode = options.independentMode ?? false
     this.useWorkspaces = options.useWorkspaces ?? false
+
+    this.factory = new LernaProjectFactory(this)
+  }
+
+  /**
+   * Adds a sub-project to this project.
+   *
+   * This is automatically called when a new project is created with `parent`
+   * pointing to this project, so there is no real need to call this manually.
+   *
+   * @param sub-project The child project to add.
+   * @internal
+   */
+  _addSubProject(subproject: Project): void {
+    super._addSubProject(subproject)
+    this.factory.addSubProject(subproject)
+  }
+
+  /**
+   * @deprecated This is automatically called when a new project is created with `parent`
+   */
+  addSubProject(_subproject: Project) {
+    console.warn('LernaProject.addSubProject is deprecated. It is now automatically called when a new project is created with `parent`')
+  }
+
+  preSynthesize() {
+    super.preSynthesize()
+    const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
+    const {defaultTask} = this
+    if (!defaultTask)
+      throw new Error('Could not find default task')
+    defaultTask.reset(projenCommand)
+
+    this.factory.build()
+  }
+}
+
+export class LernaTypescriptProject extends typescript.TypeScriptProject implements ILernaProject {
+  readonly sinceLastRelease: boolean
+  readonly useNx: boolean
+  readonly independentMode: boolean
+  readonly useWorkspaces: boolean
+
+  private readonly factory: LernaProjectFactory
+
+  constructor(options: LernaTypescriptProjectOptions) {
+    super(options)
+
+    this.sinceLastRelease = options.sinceLastRelease ?? false
+    this.useNx = options.useNx ?? false
+    this.independentMode = options.independentMode ?? false
+    this.useWorkspaces = options.useWorkspaces ?? false
+
+    this.factory = new LernaProjectFactory(this)
   }
 
   /**
@@ -71,53 +129,56 @@ export class LernaProject extends javascript.NodeProject {
   _addSubProject(subproject: Project): void {
     super._addSubProject(subproject)
 
-    this.addSubProject(subproject)
-  }
-
-  /**
-   * @deprecated This is automatically called when a new project is created with `parent`
-   */
-  addSubProject(subProject: Project) {
-    const {outdir} = subProject
-
-    const relativeOutDir = outdir.replace(`${this.outdir}/`, '')
-
-    this.subProjects[relativeOutDir] = subProject
+    this.factory.addSubProject(subproject)
   }
 
   preSynthesize() {
     super.preSynthesize()
-    const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
-    const {defaultTask} = this
-    if (!defaultTask)
-      throw new Error('Could not find default task')
-    defaultTask.reset(projenCommand)
-    this.packageTask.reset(`mkdir -p ${this.artifactsJavascriptDirectory}`)
+    this.factory.build()
+  }
+}
+
+class LernaProjectFactory {
+  private subProjects: Record<string, Project> = {}
+
+  constructor(private readonly project: ILernaProject & javascript.NodeProject) {
+    project.addDevDeps('lerna-projen', 'lerna@5')
+  }
+
+  addSubProject(subProject: Project) {
+    const {outdir} = subProject
+
+    const relativeOutDir = outdir.replace(`${this.project.outdir}/`, '')
+
+    this.subProjects[relativeOutDir] = subProject
+  }
+
+  build() {
+    this.project.packageTask.reset(`mkdir -p ${this.project.artifactsJavascriptDirectory}`)
+    this.project.preCompileTask.exec(`lerna-projen clean-dist ${this.project.artifactsDirectory}`)
 
     this.appendLernaCommands()
-
-    this.preCompileTask.exec(`lerna-projen clean-dist ${this.artifactsDirectory}`)
-
     this.addCrossLinks()
     this.updateSubProjects()
     this.addDocumentsIndex()
   }
 
   private addCrossLinks() {
+
     const lernaConfig: any = {
-      useNx: this.useNx,
-      version: this.independentMode ? 'independent' : '0.0.0',
+      useNx: this.project.useNx,
+      version: this.project.independentMode ? 'independent' : '0.0.0',
     }
 
     const packages = Object.keys(this.subProjects)
 
-    if (this.useWorkspaces)
-      this.package.addField('packages', packages)
+    if (this.project.useWorkspaces)
+      this.project.package.addField('packages', packages)
     else
       lernaConfig.packages = packages
 
 
-    new JsonFile(this, 'lerna.json', {
+    new JsonFile(this.project, 'lerna.json', {
       obj: lernaConfig,
     })
   }
@@ -125,12 +186,12 @@ export class LernaProject extends javascript.NodeProject {
   private appendLernaCommands() {
     const upgradeTaskName = 'upgrade'
     const postUpgradeTaskName = 'post-upgrade'
-    const postUpgradeTask = this.tasks.tryFind(postUpgradeTaskName)
+    const postUpgradeTask = this.project.tasks.tryFind(postUpgradeTaskName)
     postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName, false))
     postUpgradeTask?.exec('npx projen')
     postUpgradeTask?.exec(this.getLernaCommand(postUpgradeTaskName))
 
-    this.tasks.all
+    this.project.tasks.all
       .forEach(task => {
         if (lockedTaskNames.includes(task.name) || task.name === postUpgradeTaskName)
           return
@@ -141,18 +202,18 @@ export class LernaProject extends javascript.NodeProject {
 
   private getLernaCommand(taskName: string, useSinceFlag = true) {
     const mainCommand = `lerna run ${taskName} --stream`
-    const postCommand = useSinceFlag && this.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
+    const postCommand = useSinceFlag && this.project.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
     return `${mainCommand}${postCommand}`
   }
 
   private updateSubProjects() {
-    const bumpTask = this.tasks.tryFind('bump')
-    const unbumpTask = this.tasks.tryFind('unbump')
+    const bumpTask = this.project.tasks.tryFind('bump')
+    const unbumpTask = this.project.tasks.tryFind('unbump')
 
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
-      if (this.docgen && subProjectDocsDirectory)
-        this.postCompileTask.exec(`lerna-projen move-docs ${this.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
+      if (this.project.docgen && subProjectDocsDirectory)
+        this.project.postCompileTask.exec(`lerna-projen move-docs ${this.project.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
 
       const packageAllTask = subProject.tasks.tryFind('package-all')
 
@@ -161,7 +222,7 @@ export class LernaProject extends javascript.NodeProject {
 
       const artifactsDirectory = getArtifactsDirectory(subProject)
 
-      this.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}/${artifactsDirectory} ${this.artifactsDirectory}`)
+      this.project.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}/${artifactsDirectory} ${this.project.artifactsDirectory}`)
 
       subProject.defaultTask?.reset()
 
@@ -194,13 +255,13 @@ export class LernaProject extends javascript.NodeProject {
   }
 
   private addDocumentsIndex() {
-    if (!this.docgen)
+    if (!this.project.docgen)
       return
 
     const subProjectsDocs: Record<string, string> = {}
 
-    const indexMarkdown = new SourceCode(this, `${this.docsDirectory}/index.md`)
-    const readmeMarkdown = new SourceCode(this, `${this.docsDirectory}/README.md`)
+    const indexMarkdown = new SourceCode(this.project, `${this.project.docsDirectory}/index.md`)
+    const readmeMarkdown = new SourceCode(this.project, `${this.project.docsDirectory}/README.md`)
 
     Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
@@ -218,7 +279,7 @@ export class LernaProject extends javascript.NodeProject {
       readmeMarkdown.line(`- ## [${subProject.name}](../${subProjectPath}/README.md)`)
     })
 
-    const indexHtml = new SourceCode(this, `${this.docsDirectory}/index.html`)
+    const indexHtml = new SourceCode(this.project, `${this.project.docsDirectory}/index.html`)
     indexHtml.line('<!DOCTYPE html>')
     indexHtml.line('<html>')
     indexHtml.open('<body>')
@@ -235,6 +296,6 @@ export class LernaProject extends javascript.NodeProject {
     indexHtml.line('</html>')
     indexHtml.line()
 
-    this.gitattributes.addAttributes(`/${this.docsDirectory}/**`, 'linguist-generated')
+    this.project.gitattributes.addAttributes(`/${this.project.docsDirectory}/**`, 'linguist-generated')
   }
 }
