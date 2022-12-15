@@ -93,6 +93,7 @@ function generateProjectsTypescript(
     useNx: params.useNx,
     useWorkspaces: params.useWorkspaces,
     independentMode: params.independentMode,
+    taskCustomizations: params.taskCustomizations ?? {},
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -735,69 +736,140 @@ describe('typescript projenrc file', () => {
 })
 
 describe('task customization', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {
-    sinceLastRelease: false,
-    taskCustomizations: {
-      default: {
-        addLernaStep: false,
+  describe('javascript project', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {
+      sinceLastRelease: false,
+      taskCustomizations: {
+        compile: {
+          sinceLastRelease: true,
+        },
+        test: {
+          exclude: ['stub-exclude-package-name-1', 'stub-exclude-package-name-2'],
+          include: ['stub-include-package-name'],
+        },
       },
-      compile: {
-        sinceLastRelease: true,
-      },
-      test: {
-        exclude: ['stub-exclude-package-name-1', 'stub-exclude-package-name-2'],
-        include: ['stub-include-package-name'],
-      },
-    },
-  })
-  const output = synthSnapshot(parentProject)
-  test('should not add lerna run step to default task', () => {
-    expect(output[tasksFilePath]).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          default: expect.objectContaining({
-            steps: expect.not.arrayContaining([
-              {
-                exec: 'lerna run default --stream',
-              },
-            ]),
+    })
+
+    parentProject.customizeTask('default', {
+      addLernaStep: false,
+    })
+    const output = synthSnapshot(parentProject)
+    test('should not add lerna run step to default task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            default: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: 'lerna run default --stream',
+                },
+              ]),
+            }),
           }),
         }),
-      }),
-    )
+      )
+    })
+
+    test('should add since flag to compile task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            compile: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
+
+    test('should add ignore and scope flags to test task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            test: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run test --stream --scope stub-include-package-name --ignore stub-exclude-package-name-1 --ignore stub-exclude-package-name-2',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
+  })
+  describe('typescript project', () => {
+    const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory, {
+      sinceLastRelease: false,
+      taskCustomizations: {
+        compile: {
+          sinceLastRelease: true,
+        },
+        test: {
+          exclude: ['stub-exclude-package-name-1', 'stub-exclude-package-name-2'],
+          include: ['stub-include-package-name'],
+        },
+      },
+    })
+
+    parentProject.customizeTask('default', {
+      addLernaStep: false,
+    })
+    const output = synthSnapshot(parentProject)
+    test('should not add lerna run step to default task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            default: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: 'lerna run default --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
+
+    test('should add since flag to compile task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            compile: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
+
+    test('should add ignore and scope flags to test task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            test: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run test --stream --scope stub-include-package-name --ignore stub-exclude-package-name-1 --ignore stub-exclude-package-name-2',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
   })
 
-  test('should add since flag to compile task', () => {
-    expect(output[tasksFilePath]).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          compile: expect.objectContaining({
-            steps: expect.arrayContaining([
-              {
-                exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
-              },
-            ]),
-          }),
-        }),
-      }),
-    )
-  })
 
-  test('should add ignore and scope flags to test task', () => {
-    expect(output[tasksFilePath]).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          test: expect.objectContaining({
-            steps: expect.arrayContaining([
-              {
-                exec: 'lerna run test --stream --scope stub-include-package-name --ignore stub-exclude-package-name-1 --ignore stub-exclude-package-name-2',
-              },
-            ]),
-          }),
-        }),
-      }),
-    )
-  })
 })
 
 describe('Unhappy Path', () => {

@@ -34,6 +34,8 @@ interface ILernaProject {
   readonly docsDirectory: string;
   readonly docgen?: boolean;
   readonly taskCustomizations: TaskCustomizations;
+
+  customizeTask(taskName: string, customization: TaskCustomization): void;
 }
 
 /**
@@ -69,6 +71,16 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
     this.taskCustomizations = options.taskCustomizations ?? {}
 
     this.factory = new LernaProjectFactory(this)
+  }
+
+  /**
+   * Adds a customization for the specified task
+   *
+   * @param taskName Name of the task to customize
+   * @param customization TaskCustomization options
+   */
+  customizeTask(taskName: string, customization: TaskCustomization): void {
+    this.taskCustomizations[taskName] = customization
   }
 
   /**
@@ -126,6 +138,16 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     this.taskCustomizations = options.taskCustomizations ?? {}
 
     this.factory = new LernaProjectFactory(this)
+  }
+
+  /**
+   * Adds a customization for the specified task
+   *
+   * @param taskName Name of the task to customize
+   * @param customization TaskCustomization options
+   */
+  customizeTask(taskName: string, customization: TaskCustomization): void {
+    this.taskCustomizations[taskName] = customization
   }
 
   /**
@@ -204,6 +226,8 @@ class LernaProjectFactory {
 
     this.project.tasks.all
       .forEach(task => {
+        if (task.name === 'compile')
+          console.log(this.project.taskCustomizations[task.name])
         const customization = this.project.taskCustomizations[task.name]
         const addLernaStep = customization?.addLernaStep ?? true
 

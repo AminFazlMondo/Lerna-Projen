@@ -1722,6 +1722,19 @@ public readonly sinceLastRelease: boolean;
 
 ---
 
+##### `taskCustomizations`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.taskCustomizations"></a>
+
+```typescript
+public readonly taskCustomizations: {[ key: string ]: TaskCustomization};
+```
+
+- *Type:* {[ key: string ]: [`lerna-projen.TaskCustomization`](#lerna-projen.TaskCustomization)}
+- *Default:* {} "No task customizations"
+
+Key value pair of task name and TaskCustomization to customize the lerna run step added to the task.
+
+---
+
 ##### `useNx`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.useNx"></a>
 
 ```typescript
@@ -3467,6 +3480,19 @@ public readonly sinceLastRelease: boolean;
 
 ---
 
+##### `taskCustomizations`<sup>Optional</sup> <a name="lerna-projen.LernaTypescriptProjectOptions.property.taskCustomizations"></a>
+
+```typescript
+public readonly taskCustomizations: {[ key: string ]: TaskCustomization};
+```
+
+- *Type:* {[ key: string ]: [`lerna-projen.TaskCustomization`](#lerna-projen.TaskCustomization)}
+- *Default:* {} "No task customizations"
+
+Key value pair of task name and TaskCustomization to customize the lerna run step added to the task.
+
+---
+
 ##### `useNx`<sup>Optional</sup> <a name="lerna-projen.LernaTypescriptProjectOptions.property.useNx"></a>
 
 ```typescript
@@ -3669,6 +3695,68 @@ same minor, so we recommend using a `~` dependency (e.g. `~1.2.3`).
 
 ---
 
+### TaskCustomization <a name="lerna-projen.TaskCustomization"></a>
+
+#### Initializer <a name="[object Object].Initializer"></a>
+
+```typescript
+import { TaskCustomization } from 'lerna-projen'
+
+const taskCustomization: TaskCustomization = { ... }
+```
+
+##### `addLernaStep`<sup>Optional</sup> <a name="lerna-projen.TaskCustomization.property.addLernaStep"></a>
+
+```typescript
+public readonly addLernaStep: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Whether to add a lerna run step to the task.
+
+---
+
+##### `exclude`<sup>Optional</sup> <a name="lerna-projen.TaskCustomization.property.exclude"></a>
+
+```typescript
+public readonly exclude: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* []
+
+List of glob patterns matching the name of packages to exclude from the lerna run step.
+
+---
+
+##### `include`<sup>Optional</sup> <a name="lerna-projen.TaskCustomization.property.include"></a>
+
+```typescript
+public readonly include: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* []
+
+List of glob patterns matching the name of packages to include in the lerna run step.
+
+---
+
+##### `sinceLastRelease`<sup>Optional</sup> <a name="lerna-projen.TaskCustomization.property.sinceLastRelease"></a>
+
+```typescript
+public readonly sinceLastRelease: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* "Value passed in project options"
+
+(experimental) Flag to run tasks only for the packages that has changes since last release.
+
+---
+
 ## Classes <a name="Classes"></a>
 
 ### LernaProject <a name="lerna-projen.LernaProject"></a>
@@ -3698,6 +3786,28 @@ public addSubProject(_subproject: Project)
 ###### `_subproject`<sup>Required</sup> <a name="lerna-projen.LernaProject.parameter._subproject"></a>
 
 - *Type:* [`projen.Project`](#projen.Project)
+
+---
+
+##### `customizeTask` <a name="lerna-projen.LernaProject.customizeTask"></a>
+
+```typescript
+public customizeTask(taskName: string, customization: TaskCustomization)
+```
+
+###### `taskName`<sup>Required</sup> <a name="lerna-projen.LernaProject.parameter.taskName"></a>
+
+- *Type:* `string`
+
+Name of the task to customize.
+
+---
+
+###### `customization`<sup>Required</sup> <a name="lerna-projen.LernaProject.parameter.customization"></a>
+
+- *Type:* [`lerna-projen.TaskCustomization`](#lerna-projen.TaskCustomization)
+
+TaskCustomization options.
 
 ---
 
@@ -3750,6 +3860,16 @@ public readonly sinceLastRelease: boolean;
 
 ---
 
+##### `taskCustomizations`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.taskCustomizations"></a>
+
+```typescript
+public readonly taskCustomizations: {[ key: string ]: TaskCustomization};
+```
+
+- *Type:* {[ key: string ]: [`lerna-projen.TaskCustomization`](#lerna-projen.TaskCustomization)}
+
+---
+
 ##### `useNx`<sup>Required</sup> <a name="lerna-projen.LernaProject.property.useNx"></a>
 
 ```typescript
@@ -3789,6 +3909,28 @@ new LernaTypescriptProject(options: LernaTypescriptProjectOptions)
 
 #### Methods <a name="Methods"></a>
 
+##### `customizeTask` <a name="lerna-projen.LernaTypescriptProject.customizeTask"></a>
+
+```typescript
+public customizeTask(taskName: string, customization: TaskCustomization)
+```
+
+###### `taskName`<sup>Required</sup> <a name="lerna-projen.LernaTypescriptProject.parameter.taskName"></a>
+
+- *Type:* `string`
+
+Name of the task to customize.
+
+---
+
+###### `customization`<sup>Required</sup> <a name="lerna-projen.LernaTypescriptProject.parameter.customization"></a>
+
+- *Type:* [`lerna-projen.TaskCustomization`](#lerna-projen.TaskCustomization)
+
+TaskCustomization options.
+
+---
+
 ##### `preSynthesize` <a name="lerna-projen.LernaTypescriptProject.preSynthesize"></a>
 
 ```typescript
@@ -3815,6 +3957,16 @@ public readonly sinceLastRelease: boolean;
 ```
 
 - *Type:* `boolean`
+
+---
+
+##### `taskCustomizations`<sup>Required</sup> <a name="lerna-projen.LernaTypescriptProject.property.taskCustomizations"></a>
+
+```typescript
+public readonly taskCustomizations: {[ key: string ]: TaskCustomization};
+```
+
+- *Type:* {[ key: string ]: [`lerna-projen.TaskCustomization`](#lerna-projen.TaskCustomization)}
 
 ---
 
