@@ -56,6 +56,45 @@ export interface LernaProjectOptions extends javascript.NodeProjectOptions {
    * @default false
    */
   readonly useWorkspaces?: boolean;
+
+  /**
+   * Key value pair of task name and TaskCustomization to customize the lerna run step added to the task.
+   *
+   * @default {} "No task customizations"
+   */
+  readonly taskCustomizations?: TaskCustomizations;
 }
 
 export interface LernaTypescriptProjectOptions extends LernaProjectOptions, typescript.TypeScriptProjectOptions {}
+
+export type TaskCustomizations = {[taskName: string]: TaskCustomization}
+
+export interface TaskCustomization {
+  /**
+   * Whether to add a lerna run step to the task
+   *
+   * @default true
+   */
+  readonly addLernaStep?: boolean;
+
+  /**
+   * List of glob patterns matching the name of packages to include in the lerna run step
+   *
+   * @default []
+   */
+  readonly include?: string[];
+
+  /**
+   * List of glob patterns matching the name of packages to exclude from the lerna run step
+   *
+   * @default []
+   */
+  readonly exclude?: string[];
+
+  /**
+   * (experimental) Flag to run tasks only for the packages that has changes since last release
+   *
+   * @default "Value passed in project options"
+   */
+  readonly sinceLastRelease?: boolean;
+}
