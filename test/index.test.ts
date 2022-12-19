@@ -194,6 +194,22 @@ describe('Happy Path for Javascript', () => {
 
     })
 
+    test('clobber', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            clobber: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: 'lerna run clobber --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
+
     test('pre-compile', () => {
       expect(output[tasksFilePath]).toEqual(
         expect.objectContaining({
@@ -363,6 +379,22 @@ describe('Happy Path for Typescript', () => {
         }),
       )
 
+    })
+
+    test('clobber', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            clobber: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: 'lerna run clobber --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
     })
 
     test('pre-compile', () => {
