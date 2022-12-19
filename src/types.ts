@@ -65,7 +65,16 @@ export interface LernaProjectOptions extends javascript.NodeProjectOptions {
   readonly taskCustomizations?: TaskCustomizations;
 }
 
-export interface LernaTypescriptProjectOptions extends LernaProjectOptions, typescript.TypeScriptProjectOptions {}
+export interface LernaTypescriptProjectOptions extends LernaProjectOptions, typescript.TypeScriptProjectOptions {
+  /**
+   * Whether the project root package has source code.
+   *
+   * When set to `false`, removes typescript compilation from the compile step for the root project.
+   *
+   * @default false
+   */
+  readonly hasRootSourceCode?: boolean;
+}
 
 export type TaskCustomizations = {[taskName: string]: TaskCustomization}
 

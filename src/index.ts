@@ -137,6 +137,9 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     this.useWorkspaces = options.useWorkspaces ?? false
     this.taskCustomizations = options.taskCustomizations ?? {}
 
+    if (!(options.hasRootSourceCode ?? false))
+      this.tasks.tryFind('compile')?.reset()
+
     this.factory = new LernaProjectFactory(this)
   }
 

@@ -3695,6 +3695,21 @@ same minor, so we recommend using a `~` dependency (e.g. `~1.2.3`).
 
 ---
 
+##### `hasRootSourceCode`<sup>Optional</sup> <a name="lerna-projen.LernaTypescriptProjectOptions.property.hasRootSourceCode"></a>
+
+```typescript
+public readonly hasRootSourceCode: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Whether the project root package has source code.
+
+When set to `false`, removes typescript compilation from the compile step for the root project.
+
+---
+
 ### TaskCustomization <a name="lerna-projen.TaskCustomization"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>

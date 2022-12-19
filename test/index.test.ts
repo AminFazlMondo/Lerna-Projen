@@ -41,6 +41,13 @@ interface GenerateProjectsParams {
   taskCustomizations?: TaskCustomizations;
 }
 
+interface GenerateTypescriptProjectParams extends GenerateProjectsParams {
+  /**
+   * @default false
+   */
+  hasRootSourceCode?: boolean;
+}
+
 function generateProjects(
   parentDocsFolder: string,
   subProjectDirectory: string,
@@ -78,7 +85,7 @@ function generateProjects(
 function generateProjectsTypescript(
   parentDocsFolder: string,
   subProjectDirectory: string,
-  params: GenerateProjectsParams = {}): LernaTypescriptProject {
+  params: GenerateTypescriptProjectParams = {}): LernaTypescriptProject {
 
   const parentProject = new LernaTypescriptProject({
     name: 'test',
@@ -94,6 +101,7 @@ function generateProjectsTypescript(
     useWorkspaces: params.useWorkspaces,
     independentMode: params.independentMode,
     taskCustomizations: params.taskCustomizations ?? {},
+    hasRootSourceCode: params.hasRootSourceCode ?? false,
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -407,6 +415,35 @@ describe('Happy Path for Typescript', () => {
         }),
       )
 
+    })
+
+    test('compile', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            compile: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run compile --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            compile: expect.objectContaining({
+              steps: expect.not.arrayContaining([
+                {
+                  exec: expect.stringContaining('tsc'),
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
     })
 
     test('package', () => {
@@ -902,6 +939,32 @@ describe('task customization', () => {
   })
 
 
+})
+
+describe('hasRootSourceCode', () => {
+  const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory, {
+    hasRootSourceCode: true,
+  })
+  const output = synthSnapshot(parentProject)
+
+  test('should keep tsc step', () => {
+    expect(output[tasksFilePath]).toEqual(
+      expect.objectContaining({
+        tasks: expect.objectContaining({
+          compile: expect.objectContaining({
+            steps: expect.arrayContaining([
+              {
+                exec: expect.stringContaining('tsc'),
+              },
+              {
+                exec: 'lerna run compile --stream',
+              },
+            ]),
+          }),
+        }),
+      }),
+    )
+  })
 })
 
 describe('Unhappy Path', () => {
