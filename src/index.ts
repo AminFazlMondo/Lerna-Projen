@@ -24,7 +24,7 @@ function extractJsiiDocsOutput(tasks: Tasks): string | undefined {
   return match?.groups?.output
 }
 
-const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen']
+const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber']
 
 interface ILernaProject {
   readonly sinceLastRelease: boolean;
