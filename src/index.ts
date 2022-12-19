@@ -1,5 +1,5 @@
 import {JsonFile, javascript, Project, Tasks, SourceCode, typescript} from 'projen'
-import {LernaProjectOptions, LernaTypescriptProjectOptions} from './types'
+import {LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations} from './types'
 
 export * from './types'
 
@@ -33,6 +33,9 @@ interface ILernaProject {
   readonly useWorkspaces: boolean;
   readonly docsDirectory: string;
   readonly docgen?: boolean;
+  readonly taskCustomizations: TaskCustomizations;
+
+  customizeTask(taskName: string, customization: TaskCustomization): void;
 }
 
 /**
@@ -48,6 +51,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   readonly useNx: boolean
   readonly independentMode: boolean
   readonly useWorkspaces: boolean
+  readonly taskCustomizations: TaskCustomizations
 
   private readonly factory: LernaProjectFactory
 
@@ -64,8 +68,19 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
     this.projenrcTs = options.projenrcTs ?? false
     this.independentMode = options.independentMode ?? false
     this.useWorkspaces = options.useWorkspaces ?? false
+    this.taskCustomizations = options.taskCustomizations ?? {}
 
     this.factory = new LernaProjectFactory(this)
+  }
+
+  /**
+   * Adds a customization for the specified task
+   *
+   * @param taskName Name of the task to customize
+   * @param customization TaskCustomization options
+   */
+  customizeTask(taskName: string, customization: TaskCustomization): void {
+    this.taskCustomizations[taskName] = customization
   }
 
   /**
@@ -109,6 +124,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   readonly useNx: boolean
   readonly independentMode: boolean
   readonly useWorkspaces: boolean
+  readonly taskCustomizations: TaskCustomizations
 
   private readonly factory: LernaProjectFactory
 
@@ -119,8 +135,19 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     this.useNx = options.useNx ?? false
     this.independentMode = options.independentMode ?? false
     this.useWorkspaces = options.useWorkspaces ?? false
+    this.taskCustomizations = options.taskCustomizations ?? {}
 
     this.factory = new LernaProjectFactory(this)
+  }
+
+  /**
+   * Adds a customization for the specified task
+   *
+   * @param taskName Name of the task to customize
+   * @param customization TaskCustomization options
+   */
+  customizeTask(taskName: string, customization: TaskCustomization): void {
+    this.taskCustomizations[taskName] = customization
   }
 
   /**
@@ -193,23 +220,37 @@ class LernaProjectFactory {
     const upgradeTaskName = 'upgrade'
     const postUpgradeTaskName = 'post-upgrade'
     const postUpgradeTask = this.project.tasks.tryFind(postUpgradeTaskName)
-    postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName, false))
+    postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName, {sinceLastRelease: false}))
     postUpgradeTask?.exec('npx projen')
     postUpgradeTask?.exec(this.getLernaCommand(postUpgradeTaskName))
 
     this.project.tasks.all
       .forEach(task => {
-        if (lockedTaskNames.includes(task.name) || task.name === postUpgradeTaskName)
+        if (task.name === 'compile')
+          console.log(this.project.taskCustomizations[task.name])
+        const customization = this.project.taskCustomizations[task.name]
+        const addLernaStep = customization?.addLernaStep ?? true
+
+        if (lockedTaskNames.includes(task.name) || task.name === postUpgradeTaskName || !addLernaStep)
           return
 
-        task.exec(this.getLernaCommand(task.name))
+        task.exec(this.getLernaCommand(task.name, customization))
       })
   }
 
-  private getLernaCommand(taskName: string, useSinceFlag = true) {
+  private getLernaCommand(taskName: string, customization?: TaskCustomization) {
     const mainCommand = `lerna run ${taskName} --stream`
-    const postCommand = useSinceFlag && this.project.sinceLastRelease ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
-    return `${mainCommand}${postCommand}`
+    const useSinceFlag = customization?.sinceLastRelease ?? this.project.sinceLastRelease
+
+    const includePatterns = customization?.include ?? []
+    const excludePatterns = customization?.exclude ?? []
+
+    const scopeFlags = includePatterns.map((glob) => ` --scope ${glob}`).join('')
+    const ignoreFlags = excludePatterns.map((glob) => ` --ignore ${glob}`).join('')
+
+
+    const postCommand = useSinceFlag ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
+    return `${mainCommand}${postCommand}${scopeFlags}${ignoreFlags}`
   }
 
   private updateSubProjects() {
