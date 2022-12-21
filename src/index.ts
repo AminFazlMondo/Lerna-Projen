@@ -24,7 +24,7 @@ function extractJsiiDocsOutput(tasks: Tasks): string | undefined {
   return match?.groups?.output
 }
 
-const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber']
+const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber', 'post-upgrade']
 
 interface ILernaProject {
   readonly sinceLastRelease: boolean;
@@ -225,16 +225,13 @@ class LernaProjectFactory {
     const postUpgradeTask = this.project.tasks.tryFind(postUpgradeTaskName)
     postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName, {sinceLastRelease: false}))
     postUpgradeTask?.exec('npx projen')
-    postUpgradeTask?.exec(this.getLernaCommand(postUpgradeTaskName))
 
     this.project.tasks.all
       .forEach(task => {
-        if (task.name === 'compile')
-          console.log(this.project.taskCustomizations[task.name])
         const customization = this.project.taskCustomizations[task.name]
         const addLernaStep = customization?.addLernaStep ?? true
 
-        if (lockedTaskNames.includes(task.name) || task.name === postUpgradeTaskName || !addLernaStep)
+        if (lockedTaskNames.includes(task.name) || !addLernaStep)
           return
 
         task.exec(this.getLernaCommand(task.name, customization))

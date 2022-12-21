@@ -288,7 +288,6 @@ describe('Happy Path for Javascript', () => {
                 steps: [
                   {exec: 'lerna run upgrade --stream'},
                   {exec: 'npx projen'},
-                  {exec: 'lerna run post-upgrade --stream'},
                 ],
               }),
             }),
@@ -302,8 +301,9 @@ describe('Happy Path for Javascript', () => {
         expect.objectContaining({
           tasks: expect.objectContaining({
             ['post-upgrade']: expect.objectContaining({
-              steps: expect.arrayContaining([
+              steps: expect.not.arrayContaining([
                 {exec: 'lerna run post-upgrade --stream'},
+                {exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")'},
               ]),
             }),
           }),
@@ -504,7 +504,6 @@ describe('Happy Path for Typescript', () => {
                 steps: [
                   {exec: 'lerna run upgrade --stream'},
                   {exec: 'npx projen'},
-                  {exec: 'lerna run post-upgrade --stream'},
                 ],
               }),
             }),
@@ -518,8 +517,9 @@ describe('Happy Path for Typescript', () => {
         expect.objectContaining({
           tasks: expect.objectContaining({
             ['post-upgrade']: expect.objectContaining({
-              steps: expect.arrayContaining([
+              steps: expect.not.arrayContaining([
                 {exec: 'lerna run post-upgrade --stream'},
+                {exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")'},
               ]),
             }),
           }),
