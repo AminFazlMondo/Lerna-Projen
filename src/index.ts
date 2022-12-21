@@ -74,13 +74,31 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   }
 
   /**
-   * Adds a customization for the specified task
+   * Adds a customization for the specified task.
+   *
+   * If a customization for the task already exists, the customization will be merged into the existing one.
    *
    * @param taskName Name of the task to customize
    * @param customization TaskCustomization options
    */
   customizeTask(taskName: string, customization: TaskCustomization): void {
-    this.taskCustomizations[taskName] = customization
+    const currentCustomization = this.taskCustomizations[taskName]
+    if (!currentCustomization) {
+      this.taskCustomizations[taskName] = customization
+      return
+    }
+    this.taskCustomizations[taskName] = {
+      addLernaStep: customization.addLernaStep ?? currentCustomization.addLernaStep,
+      sinceLastRelease: customization.sinceLastRelease ?? currentCustomization.sinceLastRelease,
+      exclude: [
+        ...currentCustomization.exclude ?? [],
+        ...customization.exclude ?? [],
+      ],
+      include: [
+        ...currentCustomization.include ?? [],
+        ...customization.include ?? [],
+      ],
+    }
   }
 
   /**
@@ -144,13 +162,31 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   }
 
   /**
-   * Adds a customization for the specified task
+   * Adds a customization for the specified task.
+   *
+   * If a customization for the task already exists, the customization will be merged into the existing one.
    *
    * @param taskName Name of the task to customize
    * @param customization TaskCustomization options
    */
   customizeTask(taskName: string, customization: TaskCustomization): void {
-    this.taskCustomizations[taskName] = customization
+    const currentCustomization = this.taskCustomizations[taskName]
+    if (!currentCustomization) {
+      this.taskCustomizations[taskName] = customization
+      return
+    }
+    this.taskCustomizations[taskName] = {
+      addLernaStep: customization.addLernaStep ?? currentCustomization.addLernaStep,
+      sinceLastRelease: customization.sinceLastRelease ?? currentCustomization.sinceLastRelease,
+      exclude: [
+        ...currentCustomization.exclude ?? [],
+        ...customization.exclude ?? [],
+      ],
+      include: [
+        ...currentCustomization.include ?? [],
+        ...customization.include ?? [],
+      ],
+    }
   }
 
   /**

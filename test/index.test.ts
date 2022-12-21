@@ -816,12 +816,25 @@ describe('task customization', () => {
           exclude: ['stub-exclude-package-name-1', 'stub-exclude-package-name-2'],
           include: ['stub-include-package-name'],
         },
+        ['post-compile']: {
+          addLernaStep: false,
+        },
       },
     })
 
     parentProject.customizeTask('default', {
       addLernaStep: false,
     })
+    parentProject.customizeTask('post-compile', {
+      exclude: ['stub-exclude-package-name-1'],
+    })
+    parentProject.customizeTask('post-compile', {
+      exclude: ['stub-exclude-package-name-2'],
+      include: ['stub-include-package-name'],
+      addLernaStep: true,
+      sinceLastRelease: true,
+    })
+
     const output = synthSnapshot(parentProject)
     test('should not add lerna run step to default task', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -863,6 +876,22 @@ describe('task customization', () => {
               steps: expect.arrayContaining([
                 {
                   exec: 'lerna run test --stream --scope stub-include-package-name --ignore stub-exclude-package-name-1 --ignore stub-exclude-package-name-2',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
+
+    test('should modify flags for post-compile task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-compile']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run post-compile --stream --since $(git describe --abbrev=0 --tags --match "v*") --scope stub-include-package-name --ignore stub-exclude-package-name-1 --ignore stub-exclude-package-name-2',
                 },
               ]),
             }),
@@ -882,11 +911,23 @@ describe('task customization', () => {
           exclude: ['stub-exclude-package-name-1', 'stub-exclude-package-name-2'],
           include: ['stub-include-package-name'],
         },
+        ['post-compile']: {
+          addLernaStep: false,
+        },
       },
     })
 
     parentProject.customizeTask('default', {
       addLernaStep: false,
+    })
+    parentProject.customizeTask('post-compile', {
+      exclude: ['stub-exclude-package-name-1'],
+    })
+    parentProject.customizeTask('post-compile', {
+      exclude: ['stub-exclude-package-name-2'],
+      include: ['stub-include-package-name'],
+      addLernaStep: true,
+      sinceLastRelease: true,
     })
     const output = synthSnapshot(parentProject)
     test('should not add lerna run step to default task', () => {
@@ -936,9 +977,22 @@ describe('task customization', () => {
         }),
       )
     })
+    test('should modify flags for post-compile task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-compile']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run post-compile --stream --since $(git describe --abbrev=0 --tags --match "v*") --scope stub-include-package-name --ignore stub-exclude-package-name-1 --ignore stub-exclude-package-name-2',
+                },
+              ]),
+            }),
+          }),
+        }),
+      )
+    })
   })
-
-
 })
 
 describe('hasRootSourceCode', () => {
