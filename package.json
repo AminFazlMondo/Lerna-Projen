@@ -57,14 +57,14 @@
     "jsii-docgen": "^3.8.31",
     "jsii-pacmak": "^1.74.0",
     "npm-check-updates": "^16",
-    "projen": "^0.67.49",
+    "projen": "^0.67.50",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "projen": "^0.67.49"
+    "projen": "^0.67.50"
   },
   "dependencies": {
     "commander": "^6.2.1",
