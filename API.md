@@ -114,6 +114,18 @@ Whether to commit the managed files by default.
 
 ---
 
+##### `gitOptions`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.gitOptions"></a>
+
+```typescript
+public readonly gitOptions: GitOptions;
+```
+
+- *Type:* [`projen.GitOptions`](#projen.GitOptions)
+
+Configuration options for git.
+
+---
+
 ##### `logging`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.logging"></a>
 
 ```typescript
@@ -1869,6 +1881,18 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
+
+---
+
+##### `gitOptions`<sup>Optional</sup> <a name="lerna-projen.LernaTypescriptProjectOptions.property.gitOptions"></a>
+
+```typescript
+public readonly gitOptions: GitOptions;
+```
+
+- *Type:* [`projen.GitOptions`](#projen.GitOptions)
+
+Configuration options for git.
 
 ---
 
