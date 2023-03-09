@@ -915,6 +915,19 @@ test your module against the lowest peer version required.
 
 ---
 
+##### `pnpmVersion`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.pnpmVersion"></a>
+
+```typescript
+public readonly pnpmVersion: string;
+```
+
+- *Type:* `string`
+- *Default:* "7"
+
+The version of PNPM to use if using PNPM as a package manager.
+
+---
+
 ##### `repository`<sup>Optional</sup> <a name="lerna-projen.LernaProjectOptions.property.repository"></a>
 
 ```typescript
@@ -2682,6 +2695,19 @@ Unless `peerDependencyOptions.pinnedDevDependency` is disabled (it is
 enabled by default), projen will automatically add a dev dependency with a
 pinned version for each peer dependency. This will ensure that you build &
 test your module against the lowest peer version required.
+
+---
+
+##### `pnpmVersion`<sup>Optional</sup> <a name="lerna-projen.LernaTypescriptProjectOptions.property.pnpmVersion"></a>
+
+```typescript
+public readonly pnpmVersion: string;
+```
+
+- *Type:* `string`
+- *Default:* "7"
+
+The version of PNPM to use if using PNPM as a package manager.
 
 ---
 
