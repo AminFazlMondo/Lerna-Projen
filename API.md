@@ -113,7 +113,7 @@ const lernaProjectOptions: LernaProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaProjectOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
-| <code><a href="#lerna-projen.LernaProjectOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcOptions</code> | Options for .projenrc.json. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcJsonOptions</code> | Options for .projenrc.json. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
@@ -360,10 +360,10 @@ Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .pr
 ##### `projenrcJsonOptions`<sup>Optional</sup> <a name="projenrcJsonOptions" id="lerna-projen.LernaProjectOptions.property.projenrcJsonOptions"></a>
 
 ```typescript
-public readonly projenrcJsonOptions: ProjenrcOptions;
+public readonly projenrcJsonOptions: ProjenrcJsonOptions;
 ```
 
-- *Type:* projen.ProjenrcOptions
+- *Type:* projen.ProjenrcJsonOptions
 - *Default:* default options
 
 Options for .projenrc.json.
@@ -2073,7 +2073,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
-| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcOptions</code> | Options for .projenrc.json. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcJsonOptions</code> | Options for .projenrc.json. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
@@ -2334,10 +2334,10 @@ Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .pr
 ##### `projenrcJsonOptions`<sup>Optional</sup> <a name="projenrcJsonOptions" id="lerna-projen.LernaTypescriptProjectOptions.property.projenrcJsonOptions"></a>
 
 ```typescript
-public readonly projenrcJsonOptions: ProjenrcOptions;
+public readonly projenrcJsonOptions: ProjenrcJsonOptions;
 ```
 
-- *Type:* projen.ProjenrcOptions
+- *Type:* projen.ProjenrcJsonOptions
 - *Default:* default options
 
 Options for .projenrc.json.
