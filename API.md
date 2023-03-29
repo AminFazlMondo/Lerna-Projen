@@ -4339,6 +4339,7 @@ new LernaProject(options: LernaProjectOptions)
 | <code><a href="#lerna-projen.LernaProject.addFields">addFields</a></code> | Directly set fields in `package.json`. |
 | <code><a href="#lerna-projen.LernaProject.addKeywords">addKeywords</a></code> | Adds keywords to package.json (deduplicated). |
 | <code><a href="#lerna-projen.LernaProject.addPeerDeps">addPeerDeps</a></code> | Defines peer dependencies. |
+| <code><a href="#lerna-projen.LernaProject.addScripts">addScripts</a></code> | Replaces the contents of multiple npm package.json scripts. |
 | <code><a href="#lerna-projen.LernaProject.addTestCommand">addTestCommand</a></code> | DEPRECATED. |
 | <code><a href="#lerna-projen.LernaProject.hasScript">hasScript</a></code> | Indicates if a script by the name name is defined. |
 | <code><a href="#lerna-projen.LernaProject.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
@@ -4754,6 +4755,22 @@ be installed in the next `npx projen` run and the version will be recorded
 in your `package.json` file. You can upgrade manually or using `yarn
 add/upgrade`. If you wish to specify a version range use this syntax:
 `module@^7`.
+
+---
+
+##### `addScripts` <a name="addScripts" id="lerna-projen.LernaProject.addScripts"></a>
+
+```typescript
+public addScripts(scripts: {[ key: string ]: string}): void
+```
+
+Replaces the contents of multiple npm package.json scripts.
+
+###### `scripts`<sup>Required</sup> <a name="scripts" id="lerna-projen.LernaProject.addScripts.parameter.scripts"></a>
+
+- *Type:* {[ key: string ]: string}
+
+The scripts to set.
 
 ---
 
@@ -5685,6 +5702,7 @@ new LernaTypescriptProject(options: LernaTypescriptProjectOptions)
 | <code><a href="#lerna-projen.LernaTypescriptProject.addFields">addFields</a></code> | Directly set fields in `package.json`. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addKeywords">addKeywords</a></code> | Adds keywords to package.json (deduplicated). |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addPeerDeps">addPeerDeps</a></code> | Defines peer dependencies. |
+| <code><a href="#lerna-projen.LernaTypescriptProject.addScripts">addScripts</a></code> | Replaces the contents of multiple npm package.json scripts. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addTestCommand">addTestCommand</a></code> | DEPRECATED. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.hasScript">hasScript</a></code> | Indicates if a script by the name name is defined. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
@@ -6099,6 +6117,22 @@ be installed in the next `npx projen` run and the version will be recorded
 in your `package.json` file. You can upgrade manually or using `yarn
 add/upgrade`. If you wish to specify a version range use this syntax:
 `module@^7`.
+
+---
+
+##### `addScripts` <a name="addScripts" id="lerna-projen.LernaTypescriptProject.addScripts"></a>
+
+```typescript
+public addScripts(scripts: {[ key: string ]: string}): void
+```
+
+Replaces the contents of multiple npm package.json scripts.
+
+###### `scripts`<sup>Required</sup> <a name="scripts" id="lerna-projen.LernaTypescriptProject.addScripts.parameter.scripts"></a>
+
+- *Type:* {[ key: string ]: string}
+
+The scripts to set.
 
 ---
 
