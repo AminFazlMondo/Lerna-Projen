@@ -1,3 +1,48 @@
+# lerna-projen
+
+Inspired by [projen](https://github.com/projen/projen) and [lerna](https://github.com/lerna/lerna)
+
+This is a library to use manage mono repositories using projen.
+
+## Getting started
+
+To create a new project, run the following command and follow the instructions:
+
+```
+console
+$ mkdir my-project
+$ cd my-project
+$ git init
+$ npx projen new --from lerna-projen lerna-project
+🤖 Synthesizing project...
+...
+```
+
+The project type can be anything to start with, then in the `projenrc` file, initiate a lerna project and add all of the sub normal projen project to the lerna project.
+
+### Example
+```javascript
+const { LernaProject } = require('lerna-projen');
+const { TypeScriptProject } = require('projen');
+
+const parentProject = new LernaProject({
+  name: 'my-parent-project',
+  ...
+});
+
+const firstProject = new TypeScriptProject({
+  name: 'my-first-project',
+  parent: parentProject,
+  ...
+});
+
+parentProject.addSubProject(firstProject);
+
+parentProject.synth()
+```
+
+The rest of the process is taken care of by projen. All of the scripts on the parent project are chained by running the same command from the sub project using lerna.
+
 # API Reference <a name="API Reference" id="api-reference"></a>
 
 
@@ -1145,7 +1190,9 @@ Options for privately hosted scoped packages.
 
 ---
 
-##### `scripts`<sup>Optional</sup> <a name="scripts" id="lerna-projen.LernaProjectOptions.property.scripts"></a>
+##### ~~`scripts`~~<sup>Optional</sup> <a name="scripts" id="lerna-projen.LernaProjectOptions.property.scripts"></a>
+
+- *Deprecated:* use `project.addTask()` or `package.setScript()`
 
 ```typescript
 public readonly scripts: {[ key: string ]: string};
@@ -1158,6 +1205,7 @@ npm scripts to include.
 
 If a script has the same name as a standard script,
 the standard script will be overwritten.
+Also adds the script as a task.
 
 ---
 
@@ -3120,7 +3168,9 @@ Options for privately hosted scoped packages.
 
 ---
 
-##### `scripts`<sup>Optional</sup> <a name="scripts" id="lerna-projen.LernaTypescriptProjectOptions.property.scripts"></a>
+##### ~~`scripts`~~<sup>Optional</sup> <a name="scripts" id="lerna-projen.LernaTypescriptProjectOptions.property.scripts"></a>
+
+- *Deprecated:* use `project.addTask()` or `package.setScript()`
 
 ```typescript
 public readonly scripts: {[ key: string ]: string};
@@ -3133,6 +3183,7 @@ npm scripts to include.
 
 If a script has the same name as a standard script,
 the standard script will be overwritten.
+Also adds the script as a task.
 
 ---
 
@@ -4802,7 +4853,7 @@ DEPRECATED.
 
 ---
 
-##### `hasScript` <a name="hasScript" id="lerna-projen.LernaProject.hasScript"></a>
+##### ~~`hasScript`~~ <a name="hasScript" id="lerna-projen.LernaProject.hasScript"></a>
 
 ```typescript
 public hasScript(name: string): boolean
@@ -6164,7 +6215,7 @@ DEPRECATED.
 
 ---
 
-##### `hasScript` <a name="hasScript" id="lerna-projen.LernaTypescriptProject.hasScript"></a>
+##### ~~`hasScript`~~ <a name="hasScript" id="lerna-projen.LernaTypescriptProject.hasScript"></a>
 
 ```typescript
 public hasScript(name: string): boolean
