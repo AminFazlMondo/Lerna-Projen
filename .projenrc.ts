@@ -46,6 +46,7 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
+  jsiiVersion: '5.x',
 })
 
 const additionalRules = {
