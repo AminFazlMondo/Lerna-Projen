@@ -4984,6 +4984,7 @@ TaskCustomization options.
 | <code><a href="#lerna-projen.LernaProject.property.projectBuild">projectBuild</a></code> | <code>projen.ProjectBuild</code> | Manages the build process of the project. |
 | <code><a href="#lerna-projen.LernaProject.property.projenCommand">projenCommand</a></code> | <code>string</code> | The command to use in order to run the projen CLI. |
 | <code><a href="#lerna-projen.LernaProject.property.root">root</a></code> | <code>projen.Project</code> | The root project. |
+| <code><a href="#lerna-projen.LernaProject.property.subprojects">subprojects</a></code> | <code>projen.Project[]</code> | Returns all the subprojects within this project. |
 | <code><a href="#lerna-projen.LernaProject.property.tasks">tasks</a></code> | <code>projen.Tasks</code> | Project tasks. |
 | <code><a href="#lerna-projen.LernaProject.property.testTask">testTask</a></code> | <code>projen.Task</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaProject.property.defaultTask">defaultTask</a></code> | <code>projen.Task</code> | This is the "default" task, the one that executes "projen". |
@@ -5229,6 +5230,18 @@ public readonly root: Project;
 - *Type:* projen.Project
 
 The root project.
+
+---
+
+##### `subprojects`<sup>Required</sup> <a name="subprojects" id="lerna-projen.LernaProject.property.subprojects"></a>
+
+```typescript
+public readonly subprojects: Project[];
+```
+
+- *Type:* projen.Project[]
+
+Returns all the subprojects within this project.
 
 ---
 
@@ -6347,6 +6360,7 @@ TaskCustomization options.
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.projectBuild">projectBuild</a></code> | <code>projen.ProjectBuild</code> | Manages the build process of the project. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.projenCommand">projenCommand</a></code> | <code>string</code> | The command to use in order to run the projen CLI. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.root">root</a></code> | <code>projen.Project</code> | The root project. |
+| <code><a href="#lerna-projen.LernaTypescriptProject.property.subprojects">subprojects</a></code> | <code>projen.Project[]</code> | Returns all the subprojects within this project. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.tasks">tasks</a></code> | <code>projen.Tasks</code> | Project tasks. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.testTask">testTask</a></code> | <code>projen.Task</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.defaultTask">defaultTask</a></code> | <code>projen.Task</code> | This is the "default" task, the one that executes "projen". |
@@ -6600,6 +6614,18 @@ public readonly root: Project;
 - *Type:* projen.Project
 
 The root project.
+
+---
+
+##### `subprojects`<sup>Required</sup> <a name="subprojects" id="lerna-projen.LernaTypescriptProject.property.subprojects"></a>
+
+```typescript
+public readonly subprojects: Project[];
+```
+
+- *Type:* projen.Project[]
+
+Returns all the subprojects within this project.
 
 ---
 
