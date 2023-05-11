@@ -53,18 +53,18 @@
     "jest": "^27",
     "jest-junit": "^15",
     "jsii": "5.x",
-    "jsii-diff": "^1.80.0",
+    "jsii-diff": "^1.81.0",
     "jsii-docgen": "^7.2.9",
-    "jsii-pacmak": "^1.80.0",
+    "jsii-pacmak": "^1.81.0",
     "npm-check-updates": "^16",
-    "projen": "^0.71.48",
+    "projen": "^0.71.50",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "projen": "^0.71.48"
+    "projen": "^0.71.50"
   },
   "dependencies": {
     "commander": "^10.0.1",
