@@ -54,7 +54,7 @@
     "jest-junit": "^15",
     "jsii": "5.x",
     "jsii-diff": "^1.84.0",
-    "jsii-docgen": "^9.0.10",
+    "jsii-docgen": "^9.0.11",
     "jsii-pacmak": "^1.84.0",
     "npm-check-updates": "^16",
     "projen": "^0.71.111",
@@ -64,7 +64,7 @@
     "typescript": "^5.1.3"
   },
   "peerDependencies": {
-    "projen": "^0.71.110"
+    "projen": "^0.71.111"
   },
   "dependencies": {
     "commander": "^11.0.0",
