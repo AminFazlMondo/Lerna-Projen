@@ -2,6 +2,7 @@ import {JsonFile, javascript, Project, Tasks, SourceCode, typescript} from 'proj
 import {LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations} from './types'
 
 export * from './types'
+export * as utils from './utils'
 
 function getDocsDirectory(project: Project) {
   const result = Object.entries(project).find(([key]) => key === 'docsDirectory')
