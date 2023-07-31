@@ -179,7 +179,7 @@ class LernaProjectFactory {
   private subProjects: Record<string, Project> = {}
 
   constructor(private readonly project: ILernaProject & javascript.NodeProject) {
-    project.addDevDeps('lerna-projen', 'lerna@5')
+    project.addDevDeps('lerna-projen', 'lerna')
   }
 
   addSubProject(subProject: Project) {
@@ -210,7 +210,7 @@ class LernaProjectFactory {
     const packages = Object.keys(this.subProjects)
 
     if (this.project.useWorkspaces)
-      this.project.package.addField('packages', packages)
+      this.project.package.addField('workspaces', packages)
     else
       lernaConfig.packages = packages
 
