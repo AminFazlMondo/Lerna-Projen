@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils addNxTaskDependency should add dependency in nx 1`] = `
+{
+  "targets": {
+    "test": {
+      "dependsOn": [
+        {
+          "projects": [
+            "project-2",
+            "project-3",
+          ],
+          "target": "lint",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`utils addNxTaskDependency should add dependency in nx 2`] = `
+{
+  "targets": {
+    "compile": {
+      "dependsOn": [
+        {
+          "projects": [
+            "project-1",
+          ],
+          "target": "pre-compile",
+        },
+      ],
+    },
+  },
+}
+`;
