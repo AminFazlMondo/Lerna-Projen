@@ -732,7 +732,7 @@ describe('useWorkspaces', () => {
   })
   test('package.json', () => {
     expect(output[packageJsonFilePath]).toMatchObject({
-      packages: expect.arrayContaining([subProjectDirectory]),
+      workspaces: expect.arrayContaining([subProjectDirectory]),
     })
   })
 })
