@@ -1,4 +1,4 @@
-import {JsonFile, javascript, Project, Tasks, SourceCode, typescript} from 'projen'
+import {JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile} from 'projen'
 import {LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations} from './types'
 
 export * from './types'
@@ -210,7 +210,14 @@ class LernaProjectFactory {
     const packages = Object.keys(this.subProjects)
 
     if (this.project.useWorkspaces)
-      this.project.package.addField('workspaces', packages)
+      if (this.project.packageManager === javascript.NodePackageManager.PNPM)
+        new YamlFile(this.project, 'pnpm-workspace.yaml', {
+          obj: {
+            packages,
+          },
+        })
+      else
+        this.project.package.addField('workspaces', packages)
     else
       lernaConfig.packages = packages
 
