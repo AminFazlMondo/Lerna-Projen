@@ -39,6 +39,8 @@ interface GenerateProjectsParams {
    * @default {}
    */
   taskCustomizations?: TaskCustomizations;
+
+  packageManager?: javascript.NodePackageManager;
 }
 
 interface GenerateTypescriptProjectParams extends GenerateProjectsParams {
@@ -67,6 +69,7 @@ function generateProjects(
     useWorkspaces: params.useWorkspaces,
     independentMode: params.independentMode,
     taskCustomizations: params.taskCustomizations ?? {},
+    packageManager: params.packageManager,
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -722,17 +725,35 @@ describe('useNx', () => {
 })
 
 describe('useWorkspaces', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {useWorkspaces: true})
-  const output = synthSnapshot(parentProject)
-  test('lerna file', () => {
-    expect(output[lernaFilePath]).not.toHaveProperty('packages')
-    expect(output[lernaFilePath]).toMatchObject({
-      version: '0.0.0',
+  describe('default package manager', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {useWorkspaces: true})
+    const output = synthSnapshot(parentProject)
+    test('lerna file', () => {
+      expect(output[lernaFilePath]).not.toHaveProperty('packages')
+      expect(output[lernaFilePath]).toMatchObject({
+        version: '0.0.0',
+      })
+    })
+    test('package.json', () => {
+      expect(output[packageJsonFilePath]).toMatchObject({
+        workspaces: expect.arrayContaining([subProjectDirectory]),
+      })
     })
   })
-  test('package.json', () => {
-    expect(output[packageJsonFilePath]).toMatchObject({
-      workspaces: expect.arrayContaining([subProjectDirectory]),
+
+  describe('PNPM package manager', () => {
+    const parentProject = generateProjects(
+      parentDocsFolder,
+      subProjectDirectory,
+      {useWorkspaces: true, packageManager: javascript.NodePackageManager.PNPM})
+    const output = synthSnapshot(parentProject)
+
+    test('package.json', () => {
+      expect(output[packageJsonFilePath]).not.toHaveProperty('workspaces')
+    })
+
+    test('pnpm-workspace.yaml', () => {
+      expect(output['pnpm-workspace.yaml']).toMatchSnapshot()
     })
   })
 })
