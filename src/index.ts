@@ -209,17 +209,15 @@ class LernaProjectFactory {
 
     const packages = Object.keys(this.subProjects)
 
-    if (this.project.useWorkspaces)
+    if (this.project.useWorkspaces) {
       if (this.project.packageManager === javascript.NodePackageManager.PNPM)
         new YamlFile(this.project, 'pnpm-workspace.yaml', {
           obj: {
             packages,
           },
         })
-      else
-        this.project.package.addField('workspaces', packages)
-    else
-      lernaConfig.packages = packages
+      this.project.package.addField('workspaces', packages)
+    } else {lernaConfig.packages = packages}
 
 
     new JsonFile(this.project, 'lerna.json', {

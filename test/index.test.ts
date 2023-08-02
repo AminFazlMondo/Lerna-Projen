@@ -749,7 +749,9 @@ describe('useWorkspaces', () => {
     const output = synthSnapshot(parentProject)
 
     test('package.json', () => {
-      expect(output[packageJsonFilePath]).not.toHaveProperty('workspaces')
+      expect(output[packageJsonFilePath]).toMatchObject({
+        workspaces: expect.arrayContaining([subProjectDirectory]),
+      })
     })
 
     test('pnpm-workspace.yaml', () => {
