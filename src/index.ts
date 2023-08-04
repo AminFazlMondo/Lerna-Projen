@@ -141,6 +141,8 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     if (!(options.hasRootSourceCode ?? false))
       this.tasks.tryFind('compile')?.reset()
 
+    this.tasks.tryFind('docgen')?.reset()
+
     this.factory = new LernaProjectFactory(this)
   }
 
