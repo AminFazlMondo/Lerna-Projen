@@ -805,6 +805,12 @@ describe('since last release', () => {
       }),
     )
   })
+  test('should add git fetch to build workflow', () => {
+    expect(output['.github/workflows/build.yml']).toContain('git fetch origin main --tags --unshallow')
+  })
+  test('should add git fetch to release workflow', () => {
+    expect(output['.github/workflows/release.yml']).toContain('git fetch origin main --tags --unshallow')
+  })
 })
 
 describe('typescript projenrc file', () => {
