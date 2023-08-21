@@ -34,7 +34,7 @@ function appendWorkflowBootstrapSteps<T extends LernaProjectOptions | LernaTypes
     workflowBootstrapSteps: [
       {
         name: 'Fetch tags',
-        run: 'git fetch origin main --tags --unshallow',
+        run: 'git fetch origin main --tags',
       },
       ...options.workflowBootstrapSteps ?? [],
     ],
