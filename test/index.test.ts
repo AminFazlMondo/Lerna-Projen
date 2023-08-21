@@ -806,10 +806,10 @@ describe('since last release', () => {
     )
   })
   test('should add git fetch to build workflow', () => {
-    expect(output['.github/workflows/build.yml']).toContain('[ $(git rev-parse --is-shallow-repository) != false ] && git fetch --tags --unshallow')
+    expect(output['.github/workflows/build.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi')
   })
   test('should add git fetch to release workflow', () => {
-    expect(output['.github/workflows/release.yml']).toContain('[ $(git rev-parse --is-shallow-repository) != false ] && git fetch --tags --unshallow')
+    expect(output['.github/workflows/release.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi')
   })
 })
 
