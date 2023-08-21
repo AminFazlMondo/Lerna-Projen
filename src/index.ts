@@ -25,6 +25,22 @@ function extractJsiiDocsOutput(tasks: Tasks): string | undefined {
   return match?.groups?.output
 }
 
+function appendWorkflowBootstrapSteps<T extends LernaProjectOptions | LernaTypescriptProjectOptions>(options: T): T {
+  if (!options.sinceLastRelease)
+    return options
+
+  return {
+    ...options,
+    workflowBootstrapSteps: [
+      {
+        name: 'Fetch tags',
+        run: 'git fetch origin main --tags --unshallow',
+      },
+      ...options.workflowBootstrapSteps ?? [],
+    ],
+  }
+}
+
 const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber', 'post-upgrade']
 
 interface ILernaProject {
@@ -57,7 +73,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   private readonly factory: LernaProjectFactory
 
   constructor(options: LernaProjectOptions) {
-    super(options)
+    super(appendWorkflowBootstrapSteps(options))
 
     if (options.projenrcTs)
       this.addDevDeps('ts-node', 'typescript')
@@ -130,7 +146,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   private readonly factory: LernaProjectFactory
 
   constructor(options: LernaTypescriptProjectOptions) {
-    super(options)
+    super(appendWorkflowBootstrapSteps(options))
 
     this.sinceLastRelease = options.sinceLastRelease ?? false
     this.useNx = options.useNx ?? false
