@@ -23,3 +23,15 @@ export function addNxTaskDependency(project: NodeProject, taskName: string, depe
     },
   })
 }
+/**
+ * Adds dependency to the project for NX task runner
+ * see https://nx.dev/reference/project-configuration#implicitdependencies
+ *
+ * @param project The Project to add dependency to
+ * @param dependsOn The packages that source project is dependent on
+ */
+export function addNxProjectDependency(project: NodeProject, ...dependsOn: NodeProject[]): void {
+  project.package.addField('nx', {
+    implicitDependencies: dependsOn.map(d => d.package.packageName),
+  })
+}
