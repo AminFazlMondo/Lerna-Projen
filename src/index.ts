@@ -35,6 +35,7 @@ function appendWorkflowBootstrapSteps<T extends LernaProjectOptions | LernaTypes
       {
         name: 'Fetch tags',
         run: 'if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi',
+        if: '${{ github.workflow == "build" }}',
       },
       ...options.workflowBootstrapSteps ?? [],
     ],
