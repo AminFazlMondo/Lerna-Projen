@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils addNxProjectDependency should add dependency in nx 1`] = `
+{
+  "implicitDependencies": [
+    "project-2",
+    "project-3",
+  ],
+}
+`;
+
+exports[`utils addNxProjectDependency should add dependency in nx 2`] = `
+{
+  "implicitDependencies": [
+    "project-3",
+  ],
+}
+`;
+
 exports[`utils addNxTaskDependency should add dependency in nx 1`] = `
 {
   "targets": {
