@@ -246,7 +246,7 @@ const lernaProjectOptions: LernaProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaProjectOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
-| <code><a href="#lerna-projen.LernaProjectOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use github workflows to handle dependency upgrades. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
@@ -1697,7 +1697,7 @@ public readonly depsUpgrade: boolean;
 - *Type:* boolean
 - *Default:* true
 
-Use github workflows to handle dependency upgrades.
+Use tasks and github workflows to handle dependency upgrades.
 
 Cannot be used in conjunction with `dependabot`.
 
@@ -2237,7 +2237,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
-| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use github workflows to handle dependency upgrades. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
@@ -3703,7 +3703,7 @@ public readonly depsUpgrade: boolean;
 - *Type:* boolean
 - *Default:* true
 
-Use github workflows to handle dependency upgrades.
+Use tasks and github workflows to handle dependency upgrades.
 
 Cannot be used in conjunction with `dependabot`.
 
