@@ -306,7 +306,7 @@ class LernaProjectFactory {
         RELEASE_TAG_PREFIX: '',
       }
 
-      if (bumpTask) {
+      if (bumpTask && !subProject.tasks.tryFind('bump')) {
         const subBumpTask = subProject.addTask(bumpTask.name, {
           description: bumpTask.description,
           condition: bumpTask.condition,
@@ -315,7 +315,7 @@ class LernaProjectFactory {
         subBumpTask.builtin('release/bump-version')
       }
 
-      if (unbumpTask) {
+      if (unbumpTask && !subProject.tasks.tryFind('unbump')) {
         const subBumpTask = subProject.addTask(unbumpTask.name, {
           description: unbumpTask.description,
           condition: unbumpTask.condition,
