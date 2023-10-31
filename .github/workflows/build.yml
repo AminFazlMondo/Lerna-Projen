@@ -19,12 +19,16 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: "7"
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "20"
       - name: Install dependencies
-        run: npm install
+        run: pnpm i --no-frozen-lockfile
       - name: build
         run: npx projen build
       - name: Find mutations
@@ -91,7 +95,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "20"
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -100,10 +104,14 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: "7"
       - name: Prepare Repository
         run: mv dist .repo
       - name: Install Dependencies
-        run: cd .repo && npm ci
+        run: cd .repo && pnpm i --frozen-lockfile
       - name: Create js artifact
         run: cd .repo && npx projen package:js
       - name: Collect js Artifact
