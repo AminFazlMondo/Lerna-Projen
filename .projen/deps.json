@@ -115,6 +115,10 @@
       "type": "bundled"
     },
     {
+      "name": "constructs",
+      "type": "peer"
+    },
+    {
       "name": "projen",
       "type": "peer"
     }
