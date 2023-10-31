@@ -23,6 +23,7 @@ const project = new cdk.JsiiProject({
   author: 'Amin Fazl',
   peerDeps: [
     'projen',
+    'constructs',
   ],
   devDeps: [
     '@types/babel__core',

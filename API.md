@@ -103,7 +103,6 @@ new LernaProject(options: LernaProjectOptions)
 | <code><a href="#lerna-projen.LernaProject.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
 | <code><a href="#lerna-projen.LernaProject.renderWorkflowSetup">renderWorkflowSetup</a></code> | Returns the set of workflow steps which should be executed to bootstrap a workflow. |
 | <code><a href="#lerna-projen.LernaProject.setScript">setScript</a></code> | Replaces the contents of an npm package.json script. |
-| <code><a href="#lerna-projen.LernaProject.addSubProject">addSubProject</a></code> | *No description.* |
 | <code><a href="#lerna-projen.LernaProject.customizeTask">customizeTask</a></code> | Adds a customization for the specified task. |
 
 ---
@@ -623,18 +622,6 @@ The script name.
 - *Type:* string
 
 The command to execute.
-
----
-
-##### ~~`addSubProject`~~ <a name="addSubProject" id="lerna-projen.LernaProject.addSubProject"></a>
-
-```typescript
-public addSubProject(_subproject: Project): void
-```
-
-###### `_subproject`<sup>Required</sup> <a name="_subproject" id="lerna-projen.LernaProject.addSubProject.parameter._subproject"></a>
-
-- *Type:* projen.Project
 
 ---
 

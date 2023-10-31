@@ -1,3 +1,4 @@
+import * as path from 'path'
 import {JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile} from 'projen'
 import {LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations} from './types'
 
@@ -101,27 +102,6 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
     this.taskCustomizations[taskName] = customization
   }
 
-  /**
-   * Adds a sub-project to this project.
-   *
-   * This is automatically called when a new project is created with `parent`
-   * pointing to this project, so there is no real need to call this manually.
-   *
-   * @param sub-project The child project to add.
-   * @internal
-   */
-  _addSubProject(subproject: Project): void {
-    super._addSubProject(subproject)
-    this.factory.addSubProject(subproject)
-  }
-
-  /**
-   * @deprecated This is automatically called when a new project is created with `parent`
-   */
-  addSubProject(_subproject: Project) {
-    console.warn('LernaProject.addSubProject is deprecated. It is now automatically called when a new project is created with `parent`')
-  }
-
   preSynthesize() {
     super.preSynthesize()
     const projenCommand = this.projenrcTs ? 'ts-node --skip-project .projenrc.ts' : 'node .projenrc.js'
@@ -173,21 +153,6 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     this.taskCustomizations[taskName] = customization
   }
 
-  /**
-   * Adds a sub-project to this project.
-   *
-   * This is automatically called when a new project is created with `parent`
-   * pointing to this project, so there is no real need to call this manually.
-   *
-   * @param sub-project The child project to add.
-   * @internal
-   */
-  _addSubProject(subproject: Project): void {
-    super._addSubProject(subproject)
-
-    this.factory.addSubProject(subproject)
-  }
-
   preSynthesize() {
     super.preSynthesize()
     this.factory.build()
@@ -195,18 +160,8 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
 }
 
 class LernaProjectFactory {
-  private subProjects: Record<string, Project> = {}
-
   constructor(private readonly project: ILernaProject & javascript.NodeProject) {
     project.addDevDeps('lerna-projen', 'lerna')
-  }
-
-  addSubProject(subProject: Project) {
-    const {outdir} = subProject
-
-    const relativeOutDir = outdir.replace(`${this.project.outdir}/`, '')
-
-    this.subProjects[relativeOutDir] = subProject
   }
 
   build() {
@@ -219,6 +174,10 @@ class LernaProjectFactory {
     this.addDocumentsIndex()
   }
 
+  private getSubProjectPath(subProject: Project) {
+    return path.relative(this.project.outdir, subProject.outdir)
+  }
+
   private addCrossLinks() {
 
     const lernaConfig: any = {
@@ -226,7 +185,7 @@ class LernaProjectFactory {
       version: this.project.independentMode ? 'independent' : '0.0.0',
     }
 
-    const packages = Object.keys(this.subProjects)
+    const packages = this.project.subprojects.map(subProject => this.getSubProjectPath(subProject))
 
     if (this.project.useWorkspaces) {
       if (this.project.packageManager === javascript.NodePackageManager.PNPM)
@@ -282,8 +241,9 @@ class LernaProjectFactory {
     const bumpTask = this.project.tasks.tryFind('bump')
     const unbumpTask = this.project.tasks.tryFind('unbump')
 
-    Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
+    this.project.subprojects.forEach((subProject) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
+      const subProjectPath = this.getSubProjectPath(subProject)
       if (this.project.docgen && subProjectDocsDirectory)
         this.project.postCompileTask.exec(`lerna-projen move-docs ${this.project.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`)
 
@@ -335,16 +295,17 @@ class LernaProjectFactory {
     const indexMarkdown = new SourceCode(this.project, `${this.project.docsDirectory}/index.md`)
     const readmeMarkdown = new SourceCode(this.project, `${this.project.docsDirectory}/README.md`)
 
-    Object.entries(this.subProjects).forEach(([subProjectPath, subProject]) => {
+    this.project.subprojects.forEach((subProject) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject)
       if (!subProjectDocsDirectory)
         return
 
+      const subProjectPath = this.getSubProjectPath(subProject)
       const jsiiDocsOutput = extractJsiiDocsOutput(subProject.tasks)
       if (jsiiDocsOutput) {
-        const path = `${subProjectPath}/${jsiiDocsOutput}`
-        indexMarkdown.line(`- ## [${subProject.name}](${path})`)
-        subProjectsDocs[subProject.name] = path
+        const docsPath = `${subProjectPath}/${jsiiDocsOutput}`
+        indexMarkdown.line(`- ## [${subProject.name}](${docsPath})`)
+        subProjectsDocs[subProject.name] = docsPath
       } else {
         subProjectsDocs[subProject.name] = `${subProjectPath}/index.html`
       }
@@ -356,9 +317,9 @@ class LernaProjectFactory {
     indexHtml.line('<html>')
     indexHtml.open('<body>')
     indexHtml.open('<ul>')
-    Object.entries(subProjectsDocs).forEach(([name, path]) => {
+    Object.entries(subProjectsDocs).forEach(([name, docsPath]) => {
       indexHtml.open('<li>')
-      indexHtml.open(`<a href="${path}">`)
+      indexHtml.open(`<a href="${docsPath}">`)
       indexHtml.line(name)
       indexHtml.close('</a>')
       indexHtml.close('</li>')
