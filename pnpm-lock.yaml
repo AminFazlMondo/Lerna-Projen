@@ -71,8 +71,8 @@ devDependencies:
     specifier: ^16
     version: 16.14.6
   projen:
-    specifier: ^0.76.15
-    version: 0.76.15(constructs@10.3.0)
+    specifier: ^0.76.16
+    version: 0.76.16(constructs@10.3.0)
   standard-version:
     specifier: ^9
     version: 9.5.0
@@ -2389,7 +2389,7 @@ packages:
     dependencies:
       semver: 7.5.4
       shelljs: 0.8.5
-      typescript: 5.3.0-dev.20231031
+      typescript: 5.3.0-dev.20231101
     dev: true
 
   /eastasianwidth@0.2.0:
@@ -5293,8 +5293,8 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.76.15(constructs@10.3.0):
-    resolution: {integrity: sha512-Ez1w2KlmzAtiYg9aIm7NFD56hafFgnGnYcZc60GzT6AEFPEDWPX1lGrngAibDnEys3iDsIimreyVIV77KVqoAg==}
+  /projen@0.76.16(constructs@10.3.0):
+    resolution: {integrity: sha512-+p6ZNVvDICn2lskDofSOgUSTI8Or0aAqyiKf9RhSaE2nTqwoObbf1b4wmw44hjiQWa1/pVP+IGUzCienDIA+Jw==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -6387,8 +6387,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.3.0-dev.20231031:
-    resolution: {integrity: sha512-+w6szmOFr7GSWj/eNFgHdYqubMux9B5ao5LFoGdn712gbDYMpLwqLNkPLpJHD9chl/2wc/W96iSfALkZs7sVXQ==}
+  /typescript@5.3.0-dev.20231101:
+    resolution: {integrity: sha512-yt5zz7L+TBfzeJhMA/tAEO1YU8J2DWsFN3LbeMslNPXL3S0lR3yvePdl6fXCk7QFjnfaRtXH0noNdWg2imHWXg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
