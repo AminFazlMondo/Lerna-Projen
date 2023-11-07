@@ -3258,6 +3258,7 @@ const lernaProjectOptions: LernaProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaProjectOptions.property.scopedPackagesOptions">scopedPackagesOptions</a></code> | <code>projen.javascript.ScopedPackagesOptions[]</code> | Options for privately hosted scoped packages. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.scripts">scripts</a></code> | <code>{[ key: string ]: string}</code> | npm scripts to include. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
@@ -4269,6 +4270,19 @@ Package's Stability.
 
 ---
 
+##### `yarnBerryOptions`<sup>Optional</sup> <a name="yarnBerryOptions" id="lerna-projen.LernaProjectOptions.property.yarnBerryOptions"></a>
+
+```typescript
+public readonly yarnBerryOptions: YarnBerryOptions;
+```
+
+- *Type:* projen.javascript.YarnBerryOptions
+- *Default:* Yarn Berry v4 with all default options
+
+Options for Yarn Berry.
+
+---
+
 ##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="jsiiReleaseVersion" id="lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion"></a>
 
 ```typescript
@@ -5262,6 +5276,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.scopedPackagesOptions">scopedPackagesOptions</a></code> | <code>projen.javascript.ScopedPackagesOptions[]</code> | Options for privately hosted scoped packages. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.scripts">scripts</a></code> | <code>{[ key: string ]: string}</code> | npm scripts to include. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
@@ -6285,6 +6300,19 @@ public readonly stability: string;
 - *Type:* string
 
 Package's Stability.
+
+---
+
+##### `yarnBerryOptions`<sup>Optional</sup> <a name="yarnBerryOptions" id="lerna-projen.LernaTypescriptProjectOptions.property.yarnBerryOptions"></a>
+
+```typescript
+public readonly yarnBerryOptions: YarnBerryOptions;
+```
+
+- *Type:* projen.javascript.YarnBerryOptions
+- *Default:* Yarn Berry v4 with all default options
+
+Options for Yarn Berry.
 
 ---
 
