@@ -2018,7 +2018,7 @@ packages:
     dependencies:
       semver: 7.5.4
       shelljs: 0.8.5
-      typescript: 5.4.0-dev.20231201
+      typescript: 5.4.0-dev.20231202
     dev: true
 
   /electron-to-chromium@1.4.478:
@@ -5147,8 +5147,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.0-dev.20231201:
-    resolution: {integrity: sha512-v1fwNXyXtvYekwCVTJ/8ZmOdeAiL+AOeECmka/AWWGOvm6TRaWgW9DKrBNmKcKrurYEvYo/X+l6iM902esGS1Q==}
+  /typescript@5.4.0-dev.20231202:
+    resolution: {integrity: sha512-w3ix0KsujvG01+R8cjjU3ePsea5xM9+tLtVlYSNAh3UXgz7otOQ90jwUEq6xvGfu43aQn3cg2UoKFOXUpXvsQA==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
