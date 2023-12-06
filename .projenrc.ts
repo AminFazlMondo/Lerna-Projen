@@ -1,7 +1,7 @@
 import {javascript, cdk, TextFile} from 'projen'
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git'
-const nodeVersion = '20'
+const nodeVersion = '18'
 
 const project = new cdk.JsiiProject({
   projenrcTs: true,
