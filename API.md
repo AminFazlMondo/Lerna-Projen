@@ -3073,6 +3073,7 @@ public readonly useWorkspaces: boolean;
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.DEFAULT_TASK">DEFAULT_TASK</a></code> | <code>string</code> | The name of the default task (the task executed when `projen` is run without arguments). |
+| <code><a href="#lerna-projen.LernaTypescriptProject.property.DEFAULT_TS_JEST_TRANFORM_PATTERN">DEFAULT_TS_JEST_TRANFORM_PATTERN</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -3088,6 +3089,16 @@ The name of the default task (the task executed when `projen` is run without arg
 
 Normally
 this task should synthesize the project files.
+
+---
+
+##### `DEFAULT_TS_JEST_TRANFORM_PATTERN`<sup>Required</sup> <a name="DEFAULT_TS_JEST_TRANFORM_PATTERN" id="lerna-projen.LernaTypescriptProject.property.DEFAULT_TS_JEST_TRANFORM_PATTERN"></a>
+
+```typescript
+public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -5369,6 +5380,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name of the development tsconfig.json file. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.independentMode">independentMode</a></code> | <code>boolean</code> | Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.sinceLastRelease">sinceLastRelease</a></code> | <code>boolean</code> | (experimental) Flag to run tasks only for the packages that has changes since last release. |
@@ -7368,6 +7380,18 @@ public readonly tsconfigDevFile: string;
 - *Default:* "tsconfig.dev.json"
 
 The name of the development tsconfig.json file.
+
+---
+
+##### `tsJestOptions`<sup>Optional</sup> <a name="tsJestOptions" id="lerna-projen.LernaTypescriptProjectOptions.property.tsJestOptions"></a>
+
+```typescript
+public readonly tsJestOptions: TsJestOptions;
+```
+
+- *Type:* projen.typescript.TsJestOptions
+
+Options for ts-jest.
 
 ---
 
