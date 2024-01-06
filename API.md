@@ -76,7 +76,7 @@ new LernaProject(options: LernaProjectOptions)
 | <code><a href="#lerna-projen.LernaProject.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#lerna-projen.LernaProject.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#lerna-projen.LernaProject.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
-| <code><a href="#lerna-projen.LernaProject.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
+| <code><a href="#lerna-projen.LernaProject.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
 | <code><a href="#lerna-projen.LernaProject.addTask">addTask</a></code> | Adds a new task to this project. |
 | <code><a href="#lerna-projen.LernaProject.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
 | <code><a href="#lerna-projen.LernaProject.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
@@ -156,14 +156,13 @@ The glob pattern to ignore.
 public addPackageIgnore(pattern: string): void
 ```
 
-Exclude these files from the bundled package.
-
-Implemented by project types based on the
-packaging mechanism. For example, `NodeProject` delegates this to `.npmignore`.
+Adds patterns to be ignored by npm.
 
 ###### `pattern`<sup>Required</sup> <a name="pattern" id="lerna-projen.LernaProject.addPackageIgnore.parameter.pattern"></a>
 
 - *Type:* string
+
+The pattern to ignore.
 
 ---
 
@@ -1549,7 +1548,7 @@ new LernaTypescriptProject(options: LernaTypescriptProjectOptions)
 | <code><a href="#lerna-projen.LernaTypescriptProject.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
-| <code><a href="#lerna-projen.LernaTypescriptProject.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
+| <code><a href="#lerna-projen.LernaTypescriptProject.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addTask">addTask</a></code> | Adds a new task to this project. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
 | <code><a href="#lerna-projen.LernaTypescriptProject.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
@@ -1629,14 +1628,13 @@ The glob pattern to ignore.
 public addPackageIgnore(pattern: string): void
 ```
 
-Exclude these files from the bundled package.
-
-Implemented by project types based on the
-packaging mechanism. For example, `NodeProject` delegates this to `.npmignore`.
+Adds patterns to be ignored by npm.
 
 ###### `pattern`<sup>Required</sup> <a name="pattern" id="lerna-projen.LernaTypescriptProject.addPackageIgnore.parameter.pattern"></a>
 
 - *Type:* string
+
+The pattern to ignore.
 
 ---
 
@@ -4542,7 +4540,7 @@ public readonly releaseWorkflowName: string;
 ```
 
 - *Type:* string
-- *Default:* "Release"
+- *Default:* "release"
 
 The name of the default release workflow.
 
@@ -6592,7 +6590,7 @@ public readonly releaseWorkflowName: string;
 ```
 
 - *Type:* string
-- *Default:* "Release"
+- *Default:* "release"
 
 The name of the default release workflow.
 
