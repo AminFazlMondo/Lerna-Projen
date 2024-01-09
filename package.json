@@ -75,6 +75,7 @@
     "commander",
     "fs-extra"
   ],
+  "pnpm": {},
   "keywords": [
     "lerna",
     "monorepo",
