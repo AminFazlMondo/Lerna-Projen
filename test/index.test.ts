@@ -1,5 +1,6 @@
 import {LogLevel, javascript, typescript, cdk} from 'projen'
 import {synthSnapshot} from 'projen/lib/util/synth'
+import {mkdtemp} from './util'
 import {LernaProject, LernaTypescriptProject, TaskCustomizations} from '../src'
 
 interface GenerateProjectsParams {
@@ -70,6 +71,7 @@ function generateProjects(
     independentMode: params.independentMode,
     taskCustomizations: params.taskCustomizations ?? {},
     packageManager: params.packageManager,
+    outdir: mkdtemp(),
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -105,6 +107,7 @@ function generateProjectsTypescript(
     independentMode: params.independentMode,
     taskCustomizations: params.taskCustomizations ?? {},
     hasRootSourceCode: params.hasRootSourceCode ?? false,
+    outdir: mkdtemp(),
   })
 
   const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
@@ -544,6 +547,7 @@ describe('Happy Path for Jsii sub project', () => {
       },
       docgen: true,
       docsDirectory: parentDocsFolder,
+      outdir: mkdtemp(),
     })
 
     new cdk.JsiiProject({
@@ -647,6 +651,7 @@ describe('docgen set to true', () => {
       },
       docgen: true,
       docsDirectory: parentDocsFolder,
+      outdir: mkdtemp(),
     })
 
     new cdk.JsiiProject({
