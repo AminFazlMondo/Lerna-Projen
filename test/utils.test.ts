@@ -1,5 +1,6 @@
 import {NodeProject} from 'projen/lib/javascript'
 import {synthSnapshot} from 'projen/lib/util/synth'
+import {mkdtemp} from './util'
 import {addNxTaskDependency, addNxProjectDependency} from '../src/utils'
 
 describe('utils', () => {
@@ -8,14 +9,17 @@ describe('utils', () => {
       const project1 = new NodeProject({
         defaultReleaseBranch: 'main',
         name: 'project-1',
+        outdir: mkdtemp(),
       })
       const project2 = new NodeProject({
         defaultReleaseBranch: 'main',
         name: 'project-2',
+        outdir: mkdtemp(),
       })
       const project3 = new NodeProject({
         defaultReleaseBranch: 'main',
         name: 'project-3',
+        outdir: mkdtemp(),
       })
 
       addNxTaskDependency(project1, 'test', 'lint', project2, project3)
@@ -35,14 +39,17 @@ describe('utils', () => {
       const project1 = new NodeProject({
         defaultReleaseBranch: 'main',
         name: 'project-1',
+        outdir: mkdtemp(),
       })
       const project2 = new NodeProject({
         defaultReleaseBranch: 'main',
         name: 'project-2',
+        outdir: mkdtemp(),
       })
       const project3 = new NodeProject({
         defaultReleaseBranch: 'main',
         name: 'project-3',
+        outdir: mkdtemp(),
       })
 
       addNxProjectDependency(project1, project2, project3)
