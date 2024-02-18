@@ -215,7 +215,8 @@
       "description": "Publish this package to npm",
       "env": {
         "NPM_DIST_TAG": "latest",
-        "NPM_REGISTRY": "registry.npmjs.org"
+        "NPM_REGISTRY": "registry.npmjs.org",
+        "NPM_CONFIG_PROVENANCE": "true"
       },
       "requiredEnv": [
         "NPM_TOKEN"
