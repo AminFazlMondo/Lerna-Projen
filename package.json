@@ -61,7 +61,7 @@
     "standard-version": "^9",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "peerDependencies": {
     "constructs": "^10.3.0",
