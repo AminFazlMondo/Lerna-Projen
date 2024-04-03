@@ -45,36 +45,40 @@ export function addNxProjectDependency(project: NodeProject, ...dependsOn: NodeP
   project.package.addField('nx', generateNxConfigForProjectDependency(dependsOn))
 }
 
+export interface AddNxTaskDependencyOptions {
+  /**
+   * The task name that is dependent on another tasks
+   */
+  readonly taskName: string;
+
+  /**
+   * The task name that is dependent on in other projects
+   */
+  readonly dependsOnTaskName: string;
+
+  /**
+   * The packages that source project is dependent on
+   */
+  readonly dependsOnProjects: NodeProject[];
+}
+
+export interface AddNxProjectDependencyOptions {
+  /**
+   * The packages that source project is dependent on
+   */
+  readonly dependsOnProjects: NodeProject[];
+}
+
 export interface AddNxDependencyOptions {
   /**
    * Task dependency options
    */
-  taskDependency?: {
-    /**
-     * The task name that is dependent on another tasks
-     */
-    taskName: string;
-
-    /**
-     * The task name that is dependent on in other projects
-     */
-    dependsOnTaskName: string;
-
-    /**
-     * The packages that source project is dependent on
-     */
-    dependsOnProjects: NodeProject[];
-  };
+  readonly taskDependency?: AddNxTaskDependencyOptions;
 
   /**
    * Project dependency options
    */
-  projectDependency?: {
-    /**
-     * The packages that source project is dependent on
-     */
-    dependsOnProjects: NodeProject[];
-  };
+  readonly projectDependency?: AddNxProjectDependencyOptions;
 }
 
 /**

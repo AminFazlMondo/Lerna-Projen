@@ -3102,6 +3102,135 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
+### AddNxDependencyOptions <a name="AddNxDependencyOptions" id="lerna-projen.utils.AddNxDependencyOptions"></a>
+
+#### Initializer <a name="Initializer" id="lerna-projen.utils.AddNxDependencyOptions.Initializer"></a>
+
+```typescript
+import { utils } from 'lerna-projen'
+
+const addNxDependencyOptions: utils.AddNxDependencyOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#lerna-projen.utils.AddNxDependencyOptions.property.projectDependency">projectDependency</a></code> | <code>lerna-projen.utils.AddNxProjectDependencyOptions</code> | Project dependency options. |
+| <code><a href="#lerna-projen.utils.AddNxDependencyOptions.property.taskDependency">taskDependency</a></code> | <code>lerna-projen.utils.AddNxTaskDependencyOptions</code> | Task dependency options. |
+
+---
+
+##### `projectDependency`<sup>Optional</sup> <a name="projectDependency" id="lerna-projen.utils.AddNxDependencyOptions.property.projectDependency"></a>
+
+```typescript
+public readonly projectDependency: AddNxProjectDependencyOptions;
+```
+
+- *Type:* lerna-projen.utils.AddNxProjectDependencyOptions
+
+Project dependency options.
+
+---
+
+##### `taskDependency`<sup>Optional</sup> <a name="taskDependency" id="lerna-projen.utils.AddNxDependencyOptions.property.taskDependency"></a>
+
+```typescript
+public readonly taskDependency: AddNxTaskDependencyOptions;
+```
+
+- *Type:* lerna-projen.utils.AddNxTaskDependencyOptions
+
+Task dependency options.
+
+---
+
+### AddNxProjectDependencyOptions <a name="AddNxProjectDependencyOptions" id="lerna-projen.utils.AddNxProjectDependencyOptions"></a>
+
+#### Initializer <a name="Initializer" id="lerna-projen.utils.AddNxProjectDependencyOptions.Initializer"></a>
+
+```typescript
+import { utils } from 'lerna-projen'
+
+const addNxProjectDependencyOptions: utils.AddNxProjectDependencyOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#lerna-projen.utils.AddNxProjectDependencyOptions.property.dependsOnProjects">dependsOnProjects</a></code> | <code>projen.javascript.NodeProject[]</code> | The packages that source project is dependent on. |
+
+---
+
+##### `dependsOnProjects`<sup>Required</sup> <a name="dependsOnProjects" id="lerna-projen.utils.AddNxProjectDependencyOptions.property.dependsOnProjects"></a>
+
+```typescript
+public readonly dependsOnProjects: NodeProject[];
+```
+
+- *Type:* projen.javascript.NodeProject[]
+
+The packages that source project is dependent on.
+
+---
+
+### AddNxTaskDependencyOptions <a name="AddNxTaskDependencyOptions" id="lerna-projen.utils.AddNxTaskDependencyOptions"></a>
+
+#### Initializer <a name="Initializer" id="lerna-projen.utils.AddNxTaskDependencyOptions.Initializer"></a>
+
+```typescript
+import { utils } from 'lerna-projen'
+
+const addNxTaskDependencyOptions: utils.AddNxTaskDependencyOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnProjects">dependsOnProjects</a></code> | <code>projen.javascript.NodeProject[]</code> | The packages that source project is dependent on. |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName">dependsOnTaskName</a></code> | <code>string</code> | The task name that is dependent on in other projects. |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.taskName">taskName</a></code> | <code>string</code> | The task name that is dependent on another tasks. |
+
+---
+
+##### `dependsOnProjects`<sup>Required</sup> <a name="dependsOnProjects" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnProjects"></a>
+
+```typescript
+public readonly dependsOnProjects: NodeProject[];
+```
+
+- *Type:* projen.javascript.NodeProject[]
+
+The packages that source project is dependent on.
+
+---
+
+##### `dependsOnTaskName`<sup>Required</sup> <a name="dependsOnTaskName" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName"></a>
+
+```typescript
+public readonly dependsOnTaskName: string;
+```
+
+- *Type:* string
+
+The task name that is dependent on in other projects.
+
+---
+
+##### `taskName`<sup>Required</sup> <a name="taskName" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.taskName"></a>
+
+```typescript
+public readonly taskName: string;
+```
+
+- *Type:* string
+
+The task name that is dependent on another tasks.
+
+---
+
 ### LernaCommonProjectOptions <a name="LernaCommonProjectOptions" id="lerna-projen.LernaCommonProjectOptions"></a>
 
 #### Initializer <a name="Initializer" id="lerna-projen.LernaCommonProjectOptions.Initializer"></a>
