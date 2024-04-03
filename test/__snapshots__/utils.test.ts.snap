@@ -1,5 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils addNxDependency should add dependency in nx when both task and project dependency is specified 1`] = `
+{
+  "implicitDependencies": [
+    "project-2",
+  ],
+  "targets": {
+    "test": {
+      "dependsOn": [
+        {
+          "projects": [
+            "project-3",
+          ],
+          "target": "lint",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`utils addNxDependency should add dependency in nx when only project dependency is specified 1`] = `
+{
+  "implicitDependencies": [
+    "project-2",
+    "project-3",
+  ],
+}
+`;
+
+exports[`utils addNxDependency should add dependency in nx when only task dependency is specified 1`] = `
+{
+  "targets": {
+    "test": {
+      "dependsOn": [
+        {
+          "projects": [
+            "project-2",
+            "project-3",
+          ],
+          "target": "lint",
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`utils addNxProjectDependency should add dependency in nx 1`] = `
 {
   "implicitDependencies": [

@@ -1,16 +1,7 @@
 import {NodeProject} from 'projen/lib/javascript'
 
-/**
- * Adds dependency to the project for NX task runner
- * see https://nx.dev/reference/project-configuration#dependson
- *
- * @param project The Project to add dependency to
- * @param taskName The task name that is dependent on another tasks
- * @param dependsOnTaskName The task name that is dependent on in other projects
- * @param dependsOn The packages that source project is dependent on
- */
-export function addNxTaskDependency(project: NodeProject, taskName: string, dependsOnTaskName: string, ...dependsOn: NodeProject[]): void {
-  project.package.addField('nx', {
+function generateNxConfigForTaskDependency(taskName: string, dependsOnTaskName: string, dependsOn: NodeProject[]) {
+  return {
     targets: {
       [taskName]: {
         dependsOn: [
@@ -21,8 +12,28 @@ export function addNxTaskDependency(project: NodeProject, taskName: string, depe
         ],
       },
     },
-  })
+  }
 }
+
+/**
+ * Adds dependency to the project for NX task runner
+ * see https://nx.dev/reference/project-configuration#dependson
+ *
+ * @param project The Project to add dependency to
+ * @param taskName The task name that is dependent on another tasks
+ * @param dependsOnTaskName The task name that is dependent on in other projects
+ * @param dependsOn The packages that source project is dependent on
+ */
+export function addNxTaskDependency(project: NodeProject, taskName: string, dependsOnTaskName: string, ...dependsOn: NodeProject[]): void {
+  project.package.addField('nx', generateNxConfigForTaskDependency(taskName, dependsOnTaskName, dependsOn))
+}
+
+function generateNxConfigForProjectDependency(dependsOn: NodeProject[]) {
+  return {
+    implicitDependencies: dependsOn.map(d => d.package.packageName),
+  }
+}
+
 /**
  * Adds dependency to the project for NX task runner
  * see https://nx.dev/reference/project-configuration#implicitdependencies
@@ -31,7 +42,66 @@ export function addNxTaskDependency(project: NodeProject, taskName: string, depe
  * @param dependsOn The packages that source project is dependent on
  */
 export function addNxProjectDependency(project: NodeProject, ...dependsOn: NodeProject[]): void {
+  project.package.addField('nx', generateNxConfigForProjectDependency(dependsOn))
+}
+
+export interface AddNxTaskDependencyOptions {
+  /**
+   * The task name that is dependent on another tasks
+   */
+  readonly taskName: string;
+
+  /**
+   * The task name that is dependent on in other projects
+   */
+  readonly dependsOnTaskName: string;
+
+  /**
+   * The packages that source project is dependent on
+   */
+  readonly dependsOnProjects: NodeProject[];
+}
+
+export interface AddNxProjectDependencyOptions {
+  /**
+   * The packages that source project is dependent on
+   */
+  readonly dependsOnProjects: NodeProject[];
+}
+
+export interface AddNxDependencyOptions {
+  /**
+   * Task dependency options
+   */
+  readonly taskDependency?: AddNxTaskDependencyOptions;
+
+  /**
+   * Project dependency options
+   */
+  readonly projectDependency?: AddNxProjectDependencyOptions;
+}
+
+/**
+ * Adds dependency to the project for NX task runner
+ * see https://nx.dev/reference/project-configuration
+ *
+ * @param project The Project to add dependency to
+ * @param options Dependency options
+ */
+export function addNxDependency(project: NodeProject, options: AddNxDependencyOptions): void {
+  const projectDependencyConfig =
+    options.projectDependency ? generateNxConfigForProjectDependency(options.projectDependency.dependsOnProjects) : undefined
+
+  const taskDependencyConfig =
+      options.taskDependency ?
+        generateNxConfigForTaskDependency(
+          options.taskDependency.taskName,
+          options.taskDependency.dependsOnTaskName,
+          options.taskDependency.dependsOnProjects)
+        : undefined
+
   project.package.addField('nx', {
-    implicitDependencies: dependsOn.map(d => d.package.packageName),
+    ...projectDependencyConfig,
+    ...taskDependencyConfig,
   })
 }
