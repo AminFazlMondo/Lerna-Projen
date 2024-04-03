@@ -1,7 +1,7 @@
 import {NodeProject} from 'projen/lib/javascript'
 import {synthSnapshot} from 'projen/lib/util/synth'
 import {mkdtemp} from './util'
-import {addNxTaskDependency, addNxProjectDependency} from '../src/utils'
+import {addNxTaskDependency, addNxProjectDependency, addNxDependency} from '../src/utils'
 
 describe('utils', () => {
   describe('addNxTaskDependency', () => {
@@ -33,7 +33,6 @@ describe('utils', () => {
     })
   })
 
-
   describe('addNxProjectDependency', () => {
     test('should add dependency in nx', () => {
       const project1 = new NodeProject({
@@ -60,6 +59,99 @@ describe('utils', () => {
 
       expect(output1['package.json'].nx).toMatchSnapshot()
       expect(output2['package.json'].nx).toMatchSnapshot()
+    })
+  })
+
+  describe('addNxDependency', () => {
+    test('should add dependency in nx when only task dependency is specified', () => {
+      const project1 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-1',
+        outdir: mkdtemp(),
+      })
+      const project2 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-2',
+        outdir: mkdtemp(),
+      })
+      const project3 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-3',
+        outdir: mkdtemp(),
+      })
+
+      addNxDependency(project1, {
+        taskDependency: {
+          taskName: 'test',
+          dependsOnTaskName: 'lint',
+          dependsOnProjects: [project2, project3],
+        },
+      })
+
+      const output1 = synthSnapshot(project1)
+
+      expect(output1['package.json'].nx).toMatchSnapshot()
+    })
+
+    test('should add dependency in nx when only project dependency is specified', () => {
+      const project1 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-1',
+        outdir: mkdtemp(),
+      })
+      const project2 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-2',
+        outdir: mkdtemp(),
+      })
+      const project3 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-3',
+        outdir: mkdtemp(),
+      })
+
+      addNxDependency(project1, {
+        projectDependency: {
+          dependsOnProjects: [project2, project3],
+        },
+      })
+
+      const output1 = synthSnapshot(project1)
+
+      expect(output1['package.json'].nx).toMatchSnapshot()
+    })
+
+    test('should add dependency in nx when both task and project dependency is specified', () => {
+      const project1 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-1',
+        outdir: mkdtemp(),
+      })
+      const project2 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-2',
+        outdir: mkdtemp(),
+      })
+      const project3 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-3',
+        outdir: mkdtemp(),
+      })
+
+      addNxDependency(project1, {
+        projectDependency: {
+          dependsOnProjects: [project2],
+        },
+        taskDependency: {
+          taskName: 'test',
+          dependsOnTaskName: 'lint',
+          dependsOnProjects: [project3],
+        },
+      })
+
+      const output1 = synthSnapshot(project1)
+
+      expect(output1['package.json'].nx).toMatchSnapshot()
     })
   })
 })
