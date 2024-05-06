@@ -3073,6 +3073,7 @@ const addNxDependencyOptions: utils.AddNxDependencyOptions = { ... }
 | --- | --- | --- |
 | <code><a href="#lerna-projen.utils.AddNxDependencyOptions.property.projectDependency">projectDependency</a></code> | <code>lerna-projen.utils.AddNxProjectDependencyOptions</code> | Project dependency options. |
 | <code><a href="#lerna-projen.utils.AddNxDependencyOptions.property.taskDependency">taskDependency</a></code> | <code>lerna-projen.utils.AddNxTaskDependencyOptions</code> | Task dependency options. |
+| <code><a href="#lerna-projen.utils.AddNxDependencyOptions.property.tasksDependency">tasksDependency</a></code> | <code>lerna-projen.utils.AddNxTaskDependencyOptions[]</code> | Task dependency options. |
 
 ---
 
@@ -3088,13 +3089,27 @@ Project dependency options.
 
 ---
 
-##### `taskDependency`<sup>Optional</sup> <a name="taskDependency" id="lerna-projen.utils.AddNxDependencyOptions.property.taskDependency"></a>
+##### ~~`taskDependency`~~<sup>Optional</sup> <a name="taskDependency" id="lerna-projen.utils.AddNxDependencyOptions.property.taskDependency"></a>
+
+- *Deprecated:* use `tasksDependency`
 
 ```typescript
 public readonly taskDependency: AddNxTaskDependencyOptions;
 ```
 
 - *Type:* lerna-projen.utils.AddNxTaskDependencyOptions
+
+Task dependency options.
+
+---
+
+##### `tasksDependency`<sup>Optional</sup> <a name="tasksDependency" id="lerna-projen.utils.AddNxDependencyOptions.property.tasksDependency"></a>
+
+```typescript
+public readonly tasksDependency: AddNxTaskDependencyOptions[];
+```
+
+- *Type:* lerna-projen.utils.AddNxTaskDependencyOptions[]
 
 Task dependency options.
 
