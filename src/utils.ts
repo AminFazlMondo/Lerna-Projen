@@ -1,17 +1,22 @@
 import {NodeProject} from 'projen/lib/javascript'
 
-function generateNxConfigForTaskDependency(taskName: string, dependsOnTaskName: string, dependsOn: NodeProject[]) {
-  return {
-    targets: {
-      [taskName]: {
-        dependsOn: [
-          {
-            projects: dependsOn.map(d => d.package.packageName),
-            target: dependsOnTaskName,
-          },
-        ],
-      },
+function generateNxTargetEntriesForTaskDependency(options: AddNxTaskDependencyOptions) {
+  return [
+    options.taskName,
+    {
+      dependsOn: [
+        {
+          projects: options.dependsOnProjects.map(d => d.package.packageName),
+          target: options.dependsOnTaskName,
+        },
+      ],
     },
+  ]
+}
+
+function generateNxConfigForTasksDependency(options: AddNxTaskDependencyOptions[]) {
+  return {
+    targets: Object.fromEntries(options.map(generateNxTargetEntriesForTaskDependency)),
   }
 }
 
@@ -22,10 +27,10 @@ function generateNxConfigForTaskDependency(taskName: string, dependsOnTaskName: 
  * @param project The Project to add dependency to
  * @param taskName The task name that is dependent on another tasks
  * @param dependsOnTaskName The task name that is dependent on in other projects
- * @param dependsOn The packages that source project is dependent on
+ * @param dependsOnProjects The packages that source project is dependent on
  */
-export function addNxTaskDependency(project: NodeProject, taskName: string, dependsOnTaskName: string, ...dependsOn: NodeProject[]): void {
-  project.package.addField('nx', generateNxConfigForTaskDependency(taskName, dependsOnTaskName, dependsOn))
+export function addNxTaskDependency(project: NodeProject, taskName: string, dependsOnTaskName: string, ...dependsOnProjects: NodeProject[]): void {
+  project.package.addField('nx', generateNxConfigForTasksDependency([{taskName, dependsOnTaskName, dependsOnProjects}]))
 }
 
 function generateNxConfigForProjectDependency(dependsOn: NodeProject[]) {
@@ -72,8 +77,14 @@ export interface AddNxProjectDependencyOptions {
 export interface AddNxDependencyOptions {
   /**
    * Task dependency options
+   * @deprecated use `tasksDependency`
    */
   readonly taskDependency?: AddNxTaskDependencyOptions;
+
+  /**
+   * Task dependency options
+   */
+  readonly tasksDependency?: AddNxTaskDependencyOptions[];
 
   /**
    * Project dependency options
@@ -89,16 +100,18 @@ export interface AddNxDependencyOptions {
  * @param options Dependency options
  */
 export function addNxDependency(project: NodeProject, options: AddNxDependencyOptions): void {
+  if (options.taskDependency && options.tasksDependency)
+    throw new Error('Task Dependency and Tasks dependency option cannot be used in conjunction')
+
   const projectDependencyConfig =
     options.projectDependency ? generateNxConfigForProjectDependency(options.projectDependency.dependsOnProjects) : undefined
 
+  const tasksDependency = options.taskDependency ? [options.taskDependency] : options.tasksDependency
+
   const taskDependencyConfig =
-      options.taskDependency ?
-        generateNxConfigForTaskDependency(
-          options.taskDependency.taskName,
-          options.taskDependency.dependsOnTaskName,
-          options.taskDependency.dependsOnProjects)
-        : undefined
+    tasksDependency ?
+      generateNxConfigForTasksDependency(tasksDependency):
+      undefined
 
   project.package.addField('nx', {
     ...projectDependencyConfig,
