@@ -54,10 +54,10 @@
     "jest-junit": "^15",
     "jsii": "5.x",
     "jsii-diff": "^1.98.0",
-    "jsii-docgen": "^10.4.10",
+    "jsii-docgen": "^10.4.11",
     "jsii-pacmak": "^1.98.0",
     "jsii-rosetta": "5.x",
-    "projen": "^0.82.1",
+    "projen": "^0.82.2",
     "standard-version": "^9",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
@@ -65,7 +65,7 @@
   },
   "peerDependencies": {
     "constructs": "^10.3.0",
-    "projen": "^0.82.1"
+    "projen": "^0.82.2"
   },
   "dependencies": {
     "commander": "^11.1.0",
