@@ -59,7 +59,7 @@
     "jsii-rosetta": "5.x",
     "projen": "^0.82.6",
     "standard-version": "^9",
-    "ts-jest": "^29.1.4",
+    "ts-jest": "^29.1.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
