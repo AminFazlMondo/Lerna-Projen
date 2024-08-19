@@ -14,7 +14,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^18",
+      "version": "^20",
       "type": "build"
     },
     {
@@ -68,12 +68,12 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "5.x",
+      "version": "5.4.x",
       "type": "build"
     },
     {
       "name": "jsii",
-      "version": "5.x",
+      "version": "5.4.x",
       "type": "build"
     },
     {

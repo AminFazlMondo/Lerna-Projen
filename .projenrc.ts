@@ -43,12 +43,13 @@ const project = new cdk.JsiiProject({
     },
   },
   workflowNodeVersion: nodeVersion,
+  minNodeVersion: `${nodeVersion}.0.0`,
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
-  jsiiVersion: '5.x',
+  jsiiVersion: '5.4.x',
 })
 
 const additionalRules = {
