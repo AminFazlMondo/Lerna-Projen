@@ -3162,6 +3162,7 @@ const addNxTaskDependencyOptions: utils.AddNxTaskDependencyOptions = { ... }
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnProjects">dependsOnProjects</a></code> | <code>projen.javascript.NodeProject[]</code> | The packages that source project is dependent on. |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName">dependsOnTaskName</a></code> | <code>string</code> | The task name that is dependent on in other projects. |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.taskName">taskName</a></code> | <code>string</code> | The task name that is dependent on another tasks. |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.cache">cache</a></code> | <code>boolean</code> | Cache Task Results. |
 
 ---
 
@@ -3198,6 +3199,19 @@ public readonly taskName: string;
 - *Type:* string
 
 The task name that is dependent on another tasks.
+
+---
+
+##### `cache`<sup>Optional</sup> <a name="cache" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.cache"></a>
+
+```typescript
+public readonly cache: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Cache Task Results.
 
 ---
 
