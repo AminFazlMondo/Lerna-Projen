@@ -161,6 +161,44 @@ describe('utils', () => {
       expect(output1['package.json'].nx).toMatchSnapshot()
     })
 
+    test('should add cache flag when specified', () => {
+      const project1 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-1',
+        outdir: mkdtemp(),
+      })
+      const project2 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-2',
+        outdir: mkdtemp(),
+      })
+      const project3 = new NodeProject({
+        defaultReleaseBranch: 'main',
+        name: 'project-3',
+        outdir: mkdtemp(),
+      })
+
+      addNxDependency(project1, {
+        tasksDependency: [
+          {
+            taskName: 'test',
+            dependsOnTaskName: 'lint',
+            dependsOnProjects: [project3],
+            cache: true,
+          },
+          {
+            taskName: 'default',
+            dependsOnTaskName: 'build',
+            dependsOnProjects: [project2],
+          },
+        ],
+      })
+
+      const output1 = synthSnapshot(project1)
+
+      expect(output1['package.json'].nx).toMatchSnapshot()
+    })
+
     describe('deprecated', () => {
       test('should add dependency in nx when only task dependency is specified', () => {
         const project1 = new NodeProject({

@@ -8,6 +8,7 @@ function generateNxTargetEntriesForTaskDependency(options: AddNxTaskDependencyOp
         {
           projects: options.dependsOnProjects.map(d => d.package.packageName),
           target: options.dependsOnTaskName,
+          cache: options.cache ?? undefined,
         },
       ],
     },
@@ -65,6 +66,12 @@ export interface AddNxTaskDependencyOptions {
    * The packages that source project is dependent on
    */
   readonly dependsOnProjects: NodeProject[];
+
+  /**
+   * Cache Task Results
+   * @default false
+   */
+  readonly cache?: boolean;
 }
 
 export interface AddNxProjectDependencyOptions {
