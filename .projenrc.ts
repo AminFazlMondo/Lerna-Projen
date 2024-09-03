@@ -50,6 +50,7 @@ const project = new cdk.JsiiProject({
   },
   autoApproveUpgrades: true,
   jsiiVersion: '5.4.x',
+  releaseFailureIssue: true,
 })
 
 const additionalRules = {
