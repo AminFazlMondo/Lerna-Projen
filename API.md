@@ -3160,9 +3160,9 @@ const addNxTaskDependencyOptions: utils.AddNxTaskDependencyOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnProjects">dependsOnProjects</a></code> | <code>projen.javascript.NodeProject[]</code> | The packages that source project is dependent on. |
-| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName">dependsOnTaskName</a></code> | <code>string</code> | The task name that is dependent on in other projects. |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.taskName">taskName</a></code> | <code>string</code> | The task name that is dependent on another tasks. |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.cache">cache</a></code> | <code>boolean</code> | Cache Task Results. |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName">dependsOnTaskName</a></code> | <code>string</code> | The task name that is dependent on in other projects. |
 
 ---
 
@@ -3175,18 +3175,6 @@ public readonly dependsOnProjects: NodeProject[];
 - *Type:* projen.javascript.NodeProject[]
 
 The packages that source project is dependent on.
-
----
-
-##### `dependsOnTaskName`<sup>Required</sup> <a name="dependsOnTaskName" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName"></a>
-
-```typescript
-public readonly dependsOnTaskName: string;
-```
-
-- *Type:* string
-
-The task name that is dependent on in other projects.
 
 ---
 
@@ -3212,6 +3200,18 @@ public readonly cache: boolean;
 - *Default:* false
 
 Cache Task Results.
+
+---
+
+##### `dependsOnTaskName`<sup>Optional</sup> <a name="dependsOnTaskName" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName"></a>
+
+```typescript
+public readonly dependsOnTaskName: string;
+```
+
+- *Type:* string
+
+The task name that is dependent on in other projects.
 
 ---
 
