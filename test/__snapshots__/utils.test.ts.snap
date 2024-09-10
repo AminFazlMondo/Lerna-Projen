@@ -52,9 +52,9 @@ exports[`utils addNxDependency should add cache flag when specified 1`] = `
       ],
     },
     "test": {
+      "cache": true,
       "dependsOn": [
         {
-          "cache": true,
           "projects": [
             "project-3",
           ],
