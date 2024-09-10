@@ -1,16 +1,22 @@
 import {NodeProject} from 'projen/lib/javascript'
 
 function generateNxTargetEntriesForTaskDependency(options: AddNxTaskDependencyOptions) {
+  function getDependentOnAttribute() {
+    const {dependsOnTaskName, dependsOnProjects} = options
+
+    if (dependsOnProjects.length === 0 && !dependsOnTaskName)
+      return undefined
+
+    return [{
+      projects: dependsOnProjects.length === 0 ? undefined : dependsOnProjects.map(d => d.package.packageName),
+      target: dependsOnTaskName,
+    }]
+  }
   return [
     options.taskName,
     {
-      dependsOn: [
-        {
-          projects: options.dependsOnProjects.map(d => d.package.packageName),
-          target: options.dependsOnTaskName,
-          cache: options.cache ?? undefined,
-        },
-      ],
+      dependsOn: getDependentOnAttribute(),
+      cache: options.cache ?? undefined,
     },
   ]
 }
@@ -60,7 +66,7 @@ export interface AddNxTaskDependencyOptions {
   /**
    * The task name that is dependent on in other projects
    */
-  readonly dependsOnTaskName: string;
+  readonly dependsOnTaskName?: string;
 
   /**
    * The packages that source project is dependent on
