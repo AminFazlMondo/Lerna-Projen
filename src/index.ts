@@ -168,8 +168,6 @@ class LernaProjectFactory {
     this.project.packageTask.reset(`mkdir -p ${this.project.artifactsJavascriptDirectory}`)
     this.project.preCompileTask.exec(`lerna-projen clean-dist ${this.project.artifactsDirectory}`)
 
-    this.project.package.addPackageResolutions('conventional-changelog-core@5.0.2') //Temporary fix
-
     this.appendLernaCommands()
     this.addCrossLinks()
     this.updateSubProjects()
