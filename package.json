@@ -42,7 +42,7 @@
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
     "@types/fs-extra": "^9.0.13",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.13",
     "@types/node": "^20",
     "@typescript-eslint/eslint-plugin": "^7",
     "@typescript-eslint/parser": "^7",
