@@ -53,6 +53,7 @@ interface ILernaProject {
   readonly docsDirectory: string;
   readonly docgen?: boolean;
   readonly taskCustomizations: TaskCustomizations;
+  readonly pnpmVersion?: string;
 
   customizeTask(taskName: string, customization: TaskCustomization): void;
 }
@@ -71,6 +72,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   readonly independentMode: boolean
   readonly useWorkspaces: boolean
   readonly taskCustomizations: TaskCustomizations
+  readonly pnpmVersion?: string
 
   private readonly factory: LernaProjectFactory
 
@@ -88,6 +90,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
     this.independentMode = options.independentMode ?? false
     this.useWorkspaces = options.useWorkspaces ?? false
     this.taskCustomizations = options.taskCustomizations ?? {}
+    this.pnpmVersion = options.pnpmVersion
 
     this.factory = new LernaProjectFactory(this)
   }
@@ -123,6 +126,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   readonly independentMode: boolean
   readonly useWorkspaces: boolean
   readonly taskCustomizations: TaskCustomizations
+  readonly pnpmVersion?: string
 
   private readonly factory: LernaProjectFactory
 
@@ -134,6 +138,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     this.independentMode = options.independentMode ?? false
     this.useWorkspaces = options.useWorkspaces ?? false
     this.taskCustomizations = options.taskCustomizations ?? {}
+    this.pnpmVersion = options.pnpmVersion
 
     if (!(options.hasRootSourceCode ?? false))
       this.tasks.tryFind('compile')?.reset()
@@ -168,10 +173,16 @@ class LernaProjectFactory {
     this.project.packageTask.reset(`mkdir -p ${this.project.artifactsJavascriptDirectory}`)
     this.project.preCompileTask.exec(`lerna-projen clean-dist ${this.project.artifactsDirectory}`)
 
+    this.setupPackageManager()
     this.appendLernaCommands()
     this.addCrossLinks()
     this.updateSubProjects()
     this.addDocumentsIndex()
+  }
+
+  private setupPackageManager() {
+    if (this.project.package.packageManager === javascript.NodePackageManager.PNPM && this.project.pnpmVersion === '9')
+      this.project.npmrc.addConfig('node-linker', 'hoisted')
   }
 
   private getSubProjectPath(subProject: Project) {

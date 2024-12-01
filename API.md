@@ -742,6 +742,7 @@ When given a project, this it the project itself.
 | <code><a href="#lerna-projen.LernaProject.property.taskCustomizations">taskCustomizations</a></code> | <code>{[ key: string ]: <a href="#lerna-projen.TaskCustomization">TaskCustomization</a>}</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaProject.property.useNx">useNx</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaProject.property.useWorkspaces">useWorkspaces</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#lerna-projen.LernaProject.property.pnpmVersion">pnpmVersion</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -1452,6 +1453,16 @@ public readonly useWorkspaces: boolean;
 ```
 
 - *Type:* boolean
+
+---
+
+##### `pnpmVersion`<sup>Optional</sup> <a name="pnpmVersion" id="lerna-projen.LernaProject.property.pnpmVersion"></a>
+
+```typescript
+public readonly pnpmVersion: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -2226,6 +2237,7 @@ When given a project, this it the project itself.
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.taskCustomizations">taskCustomizations</a></code> | <code>{[ key: string ]: <a href="#lerna-projen.TaskCustomization">TaskCustomization</a>}</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.useNx">useNx</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.useWorkspaces">useWorkspaces</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#lerna-projen.LernaTypescriptProject.property.pnpmVersion">pnpmVersion</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -3026,6 +3038,16 @@ public readonly useWorkspaces: boolean;
 ```
 
 - *Type:* boolean
+
+---
+
+##### `pnpmVersion`<sup>Optional</sup> <a name="pnpmVersion" id="lerna-projen.LernaTypescriptProject.property.pnpmVersion"></a>
+
+```typescript
+public readonly pnpmVersion: string;
+```
+
+- *Type:* string
 
 ---
 
