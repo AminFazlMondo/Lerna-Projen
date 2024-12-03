@@ -787,7 +787,7 @@ describe('since last release', () => {
           compile: expect.objectContaining({
             steps: expect.arrayContaining([
               {
-                exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+                exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)',
               },
             ]),
           }),
@@ -880,7 +880,7 @@ describe('task customization', () => {
             compile: expect.objectContaining({
               steps: expect.arrayContaining([
                 {
-                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)',
                 },
               ]),
             }),
@@ -946,7 +946,7 @@ describe('task customization', () => {
             compile: expect.objectContaining({
               steps: expect.arrayContaining([
                 {
-                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*")',
+                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)',
                 },
               ]),
             }),

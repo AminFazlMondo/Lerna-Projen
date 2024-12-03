@@ -244,7 +244,7 @@ class LernaProjectFactory {
     const ignoreFlags = excludePatterns.map((glob) => ` --ignore ${glob}`).join('')
 
 
-    const postCommand = useSinceFlag ? ' --since $(git describe --abbrev=0 --tags --match "v*")' : ''
+    const postCommand = useSinceFlag ? ' --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)' : ''
     return `${mainCommand}${postCommand}${scopeFlags}${ignoreFlags}`
   }
 
