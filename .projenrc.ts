@@ -49,7 +49,7 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
-  jsiiVersion: '5.4.x',
+  jsiiVersion: '5.8.x',
   releaseFailureIssue: true,
 })
 

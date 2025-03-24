@@ -79,12 +79,12 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "5.4.x",
+      "version": "5.8.x",
       "type": "build"
     },
     {
       "name": "jsii",
-      "version": "5.4.x",
+      "version": "5.8.x",
       "type": "build"
     },
     {
