@@ -1,7 +1,7 @@
-import {javascript, cdk, TextFile} from 'projen'
+import { javascript, cdk, TextFile } from 'projen';
 
-const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git'
-const nodeVersion = '20'
+const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git';
+const nodeVersion = '20';
 
 const project = new cdk.JsiiProject({
   projenrcTs: true,
@@ -51,26 +51,10 @@ const project = new cdk.JsiiProject({
   autoApproveUpgrades: true,
   jsiiVersion: '5.8.x',
   releaseFailureIssue: true,
-})
-
-const additionalRules = {
-  'curly': [
-    'error',
-    'multi',
-    'consistent',
-  ],
-  'semi': [
-    'error',
-    'never',
-  ],
-  'object-curly-spacing': 'error',
-  'nonblock-statement-body-position': ['error', 'below'],
-}
-
-project.eslint?.addRules(additionalRules)
+});
 
 new TextFile(project, '.nvmrc', {
   lines: [nodeVersion],
-})
+});
 
-project.synth()
+project.synth();

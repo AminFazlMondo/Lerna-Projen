@@ -1,16 +1,15 @@
-import {NodeProject} from 'projen/lib/javascript'
+import { NodeProject } from 'projen/lib/javascript';
 
 function generateNxTargetEntriesForTaskDependency(options: AddNxTaskDependencyOptions) {
   function getDependentOnAttribute() {
-    const {dependsOnTaskName, dependsOnProjects} = options
+    const { dependsOnTaskName, dependsOnProjects } = options;
 
-    if (dependsOnProjects.length === 0 && !dependsOnTaskName)
-      return undefined
+    if (dependsOnProjects.length === 0 && !dependsOnTaskName) {return undefined;}
 
     return [{
       projects: dependsOnProjects.length === 0 ? undefined : dependsOnProjects.map(d => d.package.packageName),
       target: dependsOnTaskName,
-    }]
+    }];
   }
   return [
     options.taskName,
@@ -18,13 +17,13 @@ function generateNxTargetEntriesForTaskDependency(options: AddNxTaskDependencyOp
       dependsOn: getDependentOnAttribute(),
       cache: options.cache ?? undefined,
     },
-  ]
+  ];
 }
 
 function generateNxConfigForTasksDependency(options: AddNxTaskDependencyOptions[]) {
   return {
     targets: Object.fromEntries(options.map(generateNxTargetEntriesForTaskDependency)),
-  }
+  };
 }
 
 /**
@@ -37,13 +36,13 @@ function generateNxConfigForTasksDependency(options: AddNxTaskDependencyOptions[
  * @param dependsOnProjects The packages that source project is dependent on
  */
 export function addNxTaskDependency(project: NodeProject, taskName: string, dependsOnTaskName: string, ...dependsOnProjects: NodeProject[]): void {
-  project.package.addField('nx', generateNxConfigForTasksDependency([{taskName, dependsOnTaskName, dependsOnProjects}]))
+  project.package.addField('nx', generateNxConfigForTasksDependency([{ taskName, dependsOnTaskName, dependsOnProjects }]));
 }
 
 function generateNxConfigForProjectDependency(dependsOn: NodeProject[]) {
   return {
     implicitDependencies: dependsOn.map(d => d.package.packageName),
-  }
+  };
 }
 
 /**
@@ -54,7 +53,7 @@ function generateNxConfigForProjectDependency(dependsOn: NodeProject[]) {
  * @param dependsOn The packages that source project is dependent on
  */
 export function addNxProjectDependency(project: NodeProject, ...dependsOn: NodeProject[]): void {
-  project.package.addField('nx', generateNxConfigForProjectDependency(dependsOn))
+  project.package.addField('nx', generateNxConfigForProjectDependency(dependsOn));
 }
 
 export interface AddNxTaskDependencyOptions {
@@ -113,21 +112,20 @@ export interface AddNxDependencyOptions {
  * @param options Dependency options
  */
 export function addNxDependency(project: NodeProject, options: AddNxDependencyOptions): void {
-  if (options.taskDependency && options.tasksDependency)
-    throw new Error('Task Dependency and Tasks dependency option cannot be used in conjunction')
+  if (options.taskDependency && options.tasksDependency) {throw new Error('Task Dependency and Tasks dependency option cannot be used in conjunction');}
 
   const projectDependencyConfig =
-    options.projectDependency ? generateNxConfigForProjectDependency(options.projectDependency.dependsOnProjects) : undefined
+    options.projectDependency ? generateNxConfigForProjectDependency(options.projectDependency.dependsOnProjects) : undefined;
 
-  const tasksDependency = options.taskDependency ? [options.taskDependency] : options.tasksDependency
+  const tasksDependency = options.taskDependency ? [options.taskDependency] : options.tasksDependency;
 
   const taskDependencyConfig =
     tasksDependency ?
       generateNxConfigForTasksDependency(tasksDependency):
-      undefined
+      undefined;
 
   project.package.addField('nx', {
     ...projectDependencyConfig,
     ...taskDependencyConfig,
-  })
+  });
 }

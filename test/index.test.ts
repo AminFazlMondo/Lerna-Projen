@@ -1,7 +1,7 @@
-import {LogLevel, javascript, typescript, cdk} from 'projen'
-import {synthSnapshot} from 'projen/lib/util/synth'
-import {mkdtemp} from './util'
-import {LernaProject, LernaTypescriptProject, TaskCustomizations} from '../src'
+import { LogLevel, javascript, typescript, cdk } from 'projen';
+import { synthSnapshot } from 'projen/lib/util/synth';
+import { mkdtemp } from './util';
+import { LernaProject, LernaTypescriptProject, TaskCustomizations } from '../src';
 
 interface GenerateProjectsParams {
   /**
@@ -24,7 +24,7 @@ interface GenerateProjectsParams {
    */
   projenrcTs?: boolean;
 
-  useNx?:boolean;
+  useNx?: boolean;
 
   /**
    * @default false
@@ -72,9 +72,9 @@ function generateProjects(
     taskCustomizations: params.taskCustomizations ?? {},
     packageManager: params.packageManager,
     outdir: mkdtemp(),
-  })
+  });
 
-  const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
+  const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject;
   new SubProjectType({
     name: 'test-sub-project',
     parent: parentProject,
@@ -83,8 +83,8 @@ function generateProjects(
     logging: {
       level: LogLevel.OFF,
     },
-  })
-  return parentProject
+  });
+  return parentProject;
 }
 
 function generateProjectsTypescript(
@@ -108,9 +108,9 @@ function generateProjectsTypescript(
     taskCustomizations: params.taskCustomizations ?? {},
     hasRootSourceCode: params.hasRootSourceCode ?? false,
     outdir: mkdtemp(),
-  })
+  });
 
-  const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject
+  const SubProjectType = (params.subProjectHasDocs ?? true) ? typescript.TypeScriptProject : javascript.NodeProject;
   new SubProjectType({
     name: 'test-sub-project',
     parent: parentProject,
@@ -119,32 +119,32 @@ function generateProjectsTypescript(
     logging: {
       level: LogLevel.OFF,
     },
-  })
-  return parentProject
+  });
+  return parentProject;
 }
 
-const parentDocsFolder = 'stub-docs'
-const lernaFilePath = 'lerna.json'
-const packageJsonFilePath = 'package.json'
-const tasksFilePath = '.projen/tasks.json'
-const gitAttributesFilesPath = '.gitattributes'
-const docsMarkdownFilePath = `${parentDocsFolder}/index.md`
-const docsReadmeFilePath = `${parentDocsFolder}/README.md`
-const docsHtmlFilePath = `${parentDocsFolder}/index.html`
-const subProjectDirectory = 'packages/test-sub-project'
-const expectedDocsCommand = `lerna-projen move-docs ${parentDocsFolder} ${subProjectDirectory} docs`
+const parentDocsFolder = 'stub-docs';
+const lernaFilePath = 'lerna.json';
+const packageJsonFilePath = 'package.json';
+const tasksFilePath = '.projen/tasks.json';
+const gitAttributesFilesPath = '.gitattributes';
+const docsMarkdownFilePath = `${parentDocsFolder}/index.md`;
+const docsReadmeFilePath = `${parentDocsFolder}/README.md`;
+const docsHtmlFilePath = `${parentDocsFolder}/index.html`;
+const subProjectDirectory = 'packages/test-sub-project';
+const expectedDocsCommand = `lerna-projen move-docs ${parentDocsFolder} ${subProjectDirectory} docs`;
 
 describe('Happy Path for Javascript', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory)
-  const output = synthSnapshot(parentProject)
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory);
+  const output = synthSnapshot(parentProject);
 
   test('lerna file', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       useNx: false,
       version: '0.0.0',
-    })
-  })
+    });
+  });
 
   describe('tasks', () => {
     test('default', () => {
@@ -158,9 +158,9 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('test', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -173,9 +173,9 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('build', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -196,9 +196,9 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('clobber', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -213,8 +213,8 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('pre-compile', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -232,9 +232,9 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('package', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -252,9 +252,9 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('should not include docs tasks by default', ()=> {
       expect(output[tasksFilePath]).toEqual(
@@ -269,9 +269,9 @@ describe('Happy Path for Javascript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('upgrade', () => {
       try {
@@ -280,27 +280,27 @@ describe('Happy Path for Javascript', () => {
             tasks: expect.objectContaining({
               upgrade: expect.objectContaining({
                 steps: expect.arrayContaining([
-                  {exec: 'lerna run upgrade --stream'},
+                  { exec: 'lerna run upgrade --stream' },
                 ]),
               }),
             }),
           }),
-        )
+        );
       } catch {
         expect(output[tasksFilePath]).toEqual(
           expect.objectContaining({
             tasks: expect.objectContaining({
               ['post-upgrade']: expect.objectContaining({
                 steps: [
-                  {exec: 'lerna run upgrade --stream'},
-                  {exec: 'npx projen'},
+                  { exec: 'lerna run upgrade --stream' },
+                  { exec: 'npx projen' },
                 ],
               }),
             }),
           }),
-        )
+        );
       }
-    })
+    });
 
     test('post-upgrade', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -308,30 +308,30 @@ describe('Happy Path for Javascript', () => {
           tasks: expect.objectContaining({
             ['post-upgrade']: expect.objectContaining({
               steps: expect.not.arrayContaining([
-                {exec: 'lerna run post-upgrade --stream'},
-                {exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")'},
+                { exec: 'lerna run post-upgrade --stream' },
+                { exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")' },
               ]),
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
-  })
-})
+  });
+});
 
 describe('Happy Path for Typescript', () => {
-  const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory)
-  const output = synthSnapshot(parentProject)
+  const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory);
+  const output = synthSnapshot(parentProject);
 
   test('lerna file', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       useNx: false,
       version: '0.0.0',
-    })
-  })
+    });
+  });
 
   describe('tasks', () => {
     test('default', () => {
@@ -345,9 +345,9 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('test', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -360,9 +360,9 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('build', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -383,9 +383,9 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('clobber', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -400,8 +400,8 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('pre-compile', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -419,9 +419,9 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('compile', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -436,7 +436,7 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
       expect(output[tasksFilePath]).toEqual(
         expect.objectContaining({
           tasks: expect.objectContaining({
@@ -449,8 +449,8 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('package', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -468,9 +468,9 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('should not include docs tasks by default', ()=> {
       expect(output[tasksFilePath]).toEqual(
@@ -485,9 +485,9 @@ describe('Happy Path for Typescript', () => {
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
     test('upgrade', () => {
       try {
@@ -496,27 +496,27 @@ describe('Happy Path for Typescript', () => {
             tasks: expect.objectContaining({
               upgrade: expect.objectContaining({
                 steps: expect.arrayContaining([
-                  {exec: 'lerna run upgrade --stream'},
+                  { exec: 'lerna run upgrade --stream' },
                 ]),
               }),
             }),
           }),
-        )
+        );
       } catch {
         expect(output[tasksFilePath]).toEqual(
           expect.objectContaining({
             tasks: expect.objectContaining({
               ['post-upgrade']: expect.objectContaining({
                 steps: [
-                  {exec: 'lerna run upgrade --stream'},
-                  {exec: 'npx projen'},
+                  { exec: 'lerna run upgrade --stream' },
+                  { exec: 'npx projen' },
                 ],
               }),
             }),
           }),
-        )
+        );
       }
-    })
+    });
 
     test('post-upgrade', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -524,18 +524,18 @@ describe('Happy Path for Typescript', () => {
           tasks: expect.objectContaining({
             ['post-upgrade']: expect.objectContaining({
               steps: expect.not.arrayContaining([
-                {exec: 'lerna run post-upgrade --stream'},
-                {exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")'},
+                { exec: 'lerna run post-upgrade --stream' },
+                { exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")' },
               ]),
             }),
           }),
         }),
-      )
+      );
 
-    })
+    });
 
-  })
-})
+  });
+});
 
 describe('Happy Path for Jsii sub project', () => {
   describe('sub project has docs', () => {
@@ -548,7 +548,7 @@ describe('Happy Path for Jsii sub project', () => {
       docgen: true,
       docsDirectory: parentDocsFolder,
       outdir: mkdtemp(),
-    })
+    });
 
     new cdk.JsiiProject({
       name: 'test-sub-project',
@@ -561,8 +561,8 @@ describe('Happy Path for Jsii sub project', () => {
       repositoryUrl: '',
       author: '',
       authorAddress: '',
-    })
-    const output = synthSnapshot(parentProject)
+    });
+    const output = synthSnapshot(parentProject);
 
     test('package-all is added', () => {
       expect(output[`${subProjectDirectory}/${tasksFilePath}`]).toEqual(
@@ -577,25 +577,25 @@ describe('Happy Path for Jsii sub project', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('docs index', () => {
-      expect(output[docsHtmlFilePath]).toMatchSnapshot()
-      expect(output[docsMarkdownFilePath]).toMatchSnapshot()
-      expect(output[docsReadmeFilePath]).toMatchSnapshot()
-    })
+      expect(output[docsHtmlFilePath]).toMatchSnapshot();
+      expect(output[docsMarkdownFilePath]).toMatchSnapshot();
+      expect(output[docsReadmeFilePath]).toMatchSnapshot();
+    });
 
     test('gitattributes', () => {
-      expect(output[gitAttributesFilesPath]).toContain(`/${parentDocsFolder}/** linguist-generated`)
-    })
-  })
-})
+      expect(output[gitAttributesFilesPath]).toContain(`/${parentDocsFolder}/** linguist-generated`);
+    });
+  });
+});
 
 describe('docgen set to true', () => {
   describe('sub project has docs', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true})
-    const output = synthSnapshot(parentProject)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { docgen: true });
+    const output = synthSnapshot(parentProject);
 
     test('document generator step added to post-compile', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -610,23 +610,23 @@ describe('docgen set to true', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('docs index', () => {
-      expect(output[docsHtmlFilePath]).toMatchSnapshot()
-      expect(output[docsMarkdownFilePath]).toMatchSnapshot()
-      expect(output[docsReadmeFilePath]).toMatchSnapshot()
-    })
+      expect(output[docsHtmlFilePath]).toMatchSnapshot();
+      expect(output[docsMarkdownFilePath]).toMatchSnapshot();
+      expect(output[docsReadmeFilePath]).toMatchSnapshot();
+    });
 
     test('gitattributes', () => {
-      expect(output[gitAttributesFilesPath]).toContain(`/${parentDocsFolder}/** linguist-generated`)
-    })
-  })
+      expect(output[gitAttributesFilesPath]).toContain(`/${parentDocsFolder}/** linguist-generated`);
+    });
+  });
 
   test('sub project does not have docs', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: true, subProjectHasDocs: false})
-    const output = synthSnapshot(parentProject)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { docgen: true, subProjectHasDocs: false });
+    const output = synthSnapshot(parentProject);
     expect(output[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
@@ -639,8 +639,8 @@ describe('docgen set to true', () => {
           }),
         }),
       }),
-    )
-  })
+    );
+  });
 
   test('multiple sub-projects', () => {
     const parentProject = new LernaProject({
@@ -652,7 +652,7 @@ describe('docgen set to true', () => {
       docgen: true,
       docsDirectory: parentDocsFolder,
       outdir: mkdtemp(),
-    })
+    });
 
     new cdk.JsiiProject({
       name: 'test-sub-project-1',
@@ -665,7 +665,7 @@ describe('docgen set to true', () => {
       repositoryUrl: '',
       author: '',
       authorAddress: '',
-    })
+    });
 
     new typescript.TypeScriptProject({
       name: 'test-sub-project-2',
@@ -675,7 +675,7 @@ describe('docgen set to true', () => {
       },
       outdir: `${subProjectDirectory}-2`,
       parent: parentProject,
-    })
+    });
 
     new javascript.NodeProject({
       name: 'test-sub-project-3',
@@ -685,7 +685,7 @@ describe('docgen set to true', () => {
       },
       outdir: `${subProjectDirectory}-3`,
       parent: parentProject,
-    })
+    });
 
     new cdk.JsiiProject({
       name: 'test-sub-project-4',
@@ -698,88 +698,88 @@ describe('docgen set to true', () => {
       repositoryUrl: '',
       author: '',
       authorAddress: '',
-    })
+    });
 
-    const output = synthSnapshot(parentProject)
+    const output = synthSnapshot(parentProject);
 
-    expect(output[docsHtmlFilePath]).toMatchSnapshot()
-    expect(output[docsMarkdownFilePath]).toMatchSnapshot()
-    expect(output[docsReadmeFilePath]).toMatchSnapshot()
-  })
-})
+    expect(output[docsHtmlFilePath]).toMatchSnapshot();
+    expect(output[docsMarkdownFilePath]).toMatchSnapshot();
+    expect(output[docsReadmeFilePath]).toMatchSnapshot();
+  });
+});
 
 describe('docgen set to false', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {docgen: false})
-  const output = synthSnapshot(parentProject)
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { docgen: false });
+  const output = synthSnapshot(parentProject);
 
   test('should not add gitattributes for docs folder', () => {
-    expect(output[gitAttributesFilesPath]).not.toContain(`/${parentDocsFolder}/** linguist-generated`)
-  })
-})
+    expect(output[gitAttributesFilesPath]).not.toContain(`/${parentDocsFolder}/** linguist-generated`);
+  });
+});
 
 describe('useNx', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {useNx: true})
-  const output = synthSnapshot(parentProject)
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { useNx: true });
+  const output = synthSnapshot(parentProject);
   test('lerna file', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       useNx: true,
       version: '0.0.0',
-    })
-  })
-})
+    });
+  });
+});
 
 describe('useWorkspaces', () => {
   describe('default package manager', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {useWorkspaces: true})
-    const output = synthSnapshot(parentProject)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { useWorkspaces: true });
+    const output = synthSnapshot(parentProject);
     test('lerna file', () => {
-      expect(output[lernaFilePath]).not.toHaveProperty('packages')
+      expect(output[lernaFilePath]).not.toHaveProperty('packages');
       expect(output[lernaFilePath]).toMatchObject({
         version: '0.0.0',
-      })
-    })
+      });
+    });
     test('package.json', () => {
       expect(output[packageJsonFilePath]).toMatchObject({
         workspaces: expect.arrayContaining([subProjectDirectory]),
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe('PNPM package manager', () => {
     const parentProject = generateProjects(
       parentDocsFolder,
       subProjectDirectory,
-      {useWorkspaces: true, packageManager: javascript.NodePackageManager.PNPM})
-    const output = synthSnapshot(parentProject)
+      { useWorkspaces: true, packageManager: javascript.NodePackageManager.PNPM });
+    const output = synthSnapshot(parentProject);
 
     test('package.json', () => {
       expect(output[packageJsonFilePath]).toMatchObject({
         workspaces: expect.arrayContaining([subProjectDirectory]),
-      })
-    })
+      });
+    });
 
     test('pnpm-workspace.yaml', () => {
-      expect(output['pnpm-workspace.yaml']).toMatchSnapshot()
-    })
-  })
-})
+      expect(output['pnpm-workspace.yaml']).toMatchSnapshot();
+    });
+  });
+});
 
 describe('independentMode', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {independentMode: true})
-  const output = synthSnapshot(parentProject)
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { independentMode: true });
+  const output = synthSnapshot(parentProject);
   test('lerna file', () => {
     expect(output[lernaFilePath]).toMatchObject({
       packages: [subProjectDirectory],
       useNx: false,
       version: 'independent',
-    })
-  })
-})
+    });
+  });
+});
 
 describe('since last release', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {sinceLastRelease: true})
-  const output = synthSnapshot(parentProject)
+  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { sinceLastRelease: true });
+  const output = synthSnapshot(parentProject);
   test('should include since filter', () => {
     expect(output[tasksFilePath]).toEqual(
       expect.objectContaining({
@@ -793,8 +793,8 @@ describe('since last release', () => {
           }),
         }),
       }),
-    )
-  })
+    );
+  });
   test('should not include since filter for upgrade task', () => {
     expect(output[tasksFilePath]).toEqual(
       expect.objectContaining({
@@ -808,20 +808,20 @@ describe('since last release', () => {
           }),
         }),
       }),
-    )
-  })
+    );
+  });
   test('should add git fetch to build workflow', () => {
-    expect(output['.github/workflows/build.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi')
-  })
+    expect(output['.github/workflows/build.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+  });
   test('should add git fetch to release workflow', () => {
-    expect(output['.github/workflows/release.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi')
-  })
-})
+    expect(output['.github/workflows/release.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+  });
+});
 
 describe('typescript projenrc file', () => {
   test('should use the projenrc.ts file', () => {
-    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, {projenrcTs: true})
-    const output = synthSnapshot(parentProject)
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { projenrcTs: true });
+    const output = synthSnapshot(parentProject);
     expect(output[tasksFilePath]).toEqual(
       expect.objectContaining({
         tasks: expect.objectContaining({
@@ -834,9 +834,9 @@ describe('typescript projenrc file', () => {
           }),
         }),
       }),
-    )
-  })
-})
+    );
+  });
+});
 
 describe('task customization', () => {
   describe('javascript project', () => {
@@ -851,12 +851,12 @@ describe('task customization', () => {
           include: ['stub-include-package-name'],
         },
       },
-    })
+    });
 
     parentProject.customizeTask('default', {
       addLernaStep: false,
-    })
-    const output = synthSnapshot(parentProject)
+    });
+    const output = synthSnapshot(parentProject);
     test('should not add lerna run step to default task', () => {
       expect(output[tasksFilePath]).toEqual(
         expect.objectContaining({
@@ -870,8 +870,8 @@ describe('task customization', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('should add since flag to compile task', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -886,8 +886,8 @@ describe('task customization', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('should add ignore and scope flags to test task', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -902,9 +902,9 @@ describe('task customization', () => {
             }),
           }),
         }),
-      )
-    })
-  })
+      );
+    });
+  });
   describe('typescript project', () => {
     const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory, {
       sinceLastRelease: false,
@@ -917,12 +917,12 @@ describe('task customization', () => {
           include: ['stub-include-package-name'],
         },
       },
-    })
+    });
 
     parentProject.customizeTask('default', {
       addLernaStep: false,
-    })
-    const output = synthSnapshot(parentProject)
+    });
+    const output = synthSnapshot(parentProject);
     test('should not add lerna run step to default task', () => {
       expect(output[tasksFilePath]).toEqual(
         expect.objectContaining({
@@ -936,8 +936,8 @@ describe('task customization', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('should add since flag to compile task', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -952,8 +952,8 @@ describe('task customization', () => {
             }),
           }),
         }),
-      )
-    })
+      );
+    });
 
     test('should add ignore and scope flags to test task', () => {
       expect(output[tasksFilePath]).toEqual(
@@ -968,18 +968,18 @@ describe('task customization', () => {
             }),
           }),
         }),
-      )
-    })
-  })
+      );
+    });
+  });
 
 
-})
+});
 
 describe('hasRootSourceCode', () => {
   const parentProject = generateProjectsTypescript(parentDocsFolder, subProjectDirectory, {
     hasRootSourceCode: true,
-  })
-  const output = synthSnapshot(parentProject)
+  });
+  const output = synthSnapshot(parentProject);
 
   test('should keep tsc step', () => {
     expect(output[tasksFilePath]).toEqual(
@@ -997,9 +997,9 @@ describe('hasRootSourceCode', () => {
           }),
         }),
       }),
-    )
-  })
-})
+    );
+  });
+});
 
 describe('Unhappy Path', () => {
 
@@ -1012,7 +1012,7 @@ describe('Unhappy Path', () => {
         logging: {
           level: LogLevel.OFF,
         },
-      })
+      });
 
       expect(() => new typescript.TypeScriptProject({
         name: 'test-sub-project',
@@ -1021,9 +1021,9 @@ describe('Unhappy Path', () => {
         logging: {
           level: LogLevel.OFF,
         },
-      })).toThrow('"outdir" must be specified for subprojects')
-    })
+      })).toThrow('"outdir" must be specified for subprojects');
+    });
 
-  })
+  });
 
-})
+});
