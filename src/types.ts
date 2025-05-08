@@ -1,4 +1,4 @@
-import {javascript, typescript} from 'projen'
+import { javascript, typescript } from 'projen';
 
 export interface LernaCommonProjectOptions {
   /**
@@ -79,7 +79,7 @@ export interface LernaTypescriptProjectOptions extends typescript.TypeScriptProj
   readonly hasRootSourceCode?: boolean;
 }
 
-export type TaskCustomizations = {[taskName: string]: TaskCustomization}
+export type TaskCustomizations = { [taskName: string]: TaskCustomization };
 
 export interface TaskCustomization {
   /**
