@@ -13,9 +13,9 @@ export interface LernaCommonProjectOptions {
    * (experimental) Environment variable name to read the git reference from
    * to be used as the base for the `since` option in lerna commands.
    * If not provided, defaults to running git command to find last release tag.
-   * the reference should be a commit SHA, branch name, or tag name.
+   * The reference that is stored in the environment variable could be:
+   * a commit SHA, branch name, or tag name.
    *
-   * @default "GITHUB_BASE_REF"
    * @experimental
    */
   readonly sinceGitReferenceEnvironmentVariableName?: string;
