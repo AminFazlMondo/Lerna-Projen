@@ -52,6 +52,7 @@ interface ILernaProject {
   readonly docgen?: boolean;
   readonly taskCustomizations: TaskCustomizations;
   readonly pnpmVersion?: string;
+  readonly sinceGitReferenceEnvironmentVariableName?: string;
 
   customizeTask(taskName: string, customization: TaskCustomization): void;
 }
@@ -71,6 +72,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   readonly useWorkspaces: boolean;
   readonly taskCustomizations: TaskCustomizations;
   readonly pnpmVersion?: string;
+  readonly sinceGitReferenceEnvironmentVariableName?: string;
 
   private readonly factory: LernaProjectFactory;
 
@@ -88,6 +90,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
     this.useWorkspaces = options.useWorkspaces ?? false;
     this.taskCustomizations = options.taskCustomizations ?? {};
     this.pnpmVersion = options.pnpmVersion;
+    this.sinceGitReferenceEnvironmentVariableName = options.sinceGitReferenceEnvironmentVariableName;
 
     this.factory = new LernaProjectFactory(this);
   }
@@ -123,6 +126,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   readonly useWorkspaces: boolean;
   readonly taskCustomizations: TaskCustomizations;
   readonly pnpmVersion?: string;
+  readonly sinceGitReferenceEnvironmentVariableName?: string;
 
   private readonly factory: LernaProjectFactory;
 
@@ -135,6 +139,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
     this.useWorkspaces = options.useWorkspaces ?? false;
     this.taskCustomizations = options.taskCustomizations ?? {};
     this.pnpmVersion = options.pnpmVersion;
+    this.sinceGitReferenceEnvironmentVariableName = options.sinceGitReferenceEnvironmentVariableName;
 
     if (!(options.hasRootSourceCode ?? false)) {this.tasks.tryFind('compile')?.reset();}
 
@@ -240,8 +245,15 @@ class LernaProjectFactory {
     const ignoreFlags = excludePatterns.map((glob) => ` --ignore ${glob}`).join('');
 
 
-    const postCommand = useSinceFlag ? ' --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)' : '';
+    const postCommand = useSinceFlag ? ` --since ${this.getSinceCommand()}` : '';
     return `${mainCommand}${postCommand}${scopeFlags}${ignoreFlags}`;
+  }
+
+  private getSinceCommand() {
+    if (this.project.sinceGitReferenceEnvironmentVariableName) {
+      return `\${${this.project.sinceGitReferenceEnvironmentVariableName}:-$(git describe --abbrev=0 --tags --match "v*" HEAD^)}`;
+    }
+    return '$(git describe --abbrev=0 --tags --match "v*" HEAD^)';
   }
 
   private updateSubProjects() {

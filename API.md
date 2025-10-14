@@ -744,6 +744,7 @@ When given a project, this it the project itself.
 | <code><a href="#lerna-projen.LernaProject.property.useNx">useNx</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaProject.property.useWorkspaces">useWorkspaces</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaProject.property.pnpmVersion">pnpmVersion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#lerna-projen.LernaProject.property.sinceGitReferenceEnvironmentVariableName">sinceGitReferenceEnvironmentVariableName</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -1471,6 +1472,16 @@ public readonly useWorkspaces: boolean;
 
 ```typescript
 public readonly pnpmVersion: string;
+```
+
+- *Type:* string
+
+---
+
+##### `sinceGitReferenceEnvironmentVariableName`<sup>Optional</sup> <a name="sinceGitReferenceEnvironmentVariableName" id="lerna-projen.LernaProject.property.sinceGitReferenceEnvironmentVariableName"></a>
+
+```typescript
+public readonly sinceGitReferenceEnvironmentVariableName: string;
 ```
 
 - *Type:* string
@@ -2250,6 +2261,7 @@ When given a project, this it the project itself.
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.useNx">useNx</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.useWorkspaces">useWorkspaces</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#lerna-projen.LernaTypescriptProject.property.pnpmVersion">pnpmVersion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#lerna-projen.LernaTypescriptProject.property.sinceGitReferenceEnvironmentVariableName">sinceGitReferenceEnvironmentVariableName</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -3073,6 +3085,16 @@ public readonly pnpmVersion: string;
 
 ---
 
+##### `sinceGitReferenceEnvironmentVariableName`<sup>Optional</sup> <a name="sinceGitReferenceEnvironmentVariableName" id="lerna-projen.LernaTypescriptProject.property.sinceGitReferenceEnvironmentVariableName"></a>
+
+```typescript
+public readonly sinceGitReferenceEnvironmentVariableName: string;
+```
+
+- *Type:* string
+
+---
+
 #### Constants <a name="Constants" id="Constants"></a>
 
 | **Name** | **Type** | **Description** |
@@ -3282,6 +3304,7 @@ const lernaCommonProjectOptions: LernaCommonProjectOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#lerna-projen.LernaCommonProjectOptions.property.independentMode">independentMode</a></code> | <code>boolean</code> | Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode. |
+| <code><a href="#lerna-projen.LernaCommonProjectOptions.property.sinceGitReferenceEnvironmentVariableName">sinceGitReferenceEnvironmentVariableName</a></code> | <code>string</code> | (experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands. |
 | <code><a href="#lerna-projen.LernaCommonProjectOptions.property.sinceLastRelease">sinceLastRelease</a></code> | <code>boolean</code> | (experimental) Flag to run tasks only for the packages that has changes since last release. |
 | <code><a href="#lerna-projen.LernaCommonProjectOptions.property.taskCustomizations">taskCustomizations</a></code> | <code>{[ key: string ]: <a href="#lerna-projen.TaskCustomization">TaskCustomization</a>}</code> | Key value pair of task name and TaskCustomization to customize the lerna run step added to the task. |
 | <code><a href="#lerna-projen.LernaCommonProjectOptions.property.useNx">useNx</a></code> | <code>boolean</code> | Whether or not to use Nx for task scheduling https://lerna.js.org/docs/lerna-and-nx. |
@@ -3299,6 +3322,22 @@ public readonly independentMode: boolean;
 - *Default:* false
 
 Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode.
+
+---
+
+##### `sinceGitReferenceEnvironmentVariableName`<sup>Optional</sup> <a name="sinceGitReferenceEnvironmentVariableName" id="lerna-projen.LernaCommonProjectOptions.property.sinceGitReferenceEnvironmentVariableName"></a>
+
+```typescript
+public readonly sinceGitReferenceEnvironmentVariableName: string;
+```
+
+- *Type:* string
+- *Default:* "GITHUB_BASE_REF"
+
+(experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands.
+
+If not provided, defaults to running git command to find last release tag.
+the reference should be a commit SHA, branch name, or tag name.
 
 ---
 
@@ -3501,6 +3540,7 @@ const lernaProjectOptions: LernaProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaProjectOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.independentMode">independentMode</a></code> | <code>boolean</code> | Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.sinceGitReferenceEnvironmentVariableName">sinceGitReferenceEnvironmentVariableName</a></code> | <code>string</code> | (experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.sinceLastRelease">sinceLastRelease</a></code> | <code>boolean</code> | (experimental) Flag to run tasks only for the packages that has changes since last release. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.taskCustomizations">taskCustomizations</a></code> | <code>{[ key: string ]: <a href="#lerna-projen.TaskCustomization">TaskCustomization</a>}</code> | Key value pair of task name and TaskCustomization to customize the lerna run step added to the task. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.useNx">useNx</a></code> | <code>boolean</code> | Whether or not to use Nx for task scheduling https://lerna.js.org/docs/lerna-and-nx. |
@@ -5445,6 +5485,22 @@ Whether or not to use independent versioning for sub-projects https://lerna.js.o
 
 ---
 
+##### `sinceGitReferenceEnvironmentVariableName`<sup>Optional</sup> <a name="sinceGitReferenceEnvironmentVariableName" id="lerna-projen.LernaProjectOptions.property.sinceGitReferenceEnvironmentVariableName"></a>
+
+```typescript
+public readonly sinceGitReferenceEnvironmentVariableName: string;
+```
+
+- *Type:* string
+- *Default:* "GITHUB_BASE_REF"
+
+(experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands.
+
+If not provided, defaults to running git command to find last release tag.
+the reference should be a commit SHA, branch name, or tag name.
+
+---
+
 ##### `sinceLastRelease`<sup>Optional</sup> <a name="sinceLastRelease" id="lerna-projen.LernaProjectOptions.property.sinceLastRelease"></a>
 
 ```typescript
@@ -5701,6 +5757,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.independentMode">independentMode</a></code> | <code>boolean</code> | Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.sinceGitReferenceEnvironmentVariableName">sinceGitReferenceEnvironmentVariableName</a></code> | <code>string</code> | (experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.sinceLastRelease">sinceLastRelease</a></code> | <code>boolean</code> | (experimental) Flag to run tasks only for the packages that has changes since last release. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.taskCustomizations">taskCustomizations</a></code> | <code>{[ key: string ]: <a href="#lerna-projen.TaskCustomization">TaskCustomization</a>}</code> | Key value pair of task name and TaskCustomization to customize the lerna run step added to the task. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.useNx">useNx</a></code> | <code>boolean</code> | Whether or not to use Nx for task scheduling https://lerna.js.org/docs/lerna-and-nx. |
@@ -7880,6 +7937,22 @@ public readonly independentMode: boolean;
 - *Default:* false
 
 Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode.
+
+---
+
+##### `sinceGitReferenceEnvironmentVariableName`<sup>Optional</sup> <a name="sinceGitReferenceEnvironmentVariableName" id="lerna-projen.LernaTypescriptProjectOptions.property.sinceGitReferenceEnvironmentVariableName"></a>
+
+```typescript
+public readonly sinceGitReferenceEnvironmentVariableName: string;
+```
+
+- *Type:* string
+- *Default:* "GITHUB_BASE_REF"
+
+(experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands.
+
+If not provided, defaults to running git command to find last release tag.
+the reference should be a commit SHA, branch name, or tag name.
 
 ---
 
