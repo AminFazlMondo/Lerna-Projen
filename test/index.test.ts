@@ -19,6 +19,8 @@ interface GenerateProjectsParams {
    */
   sinceLastRelease?: boolean;
 
+  sinceGitReferenceEnvironmentVariableName?: string;
+
   /**
    * @default false
    */
@@ -65,6 +67,7 @@ function generateProjects(
     docsDirectory: parentDocsFolder,
     docgen: params.docgen ?? false,
     sinceLastRelease: params.sinceLastRelease ?? false,
+    sinceGitReferenceEnvironmentVariableName: params.sinceGitReferenceEnvironmentVariableName,
     projenrcTs: params.projenrcTs ?? false,
     useNx: params.useNx,
     useWorkspaces: params.useWorkspaces,
@@ -778,43 +781,86 @@ describe('independentMode', () => {
 });
 
 describe('since last release', () => {
-  const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { sinceLastRelease: true });
-  const output = synthSnapshot(parentProject);
-  test('should include since filter', () => {
-    expect(output[tasksFilePath]).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          compile: expect.objectContaining({
-            steps: expect.arrayContaining([
-              {
-                exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)',
-              },
-            ]),
+  describe('No sinceGitReferenceEnvironmentVariableName', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { sinceLastRelease: true });
+    const output = synthSnapshot(parentProject);
+    test('should include since filter', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            compile: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match \"v*\" HEAD^)',
+                },
+              ]),
+            }),
           }),
         }),
-      }),
-    );
-  });
-  test('should not include since filter for upgrade task', () => {
-    expect(output[tasksFilePath]).toEqual(
-      expect.objectContaining({
-        tasks: expect.objectContaining({
-          ['post-upgrade']: expect.objectContaining({
-            steps: expect.arrayContaining([
-              {
-                exec: 'lerna run upgrade --stream',
-              },
-            ]),
+      );
+    });
+    test('should not include since filter for upgrade task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-upgrade']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run upgrade --stream',
+                },
+              ]),
+            }),
           }),
         }),
-      }),
-    );
+      );
+    });
+    test('should add git fetch to build workflow', () => {
+      expect(output['.github/workflows/build.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+    });
+    test('should add git fetch to release workflow', () => {
+      expect(output['.github/workflows/release.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+    });
   });
-  test('should add git fetch to build workflow', () => {
-    expect(output['.github/workflows/build.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
-  });
-  test('should add git fetch to release workflow', () => {
-    expect(output['.github/workflows/release.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+
+  describe('sinceGitReferenceEnvironmentVariableName is set', () => {
+    const parentProject = generateProjects(parentDocsFolder, subProjectDirectory, { sinceLastRelease: true, sinceGitReferenceEnvironmentVariableName: 'CUSTOM_ENV_VAR' });
+    const output = synthSnapshot(parentProject);
+    test('should include since filter', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            compile: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run compile --stream --since ${CUSTOM_ENV_VAR:-$(git describe --abbrev=0 --tags --match \"v*\" HEAD^)}',
+                },
+              ]),
+            }),
+          }),
+        }),
+      );
+    });
+    test('should not include since filter for upgrade task', () => {
+      expect(output[tasksFilePath]).toEqual(
+        expect.objectContaining({
+          tasks: expect.objectContaining({
+            ['post-upgrade']: expect.objectContaining({
+              steps: expect.arrayContaining([
+                {
+                  exec: 'lerna run upgrade --stream',
+                },
+              ]),
+            }),
+          }),
+        }),
+      );
+    });
+    test('should add git fetch to build workflow', () => {
+      expect(output['.github/workflows/build.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+    });
+    test('should add git fetch to release workflow', () => {
+      expect(output['.github/workflows/release.yml']).toContain('if [ $(git rev-parse --is-shallow-repository) != "false" ] ; then git fetch origin main --tags --unshallow; fi');
+    });
   });
 });
 

@@ -10,6 +10,17 @@ export interface LernaCommonProjectOptions {
   readonly sinceLastRelease?: boolean;
 
   /**
+   * (experimental) Environment variable name to read the git reference from
+   * to be used as the base for the `since` option in lerna commands.
+   * If not provided, defaults to running git command to find last release tag.
+   * The reference that is stored in the environment variable could be:
+   * a commit SHA, branch name, or tag name.
+   *
+   * @experimental
+   */
+  readonly sinceGitReferenceEnvironmentVariableName?: string;
+
+  /**
    * Whether or not to use Nx for task scheduling
    * https://lerna.js.org/docs/lerna-and-nx
    *
