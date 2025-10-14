@@ -3237,6 +3237,8 @@ const addNxTaskDependencyOptions: utils.AddNxTaskDependencyOptions = { ... }
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.taskName">taskName</a></code> | <code>string</code> | The task name that is dependent on another tasks. |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.cache">cache</a></code> | <code>boolean</code> | Cache Task Results. |
 | <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.dependsOnTaskName">dependsOnTaskName</a></code> | <code>string</code> | The task name that is dependent on in other projects. |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.inputs">inputs</a></code> | <code>string[]</code> | define what gets included as part of the calculated hash (e.g. files, environment variables, etc.). |
+| <code><a href="#lerna-projen.utils.AddNxTaskDependencyOptions.property.outputs">outputs</a></code> | <code>string[]</code> | define folders where files might be placed as part of the task execution. |
 
 ---
 
@@ -3286,6 +3288,30 @@ public readonly dependsOnTaskName: string;
 - *Type:* string
 
 The task name that is dependent on in other projects.
+
+---
+
+##### `inputs`<sup>Optional</sup> <a name="inputs" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.inputs"></a>
+
+```typescript
+public readonly inputs: string[];
+```
+
+- *Type:* string[]
+
+define what gets included as part of the calculated hash (e.g. files, environment variables, etc.).
+
+---
+
+##### `outputs`<sup>Optional</sup> <a name="outputs" id="lerna-projen.utils.AddNxTaskDependencyOptions.property.outputs"></a>
+
+```typescript
+public readonly outputs: string[];
+```
+
+- *Type:* string[]
+
+define folders where files might be placed as part of the task execution.
 
 ---
 
