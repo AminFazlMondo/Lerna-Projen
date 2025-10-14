@@ -16,6 +16,8 @@ function generateNxTargetEntriesForTaskDependency(options: AddNxTaskDependencyOp
     {
       dependsOn: getDependentOnAttribute(),
       cache: options.cache ?? undefined,
+      inputs: options.inputs && options.inputs.length > 0 ? options.inputs : undefined,
+      outputs: options.outputs && options.outputs.length > 0 ? options.outputs : undefined,
     },
   ];
 }
@@ -77,6 +79,16 @@ export interface AddNxTaskDependencyOptions {
    * @default false
    */
   readonly cache?: boolean;
+
+  /**
+   * define what gets included as part of the calculated hash (e.g. files, environment variables, etc.)
+   */
+  readonly inputs?: string[];
+
+  /**
+   * define folders where files might be placed as part of the task execution.
+   */
+  readonly outputs?: string[];
 }
 
 export interface AddNxProjectDependencyOptions {

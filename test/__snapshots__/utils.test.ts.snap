@@ -123,6 +123,103 @@ exports[`utils addNxDependency should add dependency in nx when only task depend
 }
 `;
 
+exports[`utils addNxDependency should add inputs when specified 1`] = `
+{
+  "targets": {
+    "default": {
+      "dependsOn": [
+        {
+          "projects": [
+            "project-2",
+          ],
+          "target": "build",
+        },
+      ],
+    },
+    "test": {
+      "dependsOn": [
+        {
+          "target": "lint",
+        },
+      ],
+      "inputs": [
+        "!{projectRoot}/**/*.md",
+      ],
+    },
+  },
+}
+`;
+
+exports[`utils addNxDependency should add inputs when specified 2`] = `
+{
+  "targets": {
+    "test": {
+      "dependsOn": [
+        {
+          "target": "lint",
+        },
+      ],
+      "inputs": [
+        "{projectRoot}/src/**",
+        "{projectRoot}/test/**",
+      ],
+    },
+  },
+}
+`;
+
+exports[`utils addNxDependency should add outputs when specified 1`] = `
+{
+  "targets": {
+    "default": {
+      "dependsOn": [
+        {
+          "projects": [
+            "project-2",
+          ],
+          "target": "build",
+        },
+      ],
+    },
+    "test": {
+      "dependsOn": [
+        {
+          "target": "lint",
+        },
+      ],
+      "outputs": [
+        "{projectRoot}/coverage",
+      ],
+    },
+  },
+}
+`;
+
+exports[`utils addNxDependency should add outputs when specified 2`] = `
+{
+  "targets": {
+    "build": {
+      "dependsOn": [
+        {
+          "target": "pre-build",
+        },
+      ],
+    },
+    "test": {
+      "dependsOn": [
+        {
+          "target": "lint",
+        },
+      ],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/dist",
+      ],
+    },
+  },
+}
+`;
+
 exports[`utils addNxProjectDependency should add dependency in nx 1`] = `
 {
   "implicitDependencies": [
