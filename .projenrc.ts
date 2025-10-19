@@ -1,7 +1,8 @@
 import { javascript, cdk, TextFile } from 'projen';
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git';
-const nodeVersion = '20';
+const workflowNodeVersion = '24';
+const minNodeMajorVersion = '20';
 
 const project = new cdk.JsiiProject({
   projenrcTs: true,
@@ -43,19 +44,19 @@ const project = new cdk.JsiiProject({
       lib: ['es2019'],
     },
   },
-  workflowNodeVersion: nodeVersion,
-  minNodeVersion: `${nodeVersion}.0.0`,
+  workflowNodeVersion: workflowNodeVersion,
+  minNodeVersion: `${minNodeMajorVersion ?? workflowNodeVersion}.0.0`,
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
-  jsiiVersion: '5.8.x',
+  jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
 });
 
 new TextFile(project, '.nvmrc', {
-  lines: [nodeVersion],
+  lines: [minNodeMajorVersion],
 });
 
 project.synth();
