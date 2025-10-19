@@ -36,6 +36,7 @@ const project = new cdk.JsiiProject({
   ],
   releaseToNpm: true,
   npmAccess: javascript.NpmAccess.PUBLIC,
+  npmTrustedPublishing: true,
   docgen: true,
   tsconfig: {
     compilerOptions: {

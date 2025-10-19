@@ -224,11 +224,9 @@
       "env": {
         "NPM_DIST_TAG": "latest",
         "NPM_REGISTRY": "registry.npmjs.org",
-        "NPM_CONFIG_PROVENANCE": "true"
+        "NPM_CONFIG_PROVENANCE": "true",
+        "NPM_TRUSTED_PUBLISHER": "true"
       },
-      "requiredEnv": [
-        "NPM_TOKEN"
-      ],
       "steps": [
         {
           "exec": "test \"$(git branch --show-current)\" = \"main\""
