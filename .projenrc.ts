@@ -17,8 +17,8 @@ const project = new cdk.JsiiProject({
   ],
   majorVersion: 0,
   packageName: 'lerna-projen',
-  packageManager: javascript.NodePackageManager.NPM,
-  pnpmVersion: '8',
+  packageManager: javascript.NodePackageManager.PNPM,
+  pnpmVersion: '9',
   repository,
   repositoryUrl: repository,
   authorAddress: 'amin.fazl@mondo.com.au',
@@ -29,11 +29,11 @@ const project = new cdk.JsiiProject({
   ],
   devDeps: [
     '@types/babel__core',
-    '@types/fs-extra',
+    '@types/fs-extra@^11.0.4',
   ],
   bundledDeps: [
     'commander',
-    'fs-extra',
+    'fs-extra@^11.0.0',
   ],
   releaseToNpm: true,
   npmAccess: javascript.NpmAccess.PUBLIC,
@@ -54,6 +54,10 @@ const project = new cdk.JsiiProject({
   jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
 });
+
+// Configure pnpm settings
+project.npmrc.addConfig('node-linker', 'hoisted');
+project.npmrc.addConfig('strict-peer-dependencies', 'false');
 
 new TextFile(project, '.nvmrc', {
   lines: [minNodeMajorVersion],
