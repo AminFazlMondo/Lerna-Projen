@@ -11,6 +11,7 @@
     },
     {
       "name": "@types/fs-extra",
+      "version": "^11.0.4",
       "type": "build"
     },
     {
@@ -109,6 +110,7 @@
     },
     {
       "name": "fs-extra",
+      "version": "^11.0.0",
       "type": "bundled"
     },
     {

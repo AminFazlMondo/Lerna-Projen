@@ -17,7 +17,7 @@ console
 $ mkdir my-project
 $ cd my-project
 $ git init
-$ npx projen new --from lerna-projen lerna-ts-project
+$ pnpm dlx projen new --from lerna-projen lerna-ts-project
 🤖 Synthesizing project...
 ...
 ```
@@ -54,7 +54,7 @@ console
 $ mkdir my-project
 $ cd my-project
 $ git init
-$ npx projen new --from lerna-projen lerna-project
+$ pnpm dlx projen new --from lerna-projen lerna-project
 🤖 Synthesizing project...
 ...
 ```
