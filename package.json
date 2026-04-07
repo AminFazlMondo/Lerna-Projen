@@ -76,6 +76,7 @@
     "commander",
     "fs-extra"
   ],
+  "pnpm": {},
   "keywords": [
     "lerna",
     "monorepo",
@@ -87,7 +88,7 @@
   },
   "devEngines": {
     "packageManager": {
-      "name": "npm",
+      "name": "pnpm",
       "onFail": "ignore"
     }
   },
