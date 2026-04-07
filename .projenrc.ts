@@ -17,7 +17,7 @@ const project = new cdk.JsiiProject({
   ],
   majorVersion: 0,
   packageName: 'lerna-projen',
-  packageManager: javascript.NodePackageManager.NPM,
+  packageManager: javascript.NodePackageManager.PNPM,
   pnpmVersion: '8',
   repository,
   repositoryUrl: repository,
@@ -58,5 +58,6 @@ const project = new cdk.JsiiProject({
 new TextFile(project, '.nvmrc', {
   lines: [minNodeMajorVersion],
 });
+project.npmrc.addConfig('node-linker', 'hoisted');
 
 project.synth();
