@@ -71,8 +71,8 @@ devDependencies:
     specifier: 5.9.x
     version: 5.9.39
   projen:
-    specifier: ^0.99.38
-    version: 0.99.38(constructs@10.6.0)
+    specifier: ^0.99.42
+    version: 0.99.42(constructs@10.6.0)
   ts-jest:
     specifier: ^29.4.9
     version: 29.4.9(@babel/core@7.29.0)(jest@29.7.0)(typescript@5.9.3)
@@ -4593,8 +4593,8 @@ packages:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: true
 
-  /projen@0.99.38(constructs@10.6.0):
-    resolution: {integrity: sha512-G2zmxelg8fOZeKZowu6Ee5eRLioWIzOafQFku7g2rAy2iwYobfyQQFqK2Rr6Bph2QS79eZ+zQv0hi6prN3pjWQ==}
+  /projen@0.99.42(constructs@10.6.0):
+    resolution: {integrity: sha512-tmE82DOsYRY+wsj/w4l72bW0iL+W0AO7Vlfy2VKzaIAfrpifu4ratWc9DxmO5Dw/xPMKDjZRGn3cT5b2wB/G+w==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
