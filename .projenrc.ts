@@ -18,7 +18,6 @@ const project = new cdk.JsiiProject({
   majorVersion: 0,
   packageName: 'lerna-projen',
   packageManager: javascript.NodePackageManager.PNPM,
-  pnpmVersion: '8',
   repository,
   repositoryUrl: repository,
   authorAddress: 'amin.fazl@mondo.com.au',
