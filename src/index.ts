@@ -172,18 +172,10 @@ class LernaProjectFactory {
   build() {
     this.project.packageTask.reset(`mkdir -p ${this.project.artifactsJavascriptDirectory}`);
     this.project.preCompileTask.exec(`lerna-projen clean-dist ${this.project.artifactsDirectory}`);
-
-    this.setupPackageManager();
     this.appendLernaCommands();
     this.addCrossLinks();
     this.updateSubProjects();
     this.addDocumentsIndex();
-  }
-
-  private setupPackageManager() {
-    if (this.project.package.packageManager === javascript.NodePackageManager.PNPM && Number(this.project.pnpmVersion) >= 9) {
-      this.project.npmrc.addConfig('node-linker', 'hoisted');
-    }
   }
 
   private getSubProjectPath(subProject: Project) {
@@ -200,7 +192,7 @@ class LernaProjectFactory {
     const packages = this.project.subprojects.map(subProject => this.getSubProjectPath(subProject));
 
     if (this.project.useWorkspaces) {
-      if (this.project.packageManager === javascript.NodePackageManager.PNPM) {
+      if (this.project.package.packageManager === javascript.NodePackageManager.PNPM) {
         new YamlFile(this.project, 'pnpm-workspace.yaml', {
           obj: {
             packages,
