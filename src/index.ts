@@ -172,18 +172,10 @@ class LernaProjectFactory {
   build() {
     this.project.packageTask.reset(`mkdir -p ${this.project.artifactsJavascriptDirectory}`);
     this.project.preCompileTask.exec(`lerna-projen clean-dist ${this.project.artifactsDirectory}`);
-
-    this.setupPackageManager();
     this.appendLernaCommands();
     this.addCrossLinks();
     this.updateSubProjects();
     this.addDocumentsIndex();
-  }
-
-  private setupPackageManager() {
-    if (this.project.package.packageManager === javascript.NodePackageManager.PNPM && Number(this.project.pnpmVersion) >= 9) {
-      this.project.npmrc.addConfig('node-linker', 'hoisted');
-    }
   }
 
   private getSubProjectPath(subProject: Project) {
