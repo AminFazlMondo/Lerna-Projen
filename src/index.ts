@@ -192,7 +192,7 @@ class LernaProjectFactory {
     const packages = this.project.subprojects.map(subProject => this.getSubProjectPath(subProject));
 
     if (this.project.useWorkspaces) {
-      if (this.project.packageManager === javascript.NodePackageManager.PNPM) {
+      if (this.project.package.packageManager === javascript.NodePackageManager.PNPM) {
         new YamlFile(this.project, 'pnpm-workspace.yaml', {
           obj: {
             packages,
