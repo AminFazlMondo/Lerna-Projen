@@ -65,13 +65,13 @@ importers:
         version: 1.128.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.11.17(jsii-rosetta@5.9.42)
+        version: 10.11.17(jsii-rosetta@5.9.43)
       jsii-pacmak:
         specifier: ^1.128.0
-        version: 1.128.0(jsii-rosetta@5.9.42)
+        version: 1.128.0(jsii-rosetta@5.9.43)
       jsii-rosetta:
         specifier: 5.9.x
-        version: 5.9.42
+        version: 5.9.43
       projen:
         specifier: ^0.99.52
         version: 0.99.52(constructs@10.6.0)
@@ -1980,8 +1980,8 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@5.9.42:
-    resolution: {integrity: sha512-KePi4kELKbOks7Yye/zL4N1s5UiytS3fmZMh1QZQEq4g70uvV0C7+lgmdLyuNfHCWK0a6fgqCflZfpt03Mdt9g==}
+  jsii-rosetta@5.9.43:
+    resolution: {integrity: sha512-9r8lvh7ily8tLVMcSKMMX3qx89WKRrjci2Z6e0ayuK+Uyzy9/x6vFrUzasYhGxRt9svkRVP7gpUqGK7qQbLREA==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -5328,19 +5328,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.11.17(jsii-rosetta@5.9.42):
+  jsii-docgen@10.11.17(jsii-rosetta@5.9.43):
     dependencies:
       '@jsii/spec': 1.128.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.128.0
-      jsii-rosetta: 5.9.42
+      jsii-rosetta: 5.9.43
       json-stream-stringify: 3.1.6
       semver: 7.7.4
       yargs: 16.2.0
 
-  jsii-pacmak@1.128.0(jsii-rosetta@5.9.42):
+  jsii-pacmak@1.128.0(jsii-rosetta@5.9.43):
     dependencies:
       '@jsii/check-node': 1.128.0
       '@jsii/spec': 1.128.0
@@ -5350,7 +5350,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.128.0
-      jsii-rosetta: 5.9.42
+      jsii-rosetta: 5.9.43
       semver: 7.7.4
       spdx-license-list: 6.11.0
       xmlbuilder: 15.1.1
@@ -5365,7 +5365,7 @@ snapshots:
       oo-ascii-tree: 1.128.0
       yargs: 17.7.2
 
-  jsii-rosetta@5.9.42:
+  jsii-rosetta@5.9.43:
     dependencies:
       '@jsii/check-node': 1.128.0
       '@jsii/spec': 1.128.0
