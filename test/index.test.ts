@@ -574,6 +574,7 @@ describe('Happy Path for Jsii sub project', () => {
             ['package']: expect.objectContaining({
               steps: expect.arrayContaining([
                 {
+                  condition: 'node -e "if (process.env.CI) process.exit(1)"',
                   spawn: 'package-all',
                 },
               ]),

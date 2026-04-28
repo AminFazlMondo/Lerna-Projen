@@ -257,10 +257,6 @@ class LernaProjectFactory {
       const subProjectPath = this.getSubProjectPath(subProject);
       if (this.project.docgen && subProjectDocsDirectory) {this.project.postCompileTask.exec(`lerna-projen move-docs ${this.project.docsDirectory} ${subProjectPath} ${subProjectDocsDirectory}`);}
 
-      const packageAllTask = subProject.tasks.tryFind('package-all');
-
-      if (packageAllTask) {subProject.packageTask.spawn(packageAllTask);}
-
       const artifactsDirectory = getArtifactsDirectory(subProject);
 
       this.project.packageTask.exec(`lerna-projen copy-dist ${subProjectPath}/${artifactsDirectory} ${this.project.artifactsDirectory}`);
