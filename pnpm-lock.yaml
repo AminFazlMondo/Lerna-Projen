@@ -59,19 +59,19 @@ importers:
         version: 16.0.0
       jsii:
         specifier: 5.9.x
-        version: 5.9.37
+        version: 5.9.39
       jsii-diff:
         specifier: ^1.129.0
         version: 1.129.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.11.17(jsii-rosetta@5.9.43)
+        version: 10.11.17(jsii-rosetta@5.9.44)
       jsii-pacmak:
         specifier: ^1.129.0
-        version: 1.129.0(jsii-rosetta@5.9.43)
+        version: 1.129.0(jsii-rosetta@5.9.44)
       jsii-rosetta:
         specifier: 5.9.x
-        version: 5.9.43
+        version: 5.9.44
       projen:
         specifier: ^0.99.52
         version: 0.99.52(constructs@10.6.0)
@@ -416,16 +416,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@jsii/check-node@1.127.0':
-    resolution: {integrity: sha512-IYkLRond94RmaeP40LiFLM4JTxnVING3qWVndOpjhK5nPydDPBp865GW6gUQT724a6zhZww/2E1uw3c3b/i12A==}
-    engines: {node: '>= 14.17.0'}
-
   '@jsii/check-node@1.129.0':
     resolution: {integrity: sha512-au50s1tDZrn7huXo6W7NpbMUvfI8CA9Vf15k5kevm4CJtA9S9XBs7Ek2lIBlzHBVwudgAeXrvA+1wsxYZZVaAw==}
-    engines: {node: '>= 14.17.0'}
-
-  '@jsii/spec@1.127.0':
-    resolution: {integrity: sha512-LJiQLjlyQuMx1KyoKDdU9SlxNe/3xnllPSTlb6alPL84aYAcrGQX82XX7v554AudesIZHp5p5u0bupTK+v3QWA==}
     engines: {node: '>= 14.17.0'}
 
   '@jsii/spec@1.129.0':
@@ -1980,13 +1972,13 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@5.9.43:
-    resolution: {integrity: sha512-9r8lvh7ily8tLVMcSKMMX3qx89WKRrjci2Z6e0ayuK+Uyzy9/x6vFrUzasYhGxRt9svkRVP7gpUqGK7qQbLREA==}
+  jsii-rosetta@5.9.44:
+    resolution: {integrity: sha512-RdnmgjAYoelR85+aA/Q67wda6+b4uvui6ai+Jx8EVU/F2DLx6JsWf7e8fCpFscW+vtbTxe4a/B39cZD24P1GCw==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
-  jsii@5.9.37:
-    resolution: {integrity: sha512-hNuxHrD/F6nm2oBUMS9Mejc4zI7+bQxt9/raljuIap4zFQzqOVn0ArAqhueeWZmPCwx3gfjqerKMqqLrExdFlA==}
+  jsii@5.9.39:
+    resolution: {integrity: sha512-MV8Up/jWw1tQ9TATah7+G2f6xA4doCtpVJJ5fBJIup2qBfWtKJs5gWp+NyMW49myfRSJavH42ltMelOcMEISVw==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -3439,17 +3431,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@jsii/check-node@1.127.0':
-    dependencies:
-      chalk: 4.1.2
-      semver: 7.7.4
-
   '@jsii/check-node@1.129.0':
     dependencies:
       chalk: 4.1.2
       semver: 7.7.4
-
-  '@jsii/spec@1.127.0': {}
 
   '@jsii/spec@1.129.0': {}
 
@@ -5329,19 +5314,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.11.17(jsii-rosetta@5.9.43):
+  jsii-docgen@10.11.17(jsii-rosetta@5.9.44):
     dependencies:
       '@jsii/spec': 1.129.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.129.0
-      jsii-rosetta: 5.9.43
+      jsii-rosetta: 5.9.44
       json-stream-stringify: 3.1.6
       semver: 7.7.4
       yargs: 16.2.0
 
-  jsii-pacmak@1.129.0(jsii-rosetta@5.9.43):
+  jsii-pacmak@1.129.0(jsii-rosetta@5.9.44):
     dependencies:
       '@jsii/check-node': 1.129.0
       '@jsii/spec': 1.129.0
@@ -5351,7 +5336,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.129.0
-      jsii-rosetta: 5.9.43
+      jsii-rosetta: 5.9.44
       semver: 7.7.4
       spdx-license-list: 6.11.0
       xmlbuilder: 15.1.1
@@ -5366,7 +5351,7 @@ snapshots:
       oo-ascii-tree: 1.129.0
       yargs: 17.7.2
 
-  jsii-rosetta@5.9.43:
+  jsii-rosetta@5.9.44:
     dependencies:
       '@jsii/check-node': 1.129.0
       '@jsii/spec': 1.129.0
@@ -5374,7 +5359,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 5.9.37
+      jsii: 5.9.39
       semver: 7.7.4
       semver-intersect: 1.5.0
       stream-json: 1.9.1
@@ -5384,10 +5369,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@5.9.37:
+  jsii@5.9.39:
     dependencies:
-      '@jsii/check-node': 1.127.0
-      '@jsii/spec': 1.127.0
+      '@jsii/check-node': 1.129.0
+      '@jsii/spec': 1.129.0
       case: 1.6.3
       chalk: 4.1.2
       fast-deep-equal: 3.1.3
