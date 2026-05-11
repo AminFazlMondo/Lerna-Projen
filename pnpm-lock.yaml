@@ -59,22 +59,22 @@ importers:
         version: 17.0.0
       jsii:
         specifier: 5.9.x
-        version: 5.9.39
+        version: 5.9.40
       jsii-diff:
         specifier: ^1.129.0
         version: 1.129.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.11.18(jsii-rosetta@5.9.44)
+        version: 10.11.18(jsii-rosetta@5.9.45)
       jsii-pacmak:
         specifier: ^1.129.0
-        version: 1.129.0(jsii-rosetta@5.9.44)
+        version: 1.129.0(jsii-rosetta@5.9.45)
       jsii-rosetta:
         specifier: 5.9.x
-        version: 5.9.44
+        version: 5.9.45
       projen:
-        specifier: ^0.99.57
-        version: 0.99.57(constructs@10.6.0)
+        specifier: ^0.99.58
+        version: 0.99.58(constructs@10.6.0)
       ts-jest:
         specifier: ^29.4.9
         version: 29.4.9(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@20.19.40)(ts-node@10.9.2(@types/node@20.19.40)(typescript@5.9.3)))(typescript@5.9.3)
@@ -1972,13 +1972,13 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@5.9.44:
-    resolution: {integrity: sha512-RdnmgjAYoelR85+aA/Q67wda6+b4uvui6ai+Jx8EVU/F2DLx6JsWf7e8fCpFscW+vtbTxe4a/B39cZD24P1GCw==}
+  jsii-rosetta@5.9.45:
+    resolution: {integrity: sha512-bc0XQ1ki2BR1PP91wCWJRPSPxKF5pWgDUaEAn1Q9rgF80mMJLtyuGDw2znAE1G4ecEHdUnDzGxxpsd5gGfM4+Q==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
-  jsii@5.9.39:
-    resolution: {integrity: sha512-MV8Up/jWw1tQ9TATah7+G2f6xA4doCtpVJJ5fBJIup2qBfWtKJs5gWp+NyMW49myfRSJavH42ltMelOcMEISVw==}
+  jsii@5.9.40:
+    resolution: {integrity: sha512-mz86eeh6NY91tGjCCmy40hywFVx64q29DJ99RsOsAV9kOUOq5YAcQrcXuIyTQkVNjQgNIQ9QGxNs+WOP5ZyzXg==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -2359,8 +2359,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.99.57:
-    resolution: {integrity: sha512-1IWwvGnrI1lQ+dnYoAIdACZn0iXY2CqQaMlAVkicDNq7OYipQIMQccMWdnxPkwGj+AX7wS2bZqEULa++ujMXOw==}
+  projen@0.99.58:
+    resolution: {integrity: sha512-Uwbh1HYv9Y70JEjbmQ5We9W8phq4dyyXJJ+ajRUIICz2ov6klQe6axXe46LdtpkD/Bazm9jrFyICTyhbzH7iiA==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5313,19 +5313,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.11.18(jsii-rosetta@5.9.44):
+  jsii-docgen@10.11.18(jsii-rosetta@5.9.45):
     dependencies:
       '@jsii/spec': 1.129.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.129.0
-      jsii-rosetta: 5.9.44
+      jsii-rosetta: 5.9.45
       json-stream-stringify: 3.1.6
       semver: 7.7.4
       yargs: 16.2.0
 
-  jsii-pacmak@1.129.0(jsii-rosetta@5.9.44):
+  jsii-pacmak@1.129.0(jsii-rosetta@5.9.45):
     dependencies:
       '@jsii/check-node': 1.129.0
       '@jsii/spec': 1.129.0
@@ -5335,7 +5335,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.129.0
-      jsii-rosetta: 5.9.44
+      jsii-rosetta: 5.9.45
       semver: 7.7.4
       spdx-license-list: 6.11.0
       xmlbuilder: 15.1.1
@@ -5350,7 +5350,7 @@ snapshots:
       oo-ascii-tree: 1.129.0
       yargs: 17.7.2
 
-  jsii-rosetta@5.9.44:
+  jsii-rosetta@5.9.45:
     dependencies:
       '@jsii/check-node': 1.129.0
       '@jsii/spec': 1.129.0
@@ -5358,7 +5358,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 5.9.39
+      jsii: 5.9.40
       semver: 7.7.4
       semver-intersect: 1.5.0
       stream-json: 1.9.1
@@ -5368,7 +5368,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@5.9.39:
+  jsii@5.9.40:
     dependencies:
       '@jsii/check-node': 1.129.0
       '@jsii/spec': 1.129.0
@@ -5744,7 +5744,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.99.57(constructs@10.6.0):
+  projen@0.99.58(constructs@10.6.0):
     dependencies:
       constructs: 10.6.0
 
