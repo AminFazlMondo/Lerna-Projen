@@ -73,8 +73,8 @@ importers:
         specifier: 5.9.x
         version: 5.9.47
       projen:
-        specifier: ^0.99.66
-        version: 0.99.66(constructs@10.6.0)
+        specifier: ^0.99.68
+        version: 0.99.68(constructs@10.6.0)
       ts-jest:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@20.19.41)(ts-node@10.9.2(@types/node@20.19.41)(typescript@5.9.3)))(typescript@5.9.3)
@@ -2367,12 +2367,12 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.99.66:
-    resolution: {integrity: sha512-B0zDIYCG7wZ5SP4unIFhxqiz4+66SSxk5sCdxu3Py6O8aIlc38MAVqafpgZL6ov7xv1qJ1YItAH/ZK6MiJ6U0Q==}
+  projen@0.99.68:
+    resolution: {integrity: sha512-s0E+caG9LzJTFY3cEAhLBz3IS/rsRaVQdFO/dm6X7M062ZnBn+x5q01ItdyGSaz77rP52QFPO6nT+1DYTutlYQ==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
-      constructs: ^10.0.0
+      constructs: ^10.5.0
     bundledDependencies:
       - '@iarna/toml'
       - case
@@ -5769,7 +5769,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.99.66(constructs@10.6.0):
+  projen@0.99.68(constructs@10.6.0):
     dependencies:
       constructs: 10.6.0
 
