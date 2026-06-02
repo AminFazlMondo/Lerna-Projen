@@ -25,6 +25,7 @@ const project = new cdk.JsiiProject({
   peerDeps: [
     'projen',
     'constructs',
+    'ip@2.0.1',
   ],
   devDeps: [
     '@types/babel__core',

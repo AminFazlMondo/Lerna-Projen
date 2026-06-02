@@ -116,6 +116,11 @@
       "type": "peer"
     },
     {
+      "name": "ip",
+      "version": "2.0.1",
+      "type": "peer"
+    },
+    {
       "name": "projen",
       "type": "peer"
     }
