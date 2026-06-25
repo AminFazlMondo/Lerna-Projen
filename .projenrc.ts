@@ -2,7 +2,6 @@ import { javascript, cdk, TextFile } from 'projen';
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git';
 const workflowNodeVersion = '24';
-const minNodeMajorVersion = '20';
 
 const project = new cdk.JsiiProject({
   projenrcTs: true,
@@ -40,11 +39,11 @@ const project = new cdk.JsiiProject({
   docgen: true,
   tsconfig: {
     compilerOptions: {
-      lib: ['es2019'],
+      lib: ['es2022'],
     },
   },
   workflowNodeVersion: workflowNodeVersion,
-  minNodeVersion: `${minNodeMajorVersion ?? workflowNodeVersion}.0.0`,
+  minNodeVersion: `${workflowNodeVersion}.0.0`,
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
@@ -58,7 +57,7 @@ const project = new cdk.JsiiProject({
 });
 
 new TextFile(project, '.nvmrc', {
-  lines: [minNodeMajorVersion],
+  lines: [workflowNodeVersion],
 });
 project.npmrc.addConfig('node-linker', 'hoisted');
 
