@@ -1,5 +1,5 @@
 {
-  "manifestVersion": 1,
+  "manifestVersion": 2,
   "env": {
     "PATH": "$(pnpm -c exec \"node --print process.env.PATH\")"
   },
@@ -110,7 +110,11 @@
       "description": "Generate API.md from .jsii manifest",
       "steps": [
         {
-          "exec": "jsii-docgen -o API.md"
+          "execArgs": [
+            "jsii-docgen",
+            "-o",
+            "API.md"
+          ]
         }
       ]
     },
@@ -186,7 +190,14 @@
       "description": "Create js language bindings",
       "steps": [
         {
-          "exec": "jsii-pacmak -v --pack-command \"pnpm pack\" --target js"
+          "execArgs": [
+            "jsii-pacmak",
+            "-v",
+            "--pack-command",
+            "pnpm pack",
+            "--target",
+            "js"
+          ]
         }
       ]
     },
