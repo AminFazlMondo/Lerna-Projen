@@ -65,16 +65,16 @@ importers:
         version: 1.137.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.12.2(jsii-rosetta@5.9.49)
+        version: 10.12.2(jsii-rosetta@5.9.53)
       jsii-pacmak:
         specifier: ^1.137.0
-        version: 1.137.0(jsii-rosetta@5.9.49)
+        version: 1.137.0(jsii-rosetta@5.9.53)
       jsii-rosetta:
         specifier: 5.9.x
-        version: 5.9.49
+        version: 5.9.53
       projen:
-        specifier: ^0.100.6
-        version: 0.100.6(constructs@10.6.0)
+        specifier: ^0.100.7
+        version: 0.100.7(constructs@10.6.0)
       ts-jest:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@5.9.3)))(typescript@5.9.3)
@@ -1010,6 +1010,7 @@ packages:
   conventional-changelog-core@5.0.2:
     resolution: {integrity: sha512-RhQOcDweXNWvlRwUDCpaqXzbZemKPKncCWZG50Alth72WITVd6nhVk9MJ6w1k9PFNBcZ3YwkdkChE+8+ZwtUug==}
     engines: {node: '>=14'}
+    deprecated: Deprecated and no longer maintained. Please use conventional-changelog instead.
 
   conventional-changelog-ember@3.0.0:
     resolution: {integrity: sha512-7PYthCoSxIS98vWhVcSphMYM322OxptpKAuHYdVspryI0ooLDehRXWeRWgN+zWSBXKl/pwdgAg8IpLNSM1/61A==}
@@ -1509,7 +1510,7 @@ packages:
   git-raw-commits@3.0.0:
     resolution: {integrity: sha512-b5OHmZ3vAgGrDn/X0kS+9qCfNKWe4K/jFnhwzVWWg0/k5eLa3060tZShrRg8Dja5kPc+YjS0Gc6y7cRr44Lpjw==}
     engines: {node: '>=14'}
-    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-remote-origin-url@2.0.0:
@@ -1519,7 +1520,7 @@ packages:
   git-semver-tags@5.0.1:
     resolution: {integrity: sha512-hIvOeZwRbQ+7YEUmCkHqo8FOLQZCEn18yevLHADlFPZY02KJGsu5FZt9YW/lybfK2uhWFI7Qg/07LekJiTv7iA==}
     engines: {node: '>=14'}
-    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   gitconfiglocal@1.0.0:
@@ -1980,8 +1981,8 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@5.9.49:
-    resolution: {integrity: sha512-h7TVEt0wegY/cQHjEnVVxnKWTK8WUpR22Z81XAtAqMul6aecx8scsumaAYKIkgIOiROgQWH15zyPsNtrl30DRA==}
+  jsii-rosetta@5.9.53:
+    resolution: {integrity: sha512-LWr1dlFhtecLtUfDunuqxtUoIl3m+sAepbJk77eodqKmnz6kdZO7K21KM8TCpFvw0iEphtgudbNOm5DtJqNv2A==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -2367,8 +2368,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.100.6:
-    resolution: {integrity: sha512-bB/NuOxdMfTU0wjaNuksWQmjFg2iVEqTxdmQphD/bkbATvHAk+0IK+W3tu/bLWj/bHljonFMCdaonaaCbj7bwg==}
+  projen@0.100.7:
+    resolution: {integrity: sha512-aMqa8cNU6WhA+ImvUzRXR6PAbwaPoTyMlLosa5o1TRT7Pqn2VQYPYolI9i7O9o3G4A1O1D0525jZ6FRbtnBcsQ==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5351,19 +5352,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.12.2(jsii-rosetta@5.9.49):
+  jsii-docgen@10.12.2(jsii-rosetta@5.9.53):
     dependencies:
       '@jsii/spec': 1.137.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.137.0
-      jsii-rosetta: 5.9.49
+      jsii-rosetta: 5.9.53
       json-stream-stringify: 3.1.6
       semver: 7.8.5
       yargs: 16.2.2
 
-  jsii-pacmak@1.137.0(jsii-rosetta@5.9.49):
+  jsii-pacmak@1.137.0(jsii-rosetta@5.9.53):
     dependencies:
       '@jsii/check-node': 1.137.0
       '@jsii/spec': 1.137.0
@@ -5373,7 +5374,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.137.0
-      jsii-rosetta: 5.9.49
+      jsii-rosetta: 5.9.53
       semver: 7.8.4
       spdx-license-list: 6.11.0
       xmlbuilder: 15.1.1
@@ -5388,7 +5389,7 @@ snapshots:
       oo-ascii-tree: 1.137.0
       yargs: 17.7.2
 
-  jsii-rosetta@5.9.49:
+  jsii-rosetta@5.9.53:
     dependencies:
       '@jsii/check-node': 1.137.0
       '@jsii/spec': 1.137.0
@@ -5782,7 +5783,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.100.6(constructs@10.6.0):
+  projen@0.100.7(constructs@10.6.0):
     dependencies:
       constructs: 10.6.0
 

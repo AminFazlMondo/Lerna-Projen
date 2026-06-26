@@ -15,14 +15,11 @@ function getArtifactsDirectory(project: Project) {
   return result?.[1];
 }
 
-const jsiiTaskPattern = /jsii-docgen -o (?<output>.+)$/i;
 
 function extractJsiiDocsOutput(tasks: Tasks): string | undefined {
-  const jsiiDocStep = tasks.tryFind('docgen')?.steps.find(step => jsiiTaskPattern.test(step.exec ?? ''));
-  if (!jsiiDocStep || !jsiiDocStep.exec) {return;}
+  const jsiiDocStep = tasks.tryFind('docgen')?.steps.find(step => step.execArgs?.includes('jsii-docgen'));
 
-  const match = jsiiDocStep.exec.match(jsiiTaskPattern);
-  return match?.groups?.output;
+  return jsiiDocStep?.execArgs?.[2];
 }
 
 function appendWorkflowBootstrapSteps<T extends LernaProjectOptions | LernaTypescriptProjectOptions>(options: T): T {
