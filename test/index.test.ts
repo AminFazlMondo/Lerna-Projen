@@ -1035,7 +1035,7 @@ describe('hasRootSourceCode', () => {
           compile: expect.objectContaining({
             steps: expect.arrayContaining([
               {
-                exec: expect.stringContaining('tsc'),
+                execArgs: expect.arrayContaining([expect.stringContaining('tsc')]),
               },
               {
                 exec: 'lerna run compile --stream',
