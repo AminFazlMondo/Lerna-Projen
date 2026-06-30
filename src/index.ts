@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile } from 'projen';
+import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile, TaskShell } from 'projen';
 import { LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations } from './types';
 
 export * from './types';
@@ -209,7 +209,8 @@ class LernaProjectFactory {
     const upgradeTaskName = 'upgrade';
     const postUpgradeTaskName = 'post-upgrade';
     const postUpgradeTask = this.project.tasks.tryFind(postUpgradeTaskName);
-    postUpgradeTask?.prependExec(this.getLernaCommand(upgradeTaskName, { sinceLastRelease: false }));
+    const upgradeLernaCommand = this.getLernaCommand(upgradeTaskName, { sinceLastRelease: false });
+    postUpgradeTask?.prependExec(upgradeLernaCommand.command, { shell: upgradeLernaCommand.shell });
     postUpgradeTask?.exec('npx projen');
 
     this.project.tasks.all
@@ -219,7 +220,8 @@ class LernaProjectFactory {
 
         if (lockedTaskNames.includes(task.name) || !addLernaStep) {return;}
 
-        task.exec(this.getLernaCommand(task.name, customization));
+        const lernaCommand = this.getLernaCommand(task.name, customization);
+        task.exec(lernaCommand.command, { shell: lernaCommand.shell });
       });
   }
 
@@ -235,7 +237,11 @@ class LernaProjectFactory {
 
 
     const postCommand = useSinceFlag ? ` --since ${this.getSinceCommand()}` : '';
-    return `${mainCommand}${postCommand}${scopeFlags}${ignoreFlags}`;
+    const command = `${mainCommand}${postCommand}${scopeFlags}${ignoreFlags}`;
+    return {
+      command,
+      shell: useSinceFlag? TaskShell.bash() : undefined,
+    };
   }
 
   private getSinceCommand() {
