@@ -312,7 +312,10 @@ describe('Happy Path for Javascript', () => {
             ['post-upgrade']: expect.objectContaining({
               steps: expect.not.arrayContaining([
                 { exec: 'lerna run post-upgrade --stream' },
-                { exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")' },
+                {
+                  exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")',
+                  shell: ['bash', '-c'],
+                },
               ]),
             }),
           }),
@@ -483,6 +486,7 @@ describe('Happy Path for Typescript', () => {
               steps: expect.not.arrayContaining([
                 {
                   exec: expectedDocsCommand,
+                  shell: ['bash', '-c'],
                 },
               ]),
             }),
@@ -528,7 +532,10 @@ describe('Happy Path for Typescript', () => {
             ['post-upgrade']: expect.objectContaining({
               steps: expect.not.arrayContaining([
                 { exec: 'lerna run post-upgrade --stream' },
-                { exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")' },
+                {
+                  exec: 'lerna run post-upgrade --stream --since $(git describe --abbrev=0 --tags --match \"v*\")',
+                  shell: ['bash', '-c'],
+                },
               ]),
             }),
           }),
@@ -793,6 +800,10 @@ describe('since last release', () => {
               steps: expect.arrayContaining([
                 {
                   exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match \"v*\" HEAD^)',
+                  shell: [
+                    'bash',
+                    '-c',
+                  ],
                 },
               ]),
             }),
@@ -834,6 +845,10 @@ describe('since last release', () => {
               steps: expect.arrayContaining([
                 {
                   exec: 'lerna run compile --stream --since ${CUSTOM_ENV_VAR:-$(git describe --abbrev=0 --tags --match \"v*\" HEAD^)}',
+                  shell: [
+                    'bash',
+                    '-c',
+                  ],
                 },
               ]),
             }),
@@ -928,6 +943,10 @@ describe('task customization', () => {
               steps: expect.arrayContaining([
                 {
                   exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)',
+                  shell: [
+                    'bash',
+                    '-c',
+                  ],
                 },
               ]),
             }),
@@ -994,6 +1013,10 @@ describe('task customization', () => {
               steps: expect.arrayContaining([
                 {
                   exec: 'lerna run compile --stream --since $(git describe --abbrev=0 --tags --match "v*" HEAD^)',
+                  shell: [
+                    'bash',
+                    '-c',
+                  ],
                 },
               ]),
             }),
