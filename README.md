@@ -24,6 +24,8 @@ $ npx projen new --from lerna-projen lerna-ts-project
 
 The project type can be anything to start with, then in the `projenrc` file, initiate a lerna project and add all of the sub normal projen project to the lerna project.
 
+> **Note:** `LernaTypescriptProject` defaults `srcdir` to `'projenrc'` instead of the projen default of `'src'`.
+
 ### Example for TS
 ```javascript
 import {LernaTypescriptProject} from 'lerna-projen';
