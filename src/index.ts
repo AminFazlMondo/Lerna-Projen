@@ -38,6 +38,13 @@ function appendWorkflowBootstrapSteps<T extends LernaProjectOptions | LernaTypes
   };
 }
 
+function parseTsOptions(options: LernaTypescriptProjectOptions): LernaTypescriptProjectOptions {
+  return {
+    ...options,
+    srcdir: options.srcdir ?? 'projenrc',
+  };
+}
+
 const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber', 'post-upgrade'];
 
 interface ILernaProject {
@@ -128,7 +135,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   private readonly factory: LernaProjectFactory;
 
   constructor(options: LernaTypescriptProjectOptions) {
-    super(appendWorkflowBootstrapSteps(options));
+    super(appendWorkflowBootstrapSteps(parseTsOptions(options)));
 
     this.sinceLastRelease = options.sinceLastRelease ?? false;
     this.useNx = options.useNx ?? false;
