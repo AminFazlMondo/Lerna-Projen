@@ -1,5 +1,6 @@
 import * as path from 'path';
-import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile, TaskShell } from 'projen';
+import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile, TaskShell, JsonPatch } from 'projen';
+import { NodePackageManager } from 'projen/lib/javascript';
 import { LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations } from './types';
 
 export * from './types';
@@ -35,6 +36,20 @@ function appendWorkflowBootstrapSteps<T extends LernaProjectOptions | LernaTypes
       },
       ...options.workflowBootstrapSteps ?? [],
     ],
+  };
+}
+
+function parseOptions<T extends LernaProjectOptions | LernaTypescriptProjectOptions>(options: T): T {
+  if (options.packageManager !== NodePackageManager.PNPM) {
+    return options;
+  }
+  return {
+    ...options,
+    pnpmOptions: {
+      workspaceYamlOptions: {
+        sharedWorkspaceLockfile: true,
+      },
+    },
   };
 }
 
@@ -81,7 +96,7 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   private readonly factory: LernaProjectFactory;
 
   constructor(options: LernaProjectOptions) {
-    super(appendWorkflowBootstrapSteps(options));
+    super(appendWorkflowBootstrapSteps(parseOptions(options)));
 
     if (options.projenrcTs) {this.addDevDeps('ts-node', 'typescript');}
 
@@ -135,7 +150,7 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
   private readonly factory: LernaProjectFactory;
 
   constructor(options: LernaTypescriptProjectOptions) {
-    super(appendWorkflowBootstrapSteps(parseTsOptions(options)));
+    super(appendWorkflowBootstrapSteps(parseTsOptions(parseOptions(options))));
 
     this.sinceLastRelease = options.sinceLastRelease ?? false;
     this.useNx = options.useNx ?? false;
@@ -197,11 +212,9 @@ class LernaProjectFactory {
 
     if (this.project.useWorkspaces) {
       if (this.project.package.packageManager === javascript.NodePackageManager.PNPM) {
-        new YamlFile(this.project, 'pnpm-workspace.yaml', {
-          obj: {
-            packages,
-          },
-        });
+        const workspaceFileName = 'pnpm-workspace.yaml';
+        const file = this.project.tryFindObjectFile(workspaceFileName) ?? new YamlFile(this.project, workspaceFileName, {});
+        file.patch(JsonPatch.add('/packages', packages));
       }
       this.project.package.addField('workspaces', packages);
     } else {lernaConfig.packages = packages;}
