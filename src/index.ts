@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile, TaskShell, JsonPatch } from 'projen';
+import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile, TaskShell, JsonPatch, Version } from 'projen';
 import { NodePackageManager } from 'projen/lib/javascript';
 import { LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations } from './types';
 
@@ -60,7 +60,7 @@ function parseTsOptions(options: LernaTypescriptProjectOptions): LernaTypescript
   };
 }
 
-const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber', 'post-upgrade'];
+const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber', 'post-upgrade', 'bump:releasable-commits'];
 
 interface ILernaProject {
   readonly sinceLastRelease: boolean;
@@ -272,9 +272,6 @@ class LernaProjectFactory {
   }
 
   private updateSubProjects() {
-    const bumpTask = this.project.tasks.tryFind('bump');
-    const unbumpTask = this.project.tasks.tryFind('unbump');
-
     this.project.subprojects.forEach((subProject) => {
       const subProjectDocsDirectory = getDocsDirectory(subProject);
       const subProjectPath = this.getSubProjectPath(subProject);
@@ -286,30 +283,11 @@ class LernaProjectFactory {
 
       subProject.defaultTask?.reset();
 
-      const bumpEnvs = {
-        OUTFILE: 'package.json',
-        CHANGELOG: `${artifactsDirectory}/changelog.md`,
-        BUMPFILE: `${artifactsDirectory}/version.txt`,
-        RELEASETAG: `${artifactsDirectory}/releasetag.txt`,
-        RELEASE_TAG_PREFIX: '',
-      };
-
-      if (bumpTask && !subProject.tasks.tryFind('bump')) {
-        const subBumpTask = subProject.addTask(bumpTask.name, {
-          description: bumpTask.description,
-          condition: bumpTask.condition,
-          env: bumpEnvs,
+      if (this.project.tasks.tryFind('bump') && !subProject.tasks.tryFind('bump')) {
+        new Version(subProject, {
+          artifactsDirectory: './dist',
+          versionInputFile: './package.json',
         });
-        subBumpTask.builtin('release/bump-version');
-      }
-
-      if (unbumpTask && !subProject.tasks.tryFind('unbump')) {
-        const subBumpTask = subProject.addTask(unbumpTask.name, {
-          description: unbumpTask.description,
-          condition: unbumpTask.condition,
-          env: bumpEnvs,
-        });
-        subBumpTask.builtin('release/reset-version');
       }
     });
   }
