@@ -76,22 +76,35 @@
       },
       "steps": [
         {
-          "exec": "git checkout -b scratch",
+          "execArgs": [
+            "git",
+            "checkout",
+            "-b",
+            "scratch"
+          ],
           "name": "save current HEAD in \"scratch\" branch"
         },
         {
-          "exec": "git checkout $BRANCH"
+          "exec": "git checkout \"$BRANCH\""
         },
         {
-          "exec": "git fetch origin",
+          "execArgs": [
+            "git",
+            "fetch",
+            "origin"
+          ],
           "name": "fetch latest changes from origin"
         },
         {
-          "exec": "git reset --hard origin/$BRANCH",
+          "exec": "git reset --hard \"origin/$BRANCH\"",
           "name": "hard reset to origin commit"
         },
         {
-          "exec": "git clean -fdx",
+          "execArgs": [
+            "git",
+            "clean",
+            "-fdx"
+          ],
           "name": "clean all untracked files"
         },
         {
@@ -105,7 +118,13 @@
       "description": "Perform API compatibility check against latest version",
       "steps": [
         {
-          "exec": "jsii-diff npm:$(node -p \"require('./package.json').name\") -k --ignore-file .compatignore || (echo \"\nUNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .compatignore to skip.\n\" && exit 1)"
+          "execArgs": [
+            "jsii-diff",
+            "npm:lerna-projen",
+            "-k",
+            "--ignore-file",
+            ".compatignore"
+          ]
         }
       ]
     },
@@ -166,7 +185,19 @@
       },
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+          "execArgs": [
+            "eslint",
+            "--ext",
+            ".ts,.tsx",
+            "--fix",
+            "--no-error-on-unmatched-pattern",
+            "$@",
+            "src",
+            "test",
+            "build-tools",
+            "projenrc",
+            ".projenrc.ts"
+          ],
           "receiveArgs": true
         }
       ]
@@ -248,15 +279,29 @@
     "publish:github": {
       "name": "publish:github",
       "description": "Publish this package to GitHub Releases",
+      "env": {
+        "RELEASE_TAG_FILE": "dist/releasetag.txt",
+        "CHANGELOG_FILE": "dist/changelog.md",
+        "PUBLISH_BRANCH": "main",
+        "CURRENT_BRANCH": "$(git rev-parse --abbrev-ref HEAD)"
+      },
       "requiredEnv": [
         "GITHUB_TOKEN"
       ],
       "steps": [
         {
-          "exec": "test \"$(git branch --show-current)\" = \"main\""
+          "execArgs": [
+            "node",
+            "-e",
+            "const { CURRENT_BRANCH: current, PUBLISH_BRANCH: expected } = process.env;\nif (current !== expected) {\n  console.error(`cannot publish from branch \"${current}\": this task publishes \"${expected}\"`);\n  process.exit(1);\n}"
+          ]
         },
         {
-          "exec": "errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_SHA 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \"Release.tag_name already exists\" $errout; then cat $errout; exit $exitcode; fi"
+          "exec": "errout=$(mktemp)\ntag=$(cat \"$RELEASE_TAG_FILE\")\ngh release create \"$tag\" -R \"$GITHUB_REPOSITORY\" -F \"$CHANGELOG_FILE\" -t \"$tag\" --target \"$GITHUB_SHA\" ${PRERELEASE:+-p} 2> \"$errout\" && true\nexitcode=$?\nif [ $exitcode -ne 0 ] && ! grep -q \"Release.tag_name already exists\" \"$errout\"; then\n  cat \"$errout\"\n  exit $exitcode\nfi",
+          "shell": [
+            "sh",
+            "-c"
+          ]
         }
       ]
     },
@@ -267,14 +312,25 @@
         "NPM_DIST_TAG": "latest",
         "NPM_REGISTRY": "registry.npmjs.org",
         "NPM_CONFIG_PROVENANCE": "true",
-        "NPM_TRUSTED_PUBLISHER": "true"
+        "NPM_TRUSTED_PUBLISHER": "true",
+        "PUBLISH_BRANCH": "main",
+        "CURRENT_BRANCH": "$(git rev-parse --abbrev-ref HEAD)"
       },
       "steps": [
         {
-          "exec": "test \"$(git branch --show-current)\" = \"main\""
+          "execArgs": [
+            "node",
+            "-e",
+            "const { CURRENT_BRANCH: current, PUBLISH_BRANCH: expected } = process.env;\nif (current !== expected) {\n  console.error(`cannot publish from branch \"${current}\": this task publishes \"${expected}\"`);\n  process.exit(1);\n}"
+          ]
         },
         {
-          "exec": "npx -p publib@latest publib-npm"
+          "execArgs": [
+            "npx",
+            "-p",
+            "publib@latest",
+            "publib-npm"
+          ]
         }
       ]
     },
@@ -287,7 +343,11 @@
       },
       "steps": [
         {
-          "exec": "rm -fr dist"
+          "execArgs": [
+            "rm",
+            "-fr",
+            "dist"
+          ]
         },
         {
           "spawn": "bump"
@@ -308,7 +368,11 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --updateSnapshot",
+          "execArgs": [
+            "jest",
+            "--passWithNoTests",
+            "--updateSnapshot"
+          ],
           "receiveArgs": true
         },
         {
@@ -321,7 +385,10 @@
       "description": "Run jest in watch mode",
       "steps": [
         {
-          "exec": "jest --watch"
+          "execArgs": [
+            "jest",
+            "--watch"
+          ]
         }
       ]
     },
