@@ -5561,6 +5561,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.typecheckTests">typecheckTests</a></code> | <code>boolean</code> | Type-check the test suite as part of the `test` task. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.independentMode">independentMode</a></code> | <code>boolean</code> | Whether or not to use independent versioning for sub-projects https://lerna.js.org/docs/features/version-and-publish#independent-mode. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.sinceGitReferenceEnvironmentVariableName">sinceGitReferenceEnvironmentVariableName</a></code> | <code>string</code> | (experimental) Environment variable name to read the git reference from to be used as the base for the `since` option in lerna commands. |
@@ -7776,6 +7777,21 @@ public readonly tsJestOptions: TsJestOptions;
 - *Type:* projen.typescript.TsJestOptions
 
 Options for ts-jest.
+
+---
+
+##### `typecheckTests`<sup>Optional</sup> <a name="typecheckTests" id="lerna-projen.LernaTypescriptProjectOptions.property.typecheckTests"></a>
+
+```typescript
+public readonly typecheckTests: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Type-check the test suite as part of the `test` task.
+
+Adds a `tsc --noEmit` step against the development tsconfig.
 
 ---
 
