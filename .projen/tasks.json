@@ -297,11 +297,7 @@
           ]
         },
         {
-          "exec": "errout=$(mktemp)\ntag=$(cat \"$RELEASE_TAG_FILE\")\ngh release create \"$tag\" -R \"$GITHUB_REPOSITORY\" -F \"$CHANGELOG_FILE\" -t \"$tag\" --target \"$GITHUB_SHA\" ${PRERELEASE:+-p} 2> \"$errout\" && true\nexitcode=$?\nif [ $exitcode -ne 0 ] && ! grep -q \"Release.tag_name already exists\" \"$errout\"; then\n  cat \"$errout\"\n  exit $exitcode\nfi",
-          "shell": [
-            "sh",
-            "-c"
-          ]
+          "exec": "tag=$(cat \"$RELEASE_TAG_FILE\") &&\ngh release view \"$tag\" -R \"$GITHUB_REPOSITORY\" 2>/dev/null ||\ngh release create \"$tag\" -R \"$GITHUB_REPOSITORY\" -F \"$CHANGELOG_FILE\" -t \"$tag\" --target \"$GITHUB_SHA\""
         }
       ]
     },
