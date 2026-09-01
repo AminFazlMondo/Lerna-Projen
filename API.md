@@ -3240,6 +3240,7 @@ const lernaProjectOptions: LernaProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaProjectOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.githubReleaseLatest">githubReleaseLatest</a></code> | <code>boolean</code> | Whether GitHub should explicitly mark the release from the default branch as the latest release. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
@@ -4393,6 +4394,22 @@ This can be any compatible package version, including the deprecated `standard-v
 
 ---
 
+##### `githubReleaseLatest`<sup>Optional</sup> <a name="githubReleaseLatest" id="lerna-projen.LernaProjectOptions.property.githubReleaseLatest"></a>
+
+```typescript
+public readonly githubReleaseLatest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* GitHub determines the latest release based on date and semantic version.
+
+Whether GitHub should explicitly mark the release from the default branch as the latest release.
+
+Set to `true` to mark the release as latest, or `false` to explicitly not
+mark it as latest.
+
+---
+
 ##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="jsiiReleaseVersion" id="lerna-projen.LernaProjectOptions.property.jsiiReleaseVersion"></a>
 
 ```typescript
@@ -5481,6 +5498,7 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.githubReleaseLatest">githubReleaseLatest</a></code> | <code>boolean</code> | Whether GitHub should explicitly mark the release from the default branch as the latest release. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
@@ -6649,6 +6667,22 @@ public readonly bumpPackage: string;
 The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string.
 
 This can be any compatible package version, including the deprecated `standard-version@9`.
+
+---
+
+##### `githubReleaseLatest`<sup>Optional</sup> <a name="githubReleaseLatest" id="lerna-projen.LernaTypescriptProjectOptions.property.githubReleaseLatest"></a>
+
+```typescript
+public readonly githubReleaseLatest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* GitHub determines the latest release based on date and semantic version.
+
+Whether GitHub should explicitly mark the release from the default branch as the latest release.
+
+Set to `true` to mark the release as latest, or `false` to explicitly not
+mark it as latest.
 
 ---
 
