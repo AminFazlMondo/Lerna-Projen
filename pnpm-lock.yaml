@@ -73,8 +73,8 @@ importers:
         specifier: 5.9.x
         version: 5.9.65
       projen:
-        specifier: ^0.103.22
-        version: 0.103.22(constructs@10.8.1)
+        specifier: ^0.103.23
+        version: 0.103.23(constructs@10.8.1)
       ts-jest:
         specifier: ^29.4.12
         version: 29.4.12(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@24.13.4)(ts-node@10.9.2(@types/node@24.13.4)(typescript@5.9.3)))(typescript@5.9.3)
@@ -2376,8 +2376,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.103.22:
-    resolution: {integrity: sha512-+h2vgq72opvewEVIhcTDHRSG3pKdS0kSNhfwWuOpcRImuzWYw9zVyTmw45tAtUx/b0c7oGJe251tTfeQiDEOkQ==}
+  projen@0.103.23:
+    resolution: {integrity: sha512-VYNjslMGg9GBQ7qotCW8rntHNZ4a61EDZfvBJXlfWRcpB5Kd8V3cQB4WriDJYQV1euR6MsGQDWERD1PF4wex3A==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5782,7 +5782,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.103.22(constructs@10.8.1):
+  projen@0.103.23(constructs@10.8.1):
     dependencies:
       constructs: 10.8.1
 
