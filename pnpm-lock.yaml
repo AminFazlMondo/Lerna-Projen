@@ -73,8 +73,8 @@ importers:
         specifier: 5.9.x
         version: 5.9.67
       projen:
-        specifier: ^0.103.26
-        version: 0.103.26(constructs@10.8.1)
+        specifier: ^0.103.27
+        version: 0.103.27(constructs@10.8.1)
       ts-jest:
         specifier: ^29.4.12
         version: 29.4.12(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@24.13.6)(ts-node@10.9.2(@types/node@24.13.6)(typescript@5.9.3)))(typescript@5.9.3)
@@ -2151,8 +2151,8 @@ packages:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  projen@0.103.26:
-    resolution: {integrity: sha512-pQ6waWsfJi5GEU4S5GvSOwyVNDCpsB+48ZdLjgZnBdZTrSUWpeqAzML0EnhsiJYdgXOopW9DwEmlUQ5Ml9mqHQ==}
+  projen@0.103.27:
+    resolution: {integrity: sha512-dtcvFZOIhQ+AYOeOhSDSReKCgcYbrAFsKZMM+JzlA9v0icegQAolZDHhdNTDaSYODfRSgVzE+U/B2jfdImSsNQ==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5229,7 +5229,7 @@ snapshots:
       ansi-styles: 5.2.0
       react-is: 18.3.1
 
-  projen@0.103.26(constructs@10.8.1):
+  projen@0.103.27(constructs@10.8.1):
     dependencies:
       constructs: 10.8.1
 
