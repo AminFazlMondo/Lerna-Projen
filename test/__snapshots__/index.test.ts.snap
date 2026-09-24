@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Happy Path for Jsii sub project sub project has docs docs index 1`] = `
 "<!DOCTYPE html>
