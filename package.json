@@ -90,7 +90,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": ">=10",
+      "version": "11.25.0",
       "onFail": "ignore"
     }
   },
@@ -101,7 +101,7 @@
     "access": "public"
   },
   "version": "0.0.0",
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@11.25.0",
   "jest": {
     "coverageProvider": "v8",
     "testMatch": [
