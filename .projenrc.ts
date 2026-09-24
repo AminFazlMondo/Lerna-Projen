@@ -23,6 +23,7 @@ const project = new cdk.JsiiProject({
       sharedWorkspaceLockfile: true,
       strictDepBuilds: false,
       minimumReleaseAge: 60,
+      nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
     },
   },
   repository,
@@ -67,6 +68,5 @@ const project = new cdk.JsiiProject({
 new TextFile(project, '.nvmrc', {
   lines: [workflowNodeVersion],
 });
-project.npmrc.addConfig('node-linker', 'hoisted');
 
 project.synth();
