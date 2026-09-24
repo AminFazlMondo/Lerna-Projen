@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`utils addNxDependency deprecated should add dependency in nx when both task and project dependency is specified 1`] = `
 {

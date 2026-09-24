@@ -54,5 +54,4 @@ junit.xml
 .jsii
 !/API.md
 !/.nvmrc
-!/.npmrc
 !/.projenrc.ts

@@ -46,7 +46,9 @@ function parseOptions<T extends LernaProjectOptions | LernaTypescriptProjectOpti
   return {
     ...options,
     pnpmOptions: {
+      ...options.pnpmOptions,
       workspaceYamlOptions: {
+        ...options.pnpmOptions?.workspaceYamlOptions,
         sharedWorkspaceLockfile: true,
       },
     },

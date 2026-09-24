@@ -17,6 +17,15 @@ const project = new cdk.JsiiProject({
   majorVersion: 0,
   packageName: 'lerna-projen',
   packageManager: javascript.NodePackageManager.PNPM,
+  pnpmVersion: '11.25.0',
+  pnpmOptions: {
+    workspaceYamlOptions: {
+      sharedWorkspaceLockfile: true,
+      strictDepBuilds: false,
+      minimumReleaseAge: 60,
+      nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
+    },
+  },
   repository,
   repositoryUrl: repository,
   authorAddress: 'amin.fazl@mondo.com.au',
@@ -59,6 +68,5 @@ const project = new cdk.JsiiProject({
 new TextFile(project, '.nvmrc', {
   lines: [workflowNodeVersion],
 });
-project.npmrc.addConfig('node-linker', 'hoisted');
 
 project.synth();
