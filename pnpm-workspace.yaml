@@ -4,6 +4,3 @@ nodeLinker: hoisted
 strictDepBuilds: false
 sharedWorkspaceLockfile: true
 minimumReleaseAge: 60
-allowBuilds:
-  '@parcel/watcher': set this to true or false
-  unrs-resolver: set this to true or false
