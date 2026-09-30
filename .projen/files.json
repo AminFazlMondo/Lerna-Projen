@@ -11,11 +11,11 @@
     ".github/workflows/upgrade-main.yml",
     ".gitignore",
     ".mergify.yml",
-    ".nvmrc",
     ".projen/deps.json",
     ".projen/files.json",
     ".projen/tasks.json",
     "LICENSE",
+    "mise.toml",
     "projenrc/tsconfig.json",
     "test/tsconfig.json",
     "tsconfig.json"

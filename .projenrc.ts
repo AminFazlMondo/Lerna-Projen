@@ -1,4 +1,5 @@
-import { javascript, cdk, TextFile } from 'projen';
+import { Mise } from 'mise-projen';
+import { javascript, cdk } from 'projen';
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git';
 const workflowNodeVersion = '24';
@@ -24,6 +25,10 @@ const project = new cdk.JsiiProject({
       strictDepBuilds: false,
       minimumReleaseAge: 60,
       nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
+      allowBuilds: {
+        '@parcel/watcher': false,
+        'unrs-resolver': false,
+      },
     },
   },
   repository,
@@ -37,6 +42,7 @@ const project = new cdk.JsiiProject({
   devDeps: [
     '@types/babel__core',
     '@types/fs-extra',
+    'mise-projen',
   ],
   bundledDeps: [
     'commander',
@@ -65,8 +71,6 @@ const project = new cdk.JsiiProject({
   },
 });
 
-new TextFile(project, '.nvmrc', {
-  lines: [workflowNodeVersion],
-});
+project.with(new Mise());
 
 project.synth();

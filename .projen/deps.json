@@ -88,6 +88,10 @@
       "type": "build"
     },
     {
+      "name": "mise-projen",
+      "type": "build"
+    },
+    {
       "name": "projen",
       "type": "build"
     },
