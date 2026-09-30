@@ -1,5 +1,5 @@
-import { javascript, cdk } from 'projen';
 import { Mise } from 'mise-projen';
+import { javascript, cdk } from 'projen';
 
 const repository = 'https://github.com/AminFazlMondo/Lerna-Projen.git';
 const workflowNodeVersion = '24';
@@ -27,8 +27,8 @@ const project = new cdk.JsiiProject({
       nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
       allowBuilds: {
         '@parcel/watcher': false,
-        'unrs-resolver': false
-      }
+        'unrs-resolver': false,
+      },
     },
   },
   repository,
