@@ -422,7 +422,7 @@
             "--peer",
             "--no-deprecated",
             "--dep=dev,prod,peer,optional",
-            "--filter=@types/babel__core,@types/fs-extra,@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,commander,fs-extra,constructs"
+            "--filter=@types/babel__core,@types/fs-extra,@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,mise-projen,projen,ts-jest,ts-node,typescript,commander,fs-extra,constructs"
           ]
         },
         {
@@ -451,6 +451,7 @@
             "jsii-pacmak",
             "jsii-rosetta",
             "jsii",
+            "mise-projen",
             "projen",
             "ts-jest",
             "ts-node",
