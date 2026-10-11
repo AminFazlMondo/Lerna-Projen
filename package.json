@@ -61,14 +61,14 @@
     "jsii-pacmak": "^1.141.0",
     "jsii-rosetta": "5.9.x",
     "mise-projen": "^0.0.11",
-    "projen": "^0.103.27",
+    "projen": "^0.104.4",
     "ts-jest": "^29.4.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "constructs": "^10.8.1",
-    "projen": "^0.103.27"
+    "projen": "^0.104.4"
   },
   "dependencies": {
     "commander": "^11.1.0",
