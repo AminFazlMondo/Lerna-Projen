@@ -3229,6 +3229,8 @@ const lernaProjectOptions: LernaProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaProjectOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.npmTrustedPublishing">npmTrustedPublishing</a></code> | <code>boolean</code> | Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.npmVerifyPublished">npmVerifyPublished</a></code> | <code>boolean</code> | Wait until the published package version is available from the npm registry before the publish job completes. |
+| <code><a href="#lerna-projen.LernaProjectOptions.property.npmVerifyPublishedTimeoutSeconds">npmVerifyPublishedTimeoutSeconds</a></code> | <code>number</code> | How long to wait, in seconds, for the published package version to be available. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
 | <code><a href="#lerna-projen.LernaProjectOptions.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
@@ -4240,6 +4242,36 @@ public readonly npmTrustedPublishing: boolean;
 - *Default:* false
 
 Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+
+---
+
+##### `npmVerifyPublished`<sup>Optional</sup> <a name="npmVerifyPublished" id="lerna-projen.LernaProjectOptions.property.npmVerifyPublished"></a>
+
+```typescript
+public readonly npmVerifyPublished: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Wait until the published package version is available from the npm registry before the publish job completes.
+
+Enable this when packages that depend on the published package are released right after.
+
+---
+
+##### `npmVerifyPublishedTimeoutSeconds`<sup>Optional</sup> <a name="npmVerifyPublishedTimeoutSeconds" id="lerna-projen.LernaProjectOptions.property.npmVerifyPublishedTimeoutSeconds"></a>
+
+```typescript
+public readonly npmVerifyPublishedTimeoutSeconds: number;
+```
+
+- *Type:* number
+- *Default:* 3600
+
+How long to wait, in seconds, for the published package version to be available.
+
+Requires `npmVerifyPublished` to be enabled.
 
 ---
 
@@ -5506,6 +5538,8 @@ const lernaTypescriptProjectOptions: LernaTypescriptProjectOptions = { ... }
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.npmTrustedPublishing">npmTrustedPublishing</a></code> | <code>boolean</code> | Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.npmVerifyPublished">npmVerifyPublished</a></code> | <code>boolean</code> | Wait until the published package version is available from the npm registry before the publish job completes. |
+| <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.npmVerifyPublishedTimeoutSeconds">npmVerifyPublishedTimeoutSeconds</a></code> | <code>number</code> | How long to wait, in seconds, for the published package version to be available. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
 | <code><a href="#lerna-projen.LernaTypescriptProjectOptions.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
@@ -6535,6 +6569,36 @@ public readonly npmTrustedPublishing: boolean;
 - *Default:* false
 
 Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+
+---
+
+##### `npmVerifyPublished`<sup>Optional</sup> <a name="npmVerifyPublished" id="lerna-projen.LernaTypescriptProjectOptions.property.npmVerifyPublished"></a>
+
+```typescript
+public readonly npmVerifyPublished: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Wait until the published package version is available from the npm registry before the publish job completes.
+
+Enable this when packages that depend on the published package are released right after.
+
+---
+
+##### `npmVerifyPublishedTimeoutSeconds`<sup>Optional</sup> <a name="npmVerifyPublishedTimeoutSeconds" id="lerna-projen.LernaTypescriptProjectOptions.property.npmVerifyPublishedTimeoutSeconds"></a>
+
+```typescript
+public readonly npmVerifyPublishedTimeoutSeconds: number;
+```
+
+- *Type:* number
+- *Default:* 3600
+
+How long to wait, in seconds, for the published package version to be available.
+
+Requires `npmVerifyPublished` to be enabled.
 
 ---
 
