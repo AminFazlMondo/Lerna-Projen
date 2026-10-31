@@ -73,11 +73,11 @@ importers:
         specifier: 5.9.x
         version: 5.9.72(supports-color@8.1.1)
       mise-projen:
-        specifier: ^0.0.28
-        version: 0.0.28(constructs@10.8.1)(projen@0.104.20(constructs@10.8.1))
+        specifier: ^0.0.29
+        version: 0.0.29(constructs@10.8.1)(projen@0.104.21(constructs@10.8.1))
       projen:
-        specifier: ^0.104.20
-        version: 0.104.20(constructs@10.8.1)
+        specifier: ^0.104.21
+        version: 0.104.21(constructs@10.8.1)
       ts-jest:
         specifier: ^29.4.15
         version: 29.4.15(@babel/core@7.29.0(supports-color@8.1.1))(@jest/transform@30.5.2(supports-color@8.1.1))(@jest/types@30.5.1)(babel-jest@30.5.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(jest-util@30.5.1)(jest@30.5.2(@types/node@24.19.2)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.19.2)(typescript@5.9.3)))(typescript@5.9.3)
@@ -2275,8 +2275,8 @@ packages:
     resolution: {integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mise-projen@0.0.28:
-    resolution: {integrity: sha512-imE6LgqGSChaV9qOTyQFUnbri0Mm4p85eq4INQpMe8xSniUYIYrTcqXXuA632z909qlaSOZC9ZqD6g32kOfQWg==}
+  mise-projen@0.0.29:
+    resolution: {integrity: sha512-R6CeAOR6Rff5c+kHcEpMs4b8VTJMCPx2V6h8sOHdENeBzrpejZAEKA1jtl2ppTMFdPf+Xuv8E1yiXtgRufAnpw==}
     engines: {node: '>= 24.0.0'}
     peerDependencies:
       constructs: '>=10.5.0'
@@ -2465,8 +2465,8 @@ packages:
     resolution: {integrity: sha512-byhRAPguVKMQIj4kjJwJ5lAskVhfuiSdiYl/aLTWpgkGEmic2jYhJh1yE9ih8Ox44Xg9ccCT11/S6QrzSJuNrg==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  projen@0.104.20:
-    resolution: {integrity: sha512-c6HsYM4VGLI42EVM4SN/YuKnk/7Unwo+dlkTcjRGnTi/VfD4Stm9DvTmJ1Bko8ns0ulknUOeNLmsva6mWRBsPA==}
+  projen@0.104.21:
+    resolution: {integrity: sha512-/nR9d0ZyL9IoSKMhpncc9ADEfLgUa/Ma1+3vh908vgKgt47b2syd9UrgWGCd5WkK9rFRNBciJUW50Z9jp+9iVw==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5606,10 +5606,10 @@ snapshots:
 
   minipass@7.1.3: {}
 
-  mise-projen@0.0.28(constructs@10.8.1)(projen@0.104.20(constructs@10.8.1)):
+  mise-projen@0.0.29(constructs@10.8.1)(projen@0.104.21(constructs@10.8.1)):
     dependencies:
       constructs: 10.8.1
-      projen: 0.104.20(constructs@10.8.1)
+      projen: 0.104.21(constructs@10.8.1)
 
   mkdirp@1.0.4: {}
 
@@ -5785,7 +5785,7 @@ snapshots:
       '@jest/schemas': 30.5.0
       ansi-styles: 5.2.0
 
-  projen@0.104.20(constructs@10.8.1):
+  projen@0.104.21(constructs@10.8.1):
     dependencies:
       constructs: 10.8.1
 
