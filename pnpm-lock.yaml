@@ -59,19 +59,19 @@ importers:
         version: 17.0.0
       jsii:
         specifier: 5.9.x
-        version: 5.9.57(supports-color@8.1.1)
+        version: 5.9.58(supports-color@8.1.1)
       jsii-diff:
         specifier: ^1.142.0
         version: 1.142.0(supports-color@8.1.1)
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.12.9(jsii-rosetta@5.9.73(supports-color@8.1.1))
+        version: 10.12.9(jsii-rosetta@5.9.74(supports-color@8.1.1))
       jsii-pacmak:
         specifier: ^1.142.0
-        version: 1.142.0(jsii-rosetta@5.9.73(supports-color@8.1.1))
+        version: 1.142.0(jsii-rosetta@5.9.74(supports-color@8.1.1))
       jsii-rosetta:
         specifier: 5.9.x
-        version: 5.9.73(supports-color@8.1.1)
+        version: 5.9.74(supports-color@8.1.1)
       mise-projen:
         specifier: ^0.0.42
         version: 0.0.42(constructs@10.8.1)(projen@0.104.31(constructs@10.8.1))
@@ -2141,13 +2141,13 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@5.9.73:
-    resolution: {integrity: sha512-C8XEWdV+RnVATI9FHgiM3Htymb1I+ksCp4hGau09aZLcnMTy7jEWCSTCdbGvbU5GLP79I/zJm7L9N9GX++hRDg==}
+  jsii-rosetta@5.9.74:
+    resolution: {integrity: sha512-qbc/bSxJTjKcFiAS0fdb4RbAbDXwwquxRx0/BlT0v3yPDlRxRKKwKWksXhgqEX8qSfcubkHz/Q6EcaeXBx+dvw==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
-  jsii@5.9.57:
-    resolution: {integrity: sha512-+6t5k7zCn7kndIBHj2vhEHGG37aVIZxq2JVcG8md15vyQ67sLu3rqRkXTo4Y56yzcD/Pd9gcHEq99gpRHjpUIw==}
+  jsii@5.9.58:
+    resolution: {integrity: sha512-fZ9Adyw2QpzTOB225pa60wlWhI5SAiaYp9v3D0fHc26qCYm1JyG/CFp/hompOXv/FqHIIK6nMpzcMKe6Bcfo/g==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -5427,19 +5427,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.12.9(jsii-rosetta@5.9.73(supports-color@8.1.1)):
+  jsii-docgen@10.12.9(jsii-rosetta@5.9.74(supports-color@8.1.1)):
     dependencies:
       '@jsii/spec': 1.142.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.142.0
-      jsii-rosetta: 5.9.73(supports-color@8.1.1)
+      jsii-rosetta: 5.9.74(supports-color@8.1.1)
       json-stream-stringify: 3.1.7
       semver: 7.8.6
       yargs: 16.2.2
 
-  jsii-pacmak@1.142.0(jsii-rosetta@5.9.73(supports-color@8.1.1)):
+  jsii-pacmak@1.142.0(jsii-rosetta@5.9.74(supports-color@8.1.1)):
     dependencies:
       '@jsii/check-node': 1.142.0
       '@jsii/spec': 1.142.0
@@ -5449,7 +5449,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.142.0
-      jsii-rosetta: 5.9.73(supports-color@8.1.1)
+      jsii-rosetta: 5.9.74(supports-color@8.1.1)
       semver: 7.8.5
       spdx-license-list: 6.12.0
       xmlbuilder: 15.1.1
@@ -5464,7 +5464,7 @@ snapshots:
       oo-ascii-tree: 1.142.0
       yargs: 17.7.3
 
-  jsii-rosetta@5.9.73(supports-color@8.1.1):
+  jsii-rosetta@5.9.74(supports-color@8.1.1):
     dependencies:
       '@jsii/check-node': 1.142.0
       '@jsii/spec': 1.142.0
@@ -5472,7 +5472,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 5.9.57(supports-color@8.1.1)
+      jsii: 5.9.58(supports-color@8.1.1)
       semver: 7.8.6
       semver-intersect: 1.5.0
       stream-json: 3.9.0
@@ -5482,7 +5482,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@5.9.57(supports-color@8.1.1):
+  jsii@5.9.58(supports-color@8.1.1):
     dependencies:
       '@jsii/check-node': 1.142.0
       '@jsii/spec': 1.142.0
