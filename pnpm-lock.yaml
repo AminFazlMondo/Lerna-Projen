@@ -73,8 +73,8 @@ importers:
         specifier: 5.9.x
         version: 5.9.74(supports-color@8.1.1)
       mise-projen:
-        specifier: ^0.0.42
-        version: 0.0.42(constructs@10.8.1)(projen@0.104.31(constructs@10.8.1))
+        specifier: ^0.0.43
+        version: 0.0.43(constructs@10.8.1)(projen@0.104.31(constructs@10.8.1))
       projen:
         specifier: ^0.104.31
         version: 0.104.31(constructs@10.8.1)
@@ -2275,8 +2275,8 @@ packages:
     resolution: {integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mise-projen@0.0.42:
-    resolution: {integrity: sha512-gbLIXQR/IEccu36XAeCMQ/E0n1O4a1q/suND3W/aw1zDBu7GXsIjT9h+d7BSNGmGU4aTkYMRlMyOWnBO/M42ow==}
+  mise-projen@0.0.43:
+    resolution: {integrity: sha512-FbgmzsHuadoGwDZYeSSyzZYkzOvPE0ypXmHkoPgSaBmP0f9ISNn4/PncU08Yb4NtVyJ6bSjuNiuLdX+D9zxOLg==}
     engines: {node: '>= 24.0.0'}
     peerDependencies:
       constructs: '>=10.5.0'
@@ -5610,7 +5610,7 @@ snapshots:
 
   minipass@7.1.3: {}
 
-  mise-projen@0.0.42(constructs@10.8.1)(projen@0.104.31(constructs@10.8.1)):
+  mise-projen@0.0.43(constructs@10.8.1)(projen@0.104.31(constructs@10.8.1)):
     dependencies:
       constructs: 10.8.1
       projen: 0.104.31(constructs@10.8.1)
