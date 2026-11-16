@@ -24,7 +24,7 @@ const project = new cdk.JsiiProject({
       sharedWorkspaceLockfile: true,
       strictDepBuilds: false,
       minimumReleaseAge: 60,
-      nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
+      nodeLinker: 'hoisted',
       allowBuilds: {
         '@parcel/watcher': false,
         'unrs-resolver': false,

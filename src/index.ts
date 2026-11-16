@@ -1,6 +1,6 @@
 import * as path from 'path';
-import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, YamlFile, TaskShell, JsonPatch, Version } from 'projen';
-import { NodePackageManager } from 'projen/lib/javascript';
+import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, TaskShell, JsonPatch, Version } from 'projen';
+import { NodePackageManager, PnpmWorkspaceYaml } from 'projen/lib/javascript';
 import { LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations } from './types';
 
 export * from './types';
@@ -214,9 +214,8 @@ class LernaProjectFactory {
 
     if (this.project.useWorkspaces) {
       if (this.project.package.packageManager === javascript.NodePackageManager.PNPM) {
-        const workspaceFileName = 'pnpm-workspace.yaml';
-        const file = this.project.tryFindObjectFile(workspaceFileName) ?? new YamlFile(this.project, workspaceFileName, {});
-        file.patch(JsonPatch.add('/packages', packages));
+        const pnpmWorkspace = PnpmWorkspaceYaml.of(this.project) ?? new PnpmWorkspaceYaml(this.project);
+        pnpmWorkspace.file.patch(JsonPatch.add('/packages', packages));
       }
       this.project.package.addField('workspaces', packages);
     } else {lernaConfig.packages = packages;}
