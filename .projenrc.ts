@@ -64,6 +64,10 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
+  jestOptions: {
+    // projen's dependency dax is ESM-only
+    experimentalVmModules: true,
+  },
   jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
   githubOptions: {
