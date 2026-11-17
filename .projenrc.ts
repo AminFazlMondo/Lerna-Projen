@@ -24,7 +24,7 @@ const project = new cdk.JsiiProject({
       sharedWorkspaceLockfile: true,
       strictDepBuilds: false,
       minimumReleaseAge: 60,
-      nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
+      nodeLinker: 'hoisted',
       allowBuilds: {
         '@parcel/watcher': false,
         'unrs-resolver': false,
@@ -64,6 +64,10 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
+  jestOptions: {
+    // projen's dependency dax is ESM-only
+    experimentalVmModules: true,
+  },
   jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
   githubOptions: {
