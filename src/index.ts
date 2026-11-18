@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, TaskShell, JsonPatch, Version } from 'projen';
+import { JsonFile, javascript, Project, Tasks, SourceCode, typescript, TaskShell, JsonPatch, Version, DependencyType } from 'projen';
 import { NodePackageManager, PnpmWorkspaceYaml } from 'projen/lib/javascript';
 import { LernaProjectOptions, LernaTypescriptProjectOptions, TaskCustomization, TaskCustomizations } from './types';
 
@@ -62,6 +62,14 @@ function parseTsOptions(options: LernaTypescriptProjectOptions): LernaTypescript
   };
 }
 
+function addDependenciesIfNotPresent(project: Project, deps: { name: string; type: DependencyType }[]) {
+  deps.forEach(dep => {
+    if (!project.deps.tryGetDependency(dep.name)) {
+      project.deps.addDependency(dep.name, dep.type);
+    }
+  });
+}
+
 const lockedTaskNames = ['build', 'upgrade', 'upgrade-projen', 'clobber', 'post-upgrade', 'bump:releasable-commits'];
 
 interface ILernaProject {
@@ -100,7 +108,15 @@ export class LernaProject extends javascript.NodeProject implements ILernaProjec
   constructor(options: LernaProjectOptions) {
     super(appendWorkflowBootstrapSteps(parseOptions(options)));
 
-    if (options.projenrcTs) {this.addDevDeps('ts-node', 'typescript');}
+    if (options.projenrcTs) {
+      addDependenciesIfNotPresent(
+        this,
+        [
+          { name: 'ts-node', type: DependencyType.BUILD },
+          { name: 'typescript', type: DependencyType.BUILD },
+        ],
+      );
+    }
 
     this.docsDirectory = options.docsDirectory ?? 'docs';
     this.docgen = options.docgen ?? false;
@@ -187,7 +203,13 @@ export class LernaTypescriptProject extends typescript.TypeScriptProject impleme
 
 class LernaProjectFactory {
   constructor(private readonly project: ILernaProject & javascript.NodeProject) {
-    project.addDevDeps('lerna-projen', 'lerna');
+    addDependenciesIfNotPresent(
+      project,
+      [
+        { name: 'lerna-projen', type: DependencyType.BUILD },
+        { name: 'lerna', type: DependencyType.BUILD },
+      ],
+    );
   }
 
   build() {
