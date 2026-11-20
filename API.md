@@ -4,6 +4,8 @@
 
 ### LernaProject <a name="LernaProject" id="lerna-projen.LernaProject"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable
+
 #### Initializers <a name="Initializers" id="lerna-projen.LernaProject.Initializer"></a>
 
 ```typescript
@@ -1374,6 +1376,8 @@ this task should synthesize the project files.
 ---
 
 ### LernaTypescriptProject <a name="LernaTypescriptProject" id="lerna-projen.LernaTypescriptProject"></a>
+
+- *Implements:* constructs.IConstruct, constructs.IDependable
 
 #### Initializers <a name="Initializers" id="lerna-projen.LernaTypescriptProject.Initializer"></a>
 
